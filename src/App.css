@@ -1,0 +1,20 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: antiquewhite;
+}
+
+.App-header {
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0;
+  text-align: center;
+}
+
+hr {
+  background: #000;
+  height: 1px;
+  border: none;
+}
