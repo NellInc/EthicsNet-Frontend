@@ -6,6 +6,21 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+//   const response = await fetch('http://localhost:5000/auth/register', {
+//     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//     mode: 'cors', // no-cors, cors, *same-origin
+//     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//     credentials: 'same-origin', // include, *same-origin, omit
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Bearer ${token}`
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//     redirect: 'follow', // manual, *follow, error
+//     referrer: 'no-referrer', // no-referrer, *client
+//     body: JSON.stringify(data), // body data type must match "Content-Type" header
+// });
+
 import './App.css';
 
 const useStyles = makeStyles(theme => ({
@@ -52,12 +67,34 @@ function App() {
     console.log(values);
   }, [values]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
+    const data = values;
     e.preventDefault();
     console.log('form data: ', values);
-
     setLoading(true);
     // fetch('localhost:5000/auth/register');
+
+    try {
+      const response = await fetch('http://localhost:5000/auth/register', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${token}`,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+      });
+
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (loading) {
