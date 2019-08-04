@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Link } from 'react-router-dom';
+import './App.css';
 
 //   const response = await fetch('http://localhost:5000/auth/register', {
 //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -20,8 +22,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //     referrer: 'no-referrer', // no-referrer, *client
 //     body: JSON.stringify(data), // body data type must match "Content-Type" header
 // });
-
-import './App.css';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -110,6 +110,8 @@ function App() {
       <header className="App-header">
         <p>Ethics eth - sign up</p>
       </header>
+
+      <Link to="/login">login</Link>
 
       <hr />
 
