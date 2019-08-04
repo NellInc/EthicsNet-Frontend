@@ -70,6 +70,7 @@ function Login(props) {
 
       // localStorage.setItem('userName', user.firstName);
       localStorage.setItem('userId', user._id);
+      localStorage.setItem('userName', user.firstName);
       localStorage.setItem('isLogged', 'true');
       localStorage.setItem('token', token);
 
