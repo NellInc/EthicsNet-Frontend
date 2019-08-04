@@ -7,13 +7,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    maxWidth: '700px',
-    margin: 'auto',
-    border: '1px solid #000',
-    padding: '30px',
-    borderRadius: '5px',
-  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -34,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 function Login(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
+
   const [values, setValues] = React.useState({
     email: 'lupuselit@gmail.com',
     password: '12345',

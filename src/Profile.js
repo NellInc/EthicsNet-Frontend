@@ -3,13 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    maxWidth: '700px',
-    margin: 'auto',
-    border: '1px solid #000',
-    padding: '30px',
-    borderRadius: '5px',
-  },
+  // container: {
+  //   maxWidth: '700px',
+  //   margin: 'auto',
+  //   border: '1px solid #000',
+  //   padding: '30px',
+  //   borderRadius: '5px',
+  // },
 }));
 
 function Profile() {

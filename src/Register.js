@@ -8,29 +8,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
 import './App.css';
 
-//   const response = await fetch('http://localhost:5000/auth/register', {
-//     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//     mode: 'cors', // no-cors, cors, *same-origin
-//     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//     credentials: 'same-origin', // include, *same-origin, omit
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${token}`
-//         // 'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     redirect: 'follow', // manual, *follow, error
-//     referrer: 'no-referrer', // no-referrer, *client
-//     body: JSON.stringify(data), // body data type must match "Content-Type" header
-// });
-
 const useStyles = makeStyles(theme => ({
-  container: {
-    maxWidth: '700px',
-    margin: 'auto',
-    border: '1px solid #000',
-    padding: '30px',
-    borderRadius: '5px',
-  },
+  // container: {
+  //   maxWidth: '700px',
+  //   margin: 'auto',
+  //   border: '1px solid #000',
+  //   padding: '30px',
+  //   borderRadius: '5px',
+  // },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
