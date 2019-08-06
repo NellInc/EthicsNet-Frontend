@@ -57,6 +57,10 @@ function Profile(props) {
         <p>{userData.email}</p>
       </main>
 
+      <main>
+        <Link to="/profile/anotations">Anotations</Link>
+      </main>
+
       <Link to="/register">register</Link>
       <br />
       <Link to="/login">login</Link>
