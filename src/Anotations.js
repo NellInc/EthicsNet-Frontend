@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -51,16 +52,34 @@ function Anotations(props) {
     getUserData();
   }, [loading]);
 
-  const handleAnotationClick = id => {
+  const handleAnotationClick = (id, type) => {
     console.log('it was clicked!', props.history);
     console.log(id);
-    props.history.push(`/profile/anotations/${id}`)
+
+    type === 'edit' ? props.history.push(`/profile/anotations/edit/${id}`) : props.history.push(`/profile/anotations/delete/${id}`)
+    
   }
 
   const anotationsComponent = anotations.map(el => (
-    <Card className={classes.paper} key={el._id} onClick={() => handleAnotationClick(el._id)}>
+    <Card className={classes.paper} key={el._id}>
+
+      <div>
+
+      </div>
+
       <p> {el.content} </p>
       <p> {el.createdAt.substring(0,10)} </p>
+
+
+      <div>
+        <Button color="primary" onClick={() => handleAnotationClick(el._id, 'edit')}>Edit</Button>
+
+        <Button color="secondary" onClick={() => handleAnotationClick(el._id, 'delete')}>Edit</Button>
+
+      </div>
+
+
+
     </Card>
   ));
 

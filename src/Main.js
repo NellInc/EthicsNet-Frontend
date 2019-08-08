@@ -65,7 +65,7 @@ function Main() {
 
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute exact path="/profile/anotations" component={Anotations} />
-          <PrivateRoute exact path="/profile/anotations/:id" component={Anotation} />
+          <PrivateRoute exact path="/profile/anotations/edit/:id" component={Anotation} />
 
           <Route component={NotFound} />
         </Switch>
