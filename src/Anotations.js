@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import DeleteDialog from './DeleteDialog'
+
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(3, 2),
@@ -28,9 +30,23 @@ const useStyles = makeStyles(theme => ({
 
 function Anotations(props) {
   const classes = useStyles();
-
   const [anotations, setAnotations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [idToDelete, setIdToDelete] = useState('');
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function filterAnotations(idRemoved) {
+    console.log('id to remove-> ', idRemoved);
+    setAnotations(anotations.filter(el => el._id !== idRemoved))
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
 
   useEffect(() => {
     async function getUserData() {
@@ -51,7 +67,6 @@ function Anotations(props) {
       );
 
       const data = await response.json();
-
       setAnotations(data.anotations);
       setLoading(false);
     }
@@ -60,14 +75,25 @@ function Anotations(props) {
   }, [loading]);
 
   const handleAnotationClick = (id, type) => {
-    type === 'edit'
-      ? props.history.push(`/profile/anotations/edit/${id}`)
-      : props.history.push(`/profile/anotations/delete/${id}`);
+    if (type === 'edit') {
+      props.history.push(`/profile/anotations/edit/${id}`)
+    } else if (type === 'delete') {
+      console.log('delete id ->', id)
+      setIdToDelete(id);
+      setOpen(true);
+    }
   };
 
   const anotationsComponent = anotations.map(el => (
     <Card className={classes.paper} key={el._id}>
-      <div />
+      
+      <DeleteDialog 
+        content={el.content} 
+        open={open} 
+        handleClose={handleClose}
+        id={idToDelete}
+        filterAnotations={filterAnotations}
+      />
 
       <p> {el.content} </p>
       <p> {el.createdAt.substring(0, 10)} </p>
@@ -104,7 +130,6 @@ function Anotations(props) {
   return (
     <div>
       <h3 className={classes.title}>Anotations</h3>
-
       <div>{anotationsComponent}</div>
     </div>
   );
