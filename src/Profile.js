@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center'
   },
   textField: {
+    width: '330px',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   }
@@ -59,16 +60,12 @@ function Profile(props) {
       setUserData(data.user);
       setValues({...values, name: data.user.firstName, last: data.user.lastName, email: data.user.email})
       setLoading(false);
-
-      console.log('after fetch ->', loading, userData);
     }
     getUserData();
   }, [loading]);
 
-  const handleSubmit = async () => {
-
-    console.log('submit data!', values);
-
+  const handleSubmit = async e => {
+    e.preventDefault();
     const data = {
         firstName: values.name,
         lastName: values.last,
@@ -89,10 +86,7 @@ function Profile(props) {
       body: JSON.stringify(data)
 
     })
-
     const responseJson = await response.json();
-
-    console.log('response from user update ->', responseJson);
   }
 
   if (loading) {
@@ -111,6 +105,7 @@ function Profile(props) {
 
       <main>
 
+      <form onSubmit={handleSubmit}>
         <div>
           <TextField
             id="standard-name"
@@ -119,6 +114,7 @@ function Profile(props) {
             value={values.name}
             onChange={handleChange('name')}
             margin="normal"
+            required
           />
 
           <TextField
@@ -128,33 +124,37 @@ function Profile(props) {
             value={values.last}
             onChange={handleChange('last')}
             margin="normal"
+            required
           />
         </div>
 
         <div>
         <TextField
-          style={{ width: '355px' }}
+          style={{ width: '330px', marginBottom: '20px' }}
           id="standard-name"
           label="Email"
           className={classes.textField}
           value={values.email}
           onChange={handleChange('email')}
           margin="normal"
+          type="email"
+          required
         />
         </div>
 
-        <Button color="primary" variant="outlined" style={{marginRight: '10px'}} onClick={handleSubmit}>Save</Button>
-        <Button color="secondary" variant="outlined">Delete account</Button>
+        <Button color="primary" variant="outlined" style={{marginRight: '10px'}} type="submit">Save</Button>
+        <Button color="secondary" type="button" variant="outlined">Delete account</Button>
+        </form>
 
       </main>
 
-      <main>
+      {/* <main>
         <Link to="/profile/anotations">Anotations</Link>
       </main>
 
       <Link to="/register">register</Link>
       <br />
-      <Link to="/login">login</Link>
+      <Link to="/login">login</Link> */}
     </div>
   );
 }

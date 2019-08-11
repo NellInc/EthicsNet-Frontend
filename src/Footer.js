@@ -21,17 +21,10 @@ const useStyles = makeStyles(theme => (
 
 function Footer(props) {
   const classes = useStyles();
-
-  // localStorage.userName = "rdegges";
-  
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-
-      console.log('first data');
-      
     }
 
     fetchData()

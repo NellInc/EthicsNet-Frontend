@@ -14,10 +14,7 @@ function Anotation(props) {
 
   useEffect(() => {
     async function fetchData() {
-
       console.log(setLoading);
-      
-      
     }
 
     fetchData()
@@ -25,7 +22,7 @@ function Anotation(props) {
 
   return (
     <div className={classes.root}>
-      <h1>anotation</h1>
+      <h1>anotation??</h1>
     </div>
   );
 }

@@ -21,6 +21,8 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    color: '#fff',
+    textDecoration: 'none'
   },
   link: {
     color: '#fff',
@@ -30,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 function Navbar(props) {
   const classes = useStyles();
-  
+
   const [loading, setLoading] = useContext(Loading)
   const [isLogged, setIsLogged] = useContext(IsLogged)
 
@@ -58,15 +60,23 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            {isLogged}
-          </Typography>
+          {/* <Typography variant="h6" className={classes.title}>
+            
+          </Typography> */}
+            <Link color="inherit" className={classes.title} to="/">
+              Home
+            </Link>
 
           {localStorage.isLogged === 'true' ? (
             <>
               <Button color="inherit">
                 <Link className={classes.link} to="/profile">
                   Profile
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link className={classes.link} to="/profile/anotations">
+                  Anotations
                 </Link>
               </Button>
               <Button color="inherit" onClick={handleLogout}>

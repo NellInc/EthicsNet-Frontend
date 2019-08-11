@@ -14,6 +14,7 @@ import Anotations from './Anotations';
 import NotFound from './NotFound';
 import Test from './Test';
 import Anotation from './Anotation';
+import Home from './Home'
 
 import { PrivateRoute, PublicRoute } from './RoutesTypes';
 import { Loading } from './Store';
@@ -42,8 +43,6 @@ function Main() {
 
   const [loading, setLoading] = useContext(Loading);
 
-  console.log('loading ->', loading);
-
   if (loading) {
     return (
       <>
@@ -62,7 +61,7 @@ function Main() {
       <Container className={classes.root} maxWidth="md">
         <Paper className={classes.paper} elevation={2}>
           <Switch>
-            <PrivateRoute exact path="/" component={Test} />
+            <PrivateRoute exact path="/" component={Home} />
 
             <PublicRoute
               exact

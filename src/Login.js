@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
 
-import { IsLogged } from './Store'
+import { IsLogged } from './Store';
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -29,7 +29,7 @@ function Login(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
 
-  const [isLogged, setIsLogged] = useContext(IsLogged)
+  const [isLogged, setIsLogged] = useContext(IsLogged);
 
   const [values, setValues] = React.useState({
     email: 'lupuselit@gmail.com',
@@ -40,47 +40,32 @@ function Login(props) {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  useEffect(() => {
-    console.log(values);
-    console.log(isLogged);
-  }, [values]);
+  useEffect(() => {}, [values]);
 
   const handleSubmit = async e => {
     const data = values;
     e.preventDefault();
-    console.log('form data: ', values);
-    setLoading(true);
-    // fetch('localhost:5000/auth/register');
-
     try {
       const response = await fetch('http://localhost:5000/auth/authenticate', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, cors, *same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
           // Authorization: `Bearer ${token}`,
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        body: JSON.stringify(data),
       });
 
       const { token, user } = await response.json();
-      console.log('token ->', token);
-      console.log('user ->', user);
-
-      // localStorage.setItem('userName', user.firstName);
       localStorage.setItem('userId', user._id);
       localStorage.setItem('userName', user.firstName);
       localStorage.setItem('isLogged', 'true');
       localStorage.setItem('token', token);
-
-      setIsLogged('true')
-
-      props.history.push('/profile');
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -99,8 +84,6 @@ function Login(props) {
       <header className="App-header">
         <p>Ethics eth - login</p>
       </header>
-
-      <Link to="/register">sign up</Link>
 
       <hr />
 

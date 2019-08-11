@@ -54,17 +54,12 @@ function Anotations(props) {
 
       setAnotations(data.anotations);
       setLoading(false);
-
-      console.log('anotations ->', loading, anotations);
     }
 
     getUserData();
   }, [loading]);
 
   const handleAnotationClick = (id, type) => {
-    console.log('it was clicked!', props.history);
-    console.log(id);
-
     type === 'edit'
       ? props.history.push(`/profile/anotations/edit/${id}`)
       : props.history.push(`/profile/anotations/delete/${id}`);

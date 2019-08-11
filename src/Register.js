@@ -11,13 +11,6 @@ import './App.css';
 import { IsLogged } from './Store'
 
 const useStyles = makeStyles(theme => ({
-  // container: {
-  //   maxWidth: '700px',
-  //   margin: 'auto',
-  //   border: '1px solid #000',
-  //   padding: '30px',
-  //   borderRadius: '5px',
-  // },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -35,9 +28,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function App() {
+function App(props) {
   const classes = useStyles();
-
   const [isLogged, setIsLogged] = useContext(IsLogged)
 
   const [loading, setLoading] = useState(false);
@@ -60,10 +52,6 @@ function App() {
   const handleSubmit = async e => {
     const data = values;
     e.preventDefault();
-    console.log('form data: ', values);
-    setLoading(true);
-    // fetch('localhost:5000/auth/register');
-
     try {
       const response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -80,10 +68,14 @@ function App() {
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       });
 
-      const json = await response.json();
-      console.log(json);
-
-      setIsLogged('true')
+      const { token, user } = await response.json();
+      localStorage.setItem('userId', user._id);
+      localStorage.setItem('userName', user.firstName);
+      localStorage.setItem('isLogged', 'true');
+      localStorage.setItem('token', token);
+      // setIsLogged('true')
+      // props.history.push('/profile');
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -102,8 +94,6 @@ function App() {
       <header className="App-header">
         <p>Ethics eth - sign up</p>
       </header>
-
-      <Link to="/login">login</Link>
 
       <hr />
 

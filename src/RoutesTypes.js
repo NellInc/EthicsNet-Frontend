@@ -20,7 +20,6 @@ export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
 };
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(localStorage.getItem('isLogged') === 'true');
   return (
     // Show the component only when the user is logged in
     // Otherwise, redirect the user to /signin page

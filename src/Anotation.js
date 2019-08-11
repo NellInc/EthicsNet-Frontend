@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   paper: {
     background: 'red',
-    '@media (min-width:600px)': {}
+    '@media (min-width:600px)': {},
   },
   textField: {
     width: '100%',
@@ -25,8 +25,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Anotation(props) {
-  console.log('LOCAL STORAGEEE -> ', localStorage.isLogged);
-
   const classes = useStyles();
 
   const [anotation, setAnotation] = useState({});
@@ -58,19 +56,14 @@ function Anotation(props) {
       setAnotation(data.anotation);
       setAnotationEdit(data.anotation.content);
       setLoading(false);
-
-      // console.log('first data', isLogged, data.anotation.authorId);
-      console.log('first data', isLogged, data.anotation);
     }
 
     fetchData();
   }, [loading, props.match.params]);
 
   const editAnotation = async () => {
-    console.log('edit!');
-
     const { id } = props.match.params;
-      const { token } = localStorage;
+    const { token } = localStorage;
 
     const response = await fetch(
       `http://localhost:5000/api/user/anotations/${id}`,
@@ -84,26 +77,19 @@ function Anotation(props) {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          content: anotationEdit
+          content: anotationEdit,
         }),
       }
     );
 
     const data = await response.json();
-
-    console.log(data);
-    
-    
-  }
+  };
 
   const handleChange = e => {
-    console.log('hello world!');
-    console.log(e.target.value);
     setAnotationEdit(e.target.value);
   };
 
   const userId = props.match.params.id;
-  console.log(userId);
 
   if (loading) {
     return (
@@ -127,7 +113,12 @@ function Anotation(props) {
         margin="normal"
       />
 
-      <Button onClick={editAnotation} variant="contained" color="primary" className={classes.button}>
+      <Button
+        onClick={editAnotation}
+        variant="contained"
+        color="primary"
+        className={classes.button}
+      >
         Save
       </Button>
 
