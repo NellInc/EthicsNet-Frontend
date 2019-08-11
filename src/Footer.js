@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => (
+  {
+ 
   footer: {
     border: '1px solid #000',
     textAlign: 'center',
-    position: 'absolute',
+    // position: 'absolute',
     width: '100%',
     bottom: '1px',
-    background: '#eaf'
+    color: '#fff',
+    background: theme.palette.primary.main
   },
   p: {
     margin: '2px'

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 
 import Navbar from './Navbar';
@@ -16,23 +16,50 @@ import Test from './Test';
 import Anotation from './Anotation';
 
 import { PrivateRoute, PublicRoute } from './RoutesTypes';
+import { Loading } from './Store';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    minHeight: 'calc(100vh - 128px)',
+  },
   paper: {
     padding: theme.spacing(3, 2),
     maxWidth: '800px',
     margin: '20px auto',
     // backgroundColor: 'rgb(254, 255, 247)',
   },
+  loaderWrapper: {
+    height: 'calc(100vh - 98px)',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
 
 function Main() {
   const classes = useStyles();
 
+  const [loading, setLoading] = useContext(Loading);
+
+  console.log('loading ->', loading);
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <div className={classes.loaderWrapper}>
+          <CircularProgress />
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />
-      <Container maxWidth="md">
+      <Container className={classes.root} maxWidth="md">
         <Paper className={classes.paper} elevation={2}>
           <Switch>
             <PrivateRoute exact path="/" component={Test} />

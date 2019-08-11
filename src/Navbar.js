@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
 
 import { IsLogged } from './Store'
+import { Loading } from './Store'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,19 +30,12 @@ const useStyles = makeStyles(theme => ({
 
 function Navbar(props) {
   const classes = useStyles();
-
-  const [loading, setLoading] = useState(true);
   
+  const [loading, setLoading] = useContext(Loading)
   const [isLogged, setIsLogged] = useContext(IsLogged)
 
   useEffect(() => {
-    console.log(isLogged);
-    console.log(setIsLogged);
-  }, [])
-
-  useEffect(() => {
     async function fetchData() {}
-
     fetchData();
     setLoading(false);
   }, [loading]);

@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   paper: {
     background: 'red',
+    '@media (min-width:600px)': {}
   },
   textField: {
     width: '100%',

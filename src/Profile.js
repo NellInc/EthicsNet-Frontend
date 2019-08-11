@@ -6,13 +6,6 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
-  // container: {
-  //   maxWidth: '700px',
-  //   margin: 'auto',
-  //   border: '1px solid #000',
-  //   padding: '30px',
-  //   borderRadius: '5px',
-  // },
   loaderWrapper: {
     height: '50vh',
     width: '100%',
