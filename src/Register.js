@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
 import './App.css';
+
+import { IsLogged } from './Store'
 
 const useStyles = makeStyles(theme => ({
   // container: {
@@ -35,6 +37,9 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
+
+  const [isLogged, setIsLogged] = useContext(IsLogged)
+
   const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
     firstName: 'emerson',
@@ -77,6 +82,8 @@ function App() {
 
       const json = await response.json();
       console.log(json);
+
+      setIsLogged('true')
     } catch (error) {
       console.log(error);
     }

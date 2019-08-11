@@ -5,10 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Main from './Main';
 import * as serviceWorker from './serviceWorker';
+import Store from './Store';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Main />
+    <Store>
+      <Main />
+    </Store>
   </BrowserRouter>,
   document.getElementById('root')
 );

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
   // container: {
@@ -10,6 +13,20 @@ const useStyles = makeStyles(theme => ({
   //   padding: '30px',
   //   borderRadius: '5px',
   // },
+  loaderWrapper: {
+    height: '50vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    textAlign: 'center'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  }
 }));
 
 function Profile(props) {
@@ -17,6 +34,16 @@ function Profile(props) {
 
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
+
+  const [values, setValues] = useState({
+    name: '',
+    last: '',
+    email: '',
+  });
+
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value });
+  };
 
   useEffect(() => {
     async function getUserData() {
@@ -37,6 +64,7 @@ function Profile(props) {
       const data = await response.json();
 
       setUserData(data.user);
+      setValues({...values, name: data.user.firstName, last: data.user.lastName, email: data.user.email})
       setLoading(false);
 
       console.log('after fetch ->', loading, userData);
@@ -44,17 +72,87 @@ function Profile(props) {
     getUserData();
   }, [loading]);
 
+  const handleSubmit = async () => {
+
+    console.log('submit data!', values);
+
+    const data = {
+        firstName: values.name,
+        lastName: values.last,
+        email: values.email
+    }
+
+    const { token, userId } = localStorage;
+
+    const response = await fetch(`http://localhost:5000/api/user/${userId}`, {
+      method: 'PUT', 
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data)
+
+    })
+
+    const responseJson = await response.json();
+
+    console.log('response from user update ->', responseJson);
+  }
+
+  if (loading) {
+    return (
+      <div className={classes.loaderWrapper}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div className={classes.container}>
-      <header>
-        <p>Ethics eth - you're loged in!</p>
+      <header className={classes.header}>
+        ETHICS ETH - MY PROFILE 
       </header>
 
       <main>
-        <p>
-          {userData.firstName} {userData.lastName}
-        </p>
-        <p>{userData.email}</p>
+
+        <div>
+          <TextField
+            id="standard-name"
+            label="First name"
+            className={classes.textField}
+            value={values.name}
+            onChange={handleChange('name')}
+            margin="normal"
+          />
+
+          <TextField
+            id="standard-name"
+            label="Last name"
+            className={classes.textField}
+            value={values.last}
+            onChange={handleChange('last')}
+            margin="normal"
+          />
+        </div>
+
+        <div>
+        <TextField
+          style={{ width: '355px' }}
+          id="standard-name"
+          label="Email"
+          className={classes.textField}
+          value={values.email}
+          onChange={handleChange('email')}
+          margin="normal"
+        />
+        </div>
+
+        <Button color="primary" variant="outlined" style={{marginRight: '10px'}} onClick={handleSubmit}>Save</Button>
+        <Button color="secondary" variant="outlined">Delete account</Button>
+
       </main>
 
       <main>

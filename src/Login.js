@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import clsx from 'clsx';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
+
+import { IsLogged } from './Store'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: '20px',
   },
   loaderWrapper: {
-    height: '100vh',
+    height: '50vh',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -27,6 +28,8 @@ const useStyles = makeStyles(theme => ({
 function Login(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
+
+  const [isLogged, setIsLogged] = useContext(IsLogged)
 
   const [values, setValues] = React.useState({
     email: 'lupuselit@gmail.com',
@@ -39,6 +42,7 @@ function Login(props) {
 
   useEffect(() => {
     console.log(values);
+    console.log(isLogged);
   }, [values]);
 
   const handleSubmit = async e => {
@@ -73,6 +77,8 @@ function Login(props) {
       localStorage.setItem('userName', user.firstName);
       localStorage.setItem('isLogged', 'true');
       localStorage.setItem('token', token);
+
+      setIsLogged('true')
 
       props.history.push('/profile');
     } catch (error) {

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -12,6 +13,13 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     width: '100%',
+  },
+  loaderWrapper: {
+    height: '50vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
@@ -97,7 +105,11 @@ function Anotation(props) {
   console.log(userId);
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <div className={classes.loaderWrapper}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
