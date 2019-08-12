@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AlertDialogSlide(props) {
-  const { open, handleClose, content, id, filterAnotations } = props;
+  const { open, handleClose, content, id, filterAnotations, elId } = props;
 
   useEffect(() => {
     console.log('dialog opened...', props.open);
@@ -49,7 +49,8 @@ export default function AlertDialogSlide(props) {
   return (
     <div>
       <Dialog
-        open={open}
+        open={open && elId === id}
+        // open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}

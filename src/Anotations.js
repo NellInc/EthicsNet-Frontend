@@ -92,6 +92,7 @@ function Anotations(props) {
         open={open} 
         handleClose={handleClose}
         id={idToDelete}
+        elId={el._id}
         filterAnotations={filterAnotations}
       />
 
