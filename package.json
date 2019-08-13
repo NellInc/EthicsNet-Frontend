@@ -1,7 +1,7 @@
 {
   "name": "ethics-eth-anotate-frontent",
   "version": "0.1.0",
-  "homepage": "http://lupuselit.me/ethics-net-anotate-frontent/",
+  "homepage": "http://extension.lupuselit.me/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.3.0",

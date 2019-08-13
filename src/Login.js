@@ -32,8 +32,8 @@ function Login(props) {
   const [isLogged, setIsLogged] = useContext(IsLogged);
 
   const [values, setValues] = React.useState({
-    email: 'lupuselit@gmail.com',
-    password: '12345',
+    email: '',
+    password: '',
   });
 
   const handleChange = name => event => {
@@ -93,7 +93,7 @@ function Login(props) {
             required
             className={classes.textField}
             id="email"
-            label="email"
+            label="Email"
             value={values.email}
             onChange={handleChange('email')}
             margin="normal"
@@ -104,7 +104,7 @@ function Login(props) {
             className={classes.textField}
             type="password"
             id="password"
-            label="password"
+            label="Password"
             value={values.password}
             onChange={handleChange('password')}
             margin="normal"

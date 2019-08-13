@@ -34,11 +34,11 @@ function App(props) {
 
   const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
-    firstName: 'emerson',
-    lastName: 'lopes',
-    email: 'lupuselit@gmail.com',
-    password: '12345',
-    age: '23',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    age: '',
   });
 
   const handleChange = name => event => {
