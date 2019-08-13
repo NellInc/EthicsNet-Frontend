@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ethics-net-anotate-frontent/static/css/main.7ef933d7.chunk.css",
-    "main.js": "/ethics-net-anotate-frontent/static/js/main.cf818dd7.chunk.js",
-    "main.js.map": "/ethics-net-anotate-frontent/static/js/main.cf818dd7.chunk.js.map",
-    "runtime~main.js": "/ethics-net-anotate-frontent/static/js/runtime~main.1f85f965.js",
-    "runtime~main.js.map": "/ethics-net-anotate-frontent/static/js/runtime~main.1f85f965.js.map",
-    "static/js/2.31d4fc33.chunk.js": "/ethics-net-anotate-frontent/static/js/2.31d4fc33.chunk.js",
-    "static/js/2.31d4fc33.chunk.js.map": "/ethics-net-anotate-frontent/static/js/2.31d4fc33.chunk.js.map",
-    "index.html": "/ethics-net-anotate-frontent/index.html",
-    "precache-manifest.685d1b0ebee09ac36543424b4fda1361.js": "/ethics-net-anotate-frontent/precache-manifest.685d1b0ebee09ac36543424b4fda1361.js",
-    "service-worker.js": "/ethics-net-anotate-frontent/service-worker.js",
-    "static/css/main.7ef933d7.chunk.css.map": "/ethics-net-anotate-frontent/static/css/main.7ef933d7.chunk.css.map"
+    "main.css": "/static/css/main.7ef933d7.chunk.css",
+    "main.js": "/static/js/main.83f33b33.chunk.js",
+    "main.js.map": "/static/js/main.83f33b33.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.31d4fc33.chunk.js": "/static/js/2.31d4fc33.chunk.js",
+    "static/js/2.31d4fc33.chunk.js.map": "/static/js/2.31d4fc33.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.624ea17a9769031559870059782e34ae.js": "/precache-manifest.624ea17a9769031559870059782e34ae.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.7ef933d7.chunk.css.map": "/static/css/main.7ef933d7.chunk.css.map"
   }
 }
