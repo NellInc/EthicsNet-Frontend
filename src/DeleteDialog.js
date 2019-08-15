@@ -7,6 +7,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
+import { apiURL } from './globals';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -25,7 +27,7 @@ export default function AlertDialogSlide(props) {
       const { token } = localStorage;
 
       const response = await fetch(
-        `http://localhost:5000/api/user/anotations/${id}`,
+        `${apiURL}/api/user/anotations/${id}`,
         {
           method: 'DELETE',
           mode: 'cors',

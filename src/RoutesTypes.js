@@ -10,7 +10,7 @@ export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
       {...rest}
       render={props =>
         localStorage.isLogged === 'true' && restricted ? (
-          <Redirect to="/profile" />
+          <Redirect to="/" />
         ) : (
           <Component {...props} />
         )

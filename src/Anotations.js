@@ -6,6 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import DeleteDialog from './DeleteDialog'
 
+import { apiURL } from './globals';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(3, 2),
@@ -53,7 +55,7 @@ function Anotations(props) {
       const token = localStorage.getItem('token');
 
       const response = await fetch(
-        'http://localhost:5000/api/user/anotations',
+        `${apiURL}/api/user/anotations`,
         {
           method: 'GET',
           mode: 'cors',

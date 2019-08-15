@@ -44,8 +44,7 @@ function Login(props) {
 
   useEffect(() => {
     async function fetchData() {
-      // const response = await fetch('http://localhost/')
-      const response = await fetch('http://167.71.163.123')
+      const response = await fetch(`${apiURL}`)
       const json = await response.json()
       console.log('response -> ', response);
       console.log('json', json);
@@ -59,34 +58,30 @@ function Login(props) {
   const handleSubmit = async e => {
     const data = values;
     e.preventDefault();
-    // try {
+    try {
+      const response = await fetch(`${apiURL}/auth/authenticate`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${token}`,
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        body: JSON.stringify(data),
+      });
 
-      
-      
-
-    //   const response = await fetch('167.71.163.123/auth/authenticate', {
-    //     method: 'POST',
-    //     mode: 'cors',
-    //     cache: 'no-cache',
-    //     credentials: 'same-origin',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       // Authorization: `Bearer ${token}`,
-    //     },
-    //     redirect: 'follow',
-    //     referrer: 'no-referrer',
-    //     body: JSON.stringify(data),
-    //   });
-
-    //   const { token, user } = await response.json();
-    //   localStorage.setItem('userId', user._id);
-    //   localStorage.setItem('userName', user.firstName);
-    //   localStorage.setItem('isLogged', 'true');
-    //   localStorage.setItem('token', token);
-    //   window.location.reload();
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      const { token, user } = await response.json();
+      localStorage.setItem('userId', user._id);
+      localStorage.setItem('userName', user.firstName);
+      localStorage.setItem('isLogged', 'true');
+      localStorage.setItem('token', token);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (loading) {

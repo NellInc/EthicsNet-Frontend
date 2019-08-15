@@ -68,7 +68,7 @@ function Anotation(props) {
     const { token } = localStorage;
 
     const response = await fetch(
-      `http://localhost:5000/api/user/anotations/${id}`,
+      `${apiURL}/api/user/anotations/${id}`,
       {
         method: 'PUT',
         mode: 'cors',

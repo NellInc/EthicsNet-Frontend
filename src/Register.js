@@ -57,7 +57,7 @@ function App(props) {
     console.log(`${apiURL}/auth/register`);
     
     try {
-      const response = await fetch('167.71.163.123/auth/register', {
+      const response = await fetch(`${apiURL}/auth/register`, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

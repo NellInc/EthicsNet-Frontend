@@ -15,6 +15,7 @@ import NotFound from './NotFound';
 import Test from './Test';
 import Anotation from './Anotation';
 import Home from './Home'
+import LoggedOut from './LoggedOut'
 
 import { PrivateRoute, PublicRoute } from './RoutesTypes';
 import { Loading } from './Store';
@@ -78,6 +79,7 @@ function Main() {
             />
 
             <PrivateRoute exact path="/profile" component={Profile} />
+            <PrivateRoute exact path="/logged-out" component={LoggedOut} />
             <PrivateRoute
               exact
               path="/profile/anotations"

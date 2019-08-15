@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { apiURL } from './globals'
+
 const useStyles = makeStyles(theme => ({
   loaderWrapper: {
     height: '50vh',
@@ -43,7 +45,7 @@ function Profile(props) {
     async function getUserData() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch('http://localhost:5000/api/user', {
+      const response = await fetch(`${apiURL}/api/user`, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -74,7 +76,7 @@ function Profile(props) {
 
     const { token, userId } = localStorage;
 
-    const response = await fetch(`http://localhost:5000/api/user/${userId}`, {
+    const response = await fetch(`${apiURL}/api/user/${userId}`, {
       method: 'PUT', 
       mode: 'cors',
       cache: 'no-cache',
