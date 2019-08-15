@@ -10,6 +10,8 @@ import './App.css';
 
 import { IsLogged } from './Store'
 
+import { apiURL } from './globals';
+
 const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
@@ -52,8 +54,10 @@ function App(props) {
   const handleSubmit = async e => {
     const data = values;
     e.preventDefault();
+    console.log(`${apiURL}/auth/register`);
+    
     try {
-      const response = await fetch('http://localhost:5000/auth/register', {
+      const response = await fetch('167.71.163.123/auth/register', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

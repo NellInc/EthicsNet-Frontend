@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 import { IsLogged } from './Store';
 
+import { apiURL } from './globals';
+
 const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
@@ -40,35 +42,51 @@ function Login(props) {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  useEffect(() => {}, [values]);
+  useEffect(() => {
+    async function fetchData() {
+      // const response = await fetch('http://localhost/')
+      const response = await fetch('http://167.71.163.123')
+      const json = await response.json()
+      console.log('response -> ', response);
+      console.log('json', json);
+      
+    }
+
+    fetchData()
+    
+  }, []);
 
   const handleSubmit = async e => {
     const data = values;
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/auth/authenticate', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`,
-        },
-        redirect: 'follow',
-        referrer: 'no-referrer',
-        body: JSON.stringify(data),
-      });
+    // try {
 
-      const { token, user } = await response.json();
-      localStorage.setItem('userId', user._id);
-      localStorage.setItem('userName', user.firstName);
-      localStorage.setItem('isLogged', 'true');
-      localStorage.setItem('token', token);
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
+      
+      
+
+    //   const response = await fetch('167.71.163.123/auth/authenticate', {
+    //     method: 'POST',
+    //     mode: 'cors',
+    //     cache: 'no-cache',
+    //     credentials: 'same-origin',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       // Authorization: `Bearer ${token}`,
+    //     },
+    //     redirect: 'follow',
+    //     referrer: 'no-referrer',
+    //     body: JSON.stringify(data),
+    //   });
+
+    //   const { token, user } = await response.json();
+    //   localStorage.setItem('userId', user._id);
+    //   localStorage.setItem('userName', user.firstName);
+    //   localStorage.setItem('isLogged', 'true');
+    //   localStorage.setItem('token', token);
+    //   window.location.reload();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   if (loading) {

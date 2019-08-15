@@ -7,6 +7,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { apiURL } from './globals';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     background: 'red',
@@ -38,7 +40,7 @@ function Anotation(props) {
       const { token } = localStorage;
 
       const response = await fetch(
-        `http://localhost:5000/api/user/anotations/${id}`,
+        `${apiURL}/api/user/anotations/${id}`,
         {
           method: 'GET',
           mode: 'cors',
