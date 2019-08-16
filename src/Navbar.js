@@ -43,9 +43,12 @@ function Navbar(props) {
   }, [loading]);
 
   const handleLogout = () => {
-    localStorage.isLogged = null;
-    setIsLogged('false')
-    props.history.push('/')
+    props.history.push('/logged-out');
+    // window.location.href = 'http://localhost:3000/#/logged-out';
+    // setTimeout(() => {
+    //   localStorage.isLogged = null;
+    //   setIsLogged('false')
+    // }, 200);
   };
 
   return (

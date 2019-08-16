@@ -69,6 +69,8 @@ function Anotations(props) {
       );
 
       const data = await response.json();
+      console.log(data);
+      
       setAnotations(data.anotations);
       setLoading(false);
     }
