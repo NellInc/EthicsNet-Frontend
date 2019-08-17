@@ -1,6 +1,6 @@
-# Ethics Net Frontend extension app
+# Ethics Net frontend extension app
 
-### to get the app running
+### To get the app running
 
 1 - `yarn install`
 
@@ -9,7 +9,7 @@
 3 - `yarn build` will create a build folder ready to be deployed.
 
 
-### stack used
+### Stack used
 
 1 - `React`
 
