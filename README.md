@@ -11,3 +11,15 @@
 
 ### stack used
 
+1 - `React`
+
+2 - `Material UI`
+
+3 - `React Router`
+
+currently using the context api & react hooks  for global state pattern
+
+
+### App structure
+
+none yet - still in development mode - all files are in the ./src folder
