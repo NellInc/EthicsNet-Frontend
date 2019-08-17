@@ -48,6 +48,16 @@ function Home(props) {
         </Link>
       </Button>
 
+      <Button
+        color="primary"
+        variant="outlined"
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to="/anotations/new">
+          Insert new anotation
+        </Link>
+      </Button>
+
       <Button color="primary" variant="outlined">
         <Link className={classes.link} to="/profile">
           Profile

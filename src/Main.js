@@ -16,6 +16,7 @@ import Test from './Test';
 import Anotation from './Anotation';
 import Home from './Home';
 import LoggedOut from './LoggedOut';
+import NewAnotation from './NewAnotation'
 
 import { PrivateRoute, PublicRoute } from './RoutesTypes';
 import { Loading } from './Store';
@@ -87,6 +88,13 @@ function Main() {
               path="/profile/anotations"
               component={Anotations}
             />
+
+            <PrivateRoute
+              exact
+              path="/anotations/new"
+              component={NewAnotation}
+            />
+
             <PrivateRoute
               exact
               path="/profile/anotations/edit/:id"
