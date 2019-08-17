@@ -135,7 +135,11 @@ function Anotations(props) {
   return (
     <div>
       <h3 className={classes.title}>Anotations</h3>
-      <div>{anotationsComponent}</div>
+      <div>
+
+      {anotationsComponent}
+      
+      </div>
     </div>
   );
 }

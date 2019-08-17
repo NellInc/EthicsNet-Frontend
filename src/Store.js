@@ -19,8 +19,8 @@ function Store({ children }) {
   const [isLogged, setIsLogged] = useState(localStorage.isLogged);
   const [loading, setLoading] = useState(true);
 
-  console.log('IS LOGGED FROM CONTEXT ->', isLogged);
-  console.log('IS LOGGED FROM CONTEXT LOCAL ->', localStorage.isLogged);
+  // console.log('IS LOGGED FROM CONTEXT ->', isLogged);
+  // console.log('IS LOGGED FROM CONTEXT LOCAL ->', localStorage.isLogged);
   
 
   return (
