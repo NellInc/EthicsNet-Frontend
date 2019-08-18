@@ -7,6 +7,8 @@
     "@material-ui/core": "^4.3.0",
     "@material-ui/icons": "^4.2.1",
     "gh-pages": "^2.1.1",
+    "html-screen-capture-js": "^1.0.21",
+    "html2canvas": "^1.0.0-rc.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-notifications-component": "^1.1.1",

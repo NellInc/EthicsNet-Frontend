@@ -5,11 +5,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Link } from 'react-router-dom';
 import './App.css';
 
-import { IsLogged } from './Store'
-
+import { IsLogged, Notification } from './Store'
 import { apiURL } from './globals';
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +30,8 @@ const useStyles = makeStyles(theme => ({
 
 function App(props) {
   const classes = useStyles();
-  const [isLogged, setIsLogged] = useContext(IsLogged)
+  const [isLogged, setIsLogged] = useContext(IsLogged);
+  const notification = useContext(Notification);
 
   const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
@@ -58,28 +57,33 @@ function App(props) {
     
     try {
       const response = await fetch(`${apiURL}/auth/register`, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, cors, *same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`,
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        body: JSON.stringify(data),
       });
 
-      const { token, user } = await response.json();
-      localStorage.setItem('userId', user._id);
-      localStorage.setItem('userName', user.firstName);
-      localStorage.setItem('isLogged', 'true');
-      localStorage.setItem('token', token);
-      // setIsLogged('true')
-      // props.history.push('/profile');
-      window.location.reload();
+      const json = await response.json();
+
+      if (response.status === 400) {
+        notification(json.error, 'registration failed', 'danger');
+      } else if (response.status === 200) {
+        notification('welcome to ethics net!');
+        const { token, user } = json;
+        localStorage.setItem('userId', user._id);
+        localStorage.setItem('userName', user.firstName);
+        localStorage.setItem('isLogged', 'true');
+        localStorage.setItem('token', token);
+        window.location.reload();
+      } else {
+        notification('there was an error', 'we could not register you', 'danger');
+      }
     } catch (error) {
       console.log(error);
     }

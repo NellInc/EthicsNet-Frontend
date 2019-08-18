@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Link } from 'react-router-dom';
 
-import { IsLogged } from './Store';
+import { IsLogged, Notification } from './Store';
+
 
 import { apiURL } from './globals';
 
@@ -31,6 +31,7 @@ function Login(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
 
+  const notification = useContext(Notification);
   const [isLogged, setIsLogged] = useContext(IsLogged);
 
   const [values, setValues] = React.useState({
@@ -73,12 +74,22 @@ function Login(props) {
         body: JSON.stringify(data),
       });
 
-      const { token, user } = await response.json();
-      localStorage.setItem('userId', user._id);
-      localStorage.setItem('userName', user.firstName);
-      localStorage.setItem('isLogged', 'true');
-      localStorage.setItem('token', token);
-      window.location.reload();
+      const json = await response.json()
+
+      if (response.status === 400) {
+        notification(json.error, 'login failed', 'danger');
+        console.log('status -> ', response.status, json);
+      } else if (response.status === 200) {
+        notification('welcome back!');
+        const { token, user } = json;
+        localStorage.setItem('userId', user._id);
+        localStorage.setItem('userName', user.firstName);
+        localStorage.setItem('isLogged', 'true');
+        localStorage.setItem('token', token);
+        window.location.reload();
+      } else {
+        notification('there was an error', 'we could not log you in', 'danger');
+      }
     } catch (error) {
       console.log(error);
     }

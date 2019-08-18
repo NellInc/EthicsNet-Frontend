@@ -44,7 +44,7 @@ function Home(props) {
         style={{ marginRight: '10px' }}
       >
         <Link className={classes.link} to="/profile/annotations">
-          Anotations
+          Annotations
         </Link>
       </Button>
 
@@ -54,7 +54,7 @@ function Home(props) {
         style={{ marginRight: '10px' }}
       >
         <Link className={classes.link} to="/annotations/new">
-          Insert new anotation
+          Insert new annotation
         </Link>
       </Button>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import html2canvas from 'html2canvas';
 
 import { IsLogged } from './Store';
 
@@ -41,6 +42,29 @@ function LoggedOut(props) {
     console.log('redirect home!');
   }
 
+  function convertCanvasToImage(canvas) {
+    var image = new Image();
+    image.src = canvas.toDataURL("image/png");
+    return image;
+  }
+
+  // TODO: implement this on the chrome extension
+  const saveScreenshot = () => {
+    console.log('get a screenshot from here'); 
+    html2canvas(document.body).then(function(canvas) {
+
+      canvas.classList = 'ethics-net-canvas';
+
+      document.body.appendChild(canvas)
+      console.log('canvas -> ', canvas);
+      
+      const img = convertCanvasToImage(canvas)
+
+      document.body.appendChild(img);
+    });
+
+  }
+
   if (localStorage.isLogged === 'true') {
     return (
       <div className={classes.root}>
@@ -51,6 +75,10 @@ function LoggedOut(props) {
   
         <Button color="secondary" variant="outlined" onClick={redirectHome}>
           No, keep logged in
+        </Button>
+
+        <Button className="screenshot" color="primary" variant="outlined" onClick={saveScreenshot}>
+          save screenshot
         </Button>
       </div>
     );

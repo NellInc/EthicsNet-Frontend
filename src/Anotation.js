@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { apiURL } from './globals';
 import { LinkBtn } from './components';
 import { Loader } from './components';
+import { Notification } from './Store';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -30,6 +31,8 @@ function Anotation(props) {
   const [anotation, setAnotation] = useState({});
   const [anotationEdit, setAnotationEdit] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const notification = useContext(Notification);
 
   useEffect(() => {
     async function fetchData() {
@@ -84,13 +87,13 @@ function Anotation(props) {
       }
     );
     console.log(response.status);
+    const data = await response.json();
 
     if (response.status === 200) {
-      const data = await response.json();
-      console.log(data);
-      
+      notification('annotation saved!')
     } else {
       console.log('there was an error', response.status);
+      notification(data.error, 'there was an error', 'danger');
     }
   };
 
@@ -113,7 +116,7 @@ function Anotation(props) {
         id="standard-multiline-flexible"
         label="edit anotation"
         multiline
-        rowsMax="10"
+        rowsMax="30"
         value={anotationEdit}
         onChange={handleChange}
         className={classes.textField}

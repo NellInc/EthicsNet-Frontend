@@ -8,7 +8,6 @@ const useStyles = makeStyles(theme => (
   footer: {
     border: '1px solid #000',
     textAlign: 'center',
-    // position: 'absolute',
     width: '100%',
     bottom: '1px',
     color: '#fff',
@@ -35,7 +34,7 @@ function Footer(props) {
 
   return (
     <div className={classes.footer}>
-      <p className={classes.p}>ethics eth - 2019</p>
+      <p className={classes.p}>Ethics Net - 2019</p>
     </div>
   );
 }
