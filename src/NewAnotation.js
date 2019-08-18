@@ -99,7 +99,7 @@ function NewAnotation(props) {
   return (
     <div className={classes.root}>
       <Typography variant="h6" gutterBottom>
-        Create a new anotation
+        Create a new annotation
       </Typography>
 
       <form onSubmit={handleSubmit}>

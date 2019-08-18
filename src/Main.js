@@ -89,6 +89,14 @@ function Main() {
               component={Anotations}
             />
 
+            {/* TODO: remove this later, this was only to */}
+            {/* not break the deployed extension */}
+            <PrivateRoute
+              exact
+              path="/profile/anotations"
+              component={Anotations}
+            />
+
             <PrivateRoute
               exact
               path="/annotations/new"
