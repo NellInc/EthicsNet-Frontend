@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { apiURL } from './globals';
 import { Loader } from './components';
+import { Notification } from './Store';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -34,8 +35,11 @@ function NewAnotation(props) {
   const [loading, setLoading] = useState(true);
   const [anotation, setAnotation] = useState('');
 
+  const notification = useContext(Notification);
+
   useEffect(() => {
     setLoading(false);
+    notification('welcome back!');
   }, []);
 
   const handleChange = e => {
@@ -73,6 +77,7 @@ function NewAnotation(props) {
 
      if (response.status === 200) {
        const json = await response.json();
+       notification('annotation created!');
        props.history.push('/profile/annotations')
      } else {
        console.log('error while fetching data!');

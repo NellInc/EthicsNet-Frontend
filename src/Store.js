@@ -3,6 +3,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { purple } from '@material-ui/core/colors';
 
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
 const theme = createMuiTheme({
   palette: {
     // primary: { main: 'rgb(255, 127, 80)' },
@@ -14,19 +17,35 @@ const theme = createMuiTheme({
 // this is the default value
 export const IsLogged = createContext(localStorage.isLogged);
 export const Loading = createContext(true);
+export const Notification = createContext('bla');
 
 function Store({ children }) {
   const [isLogged, setIsLogged] = useState(localStorage.isLogged);
   const [loading, setLoading] = useState(true);
 
-  // console.log('IS LOGGED FROM CONTEXT ->', isLogged);
-  // console.log('IS LOGGED FROM CONTEXT LOCAL ->', localStorage.isLogged);
-  
+  const notificationDOMRef = React.createRef();
+
+  const addNotification = (message, title = '', type = 'success') => {
+    notificationDOMRef.current.addNotification({
+      title,
+      message,
+      type,
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
+      dismiss: { duration: 3000 },
+      dismissable: { click: true },
+    });
+  };
 
   return (
     <Loading.Provider value={[loading, setLoading]}>
       <IsLogged.Provider value={[isLogged, setIsLogged]}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <ReactNotification ref={notificationDOMRef} />
+        <Notification.Provider value={addNotification}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </Notification.Provider>
       </IsLogged.Provider>
     </Loading.Provider>
   );
