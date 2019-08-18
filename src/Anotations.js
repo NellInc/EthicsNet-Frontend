@@ -80,7 +80,7 @@ function Anotations(props) {
 
   const handleAnotationClick = (id, type) => {
     if (type === 'edit') {
-      props.history.push(`/profile/anotations/edit/${id}`)
+      props.history.push(`/profile/annotations/edit/${id}`)
     } else if (type === 'delete') {
       console.log('delete id ->', id)
       setIdToDelete(id);

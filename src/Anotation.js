@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 
 import { apiURL } from './globals';
 import { LinkBtn } from './components';
+import { Loader } from './components';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -16,13 +14,6 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     width: '100%',
-  },
-  loaderWrapper: {
-    height: '50vh',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   link: {
     color: 'inherit',
@@ -71,6 +62,8 @@ function Anotation(props) {
   }, [loading, props.match.params]);
 
   const editAnotation = async () => {
+    setLoading(true);
+
     const { id } = props.match.params;
     const { token } = localStorage;
 
@@ -90,8 +83,15 @@ function Anotation(props) {
         }),
       }
     );
+    console.log(response.status);
 
-    const data = await response.json();
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data);
+      
+    } else {
+      console.log('there was an error', response.status);
+    }
   };
 
   const handleChange = e => {
@@ -102,9 +102,7 @@ function Anotation(props) {
 
   if (loading) {
     return (
-      <div className={classes.loaderWrapper}>
-        <CircularProgress />
-      </div>
+      <Loader />
     );
   }
 
@@ -134,7 +132,7 @@ function Anotation(props) {
       <LinkBtn 
         variant="outlined"
         color="secondary"
-        to="/profile/anotations"
+        to="/profile/annotations"
         name="cancel"
       />
 

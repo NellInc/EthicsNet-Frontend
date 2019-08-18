@@ -109,7 +109,7 @@ function Profile(props) {
 
       <form onSubmit={handleSubmit}>
         <div>
-          
+
           <TextField
             id="standard-name"
             label="First name"
@@ -146,18 +146,11 @@ function Profile(props) {
         </div>
 
         <Button color="primary" variant="outlined" style={{marginRight: '10px'}} type="submit">Save</Button>
+
         <Button color="secondary" type="button" variant="outlined">Delete account</Button>
         </form>
 
       </main>
-
-      {/* <main>
-        <Link to="/profile/anotations">Anotations</Link>
-      </main>
-
-      <Link to="/register">register</Link>
-      <br />
-      <Link to="/login">login</Link> */}
     </div>
   );
 }

@@ -5,6 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
+import { apiURL } from './globals';
+import { Loader } from './components';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     background: 'red',
@@ -15,7 +18,14 @@ const useStyles = makeStyles(theme => ({
   link: {
     color: 'inherit',
     textDecoration: 'none'
-  }
+  },
+  loaderWrapper: {
+    height: '50vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
 
 function NewAnotation(props) {
@@ -25,13 +35,8 @@ function NewAnotation(props) {
   const [anotation, setAnotation] = useState('');
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(false);
-      console.log(loading);
-    }
-
-    fetchData();
-  }, [loading]);
+    setLoading(false);
+  }, []);
 
   const handleChange = e => {
     setAnotation(e.target.value);
@@ -39,8 +44,52 @@ function NewAnotation(props) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    setLoading(true);
+
+    const { token, userId } = localStorage;
+
+    const data = {
+      content: anotation,
+      authorId: userId
+    }
+
+    try {
+      const response = await fetch(`${apiURL}/api/post-text`, {
+       method: 'POST',
+       mode: 'cors',
+       cache: 'no-cache',
+       credentials: 'same-origin',
+       headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${token}`,
+       },
+       redirect: 'follow',
+       referrer: 'no-referrer',
+       body: JSON.stringify(data),
+     });
+
+     console.log(response.status);
+
+     if (response.status === 200) {
+       const json = await response.json();
+       props.history.push('/profile/annotations')
+     } else {
+       console.log('error while fetching data!');
+     }
+
+    } catch(error) {
+      console.log('there was an error ->', error);
+    }
+
     console.log('submiting!');
   };
+
+  if (loading) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className={classes.root}>

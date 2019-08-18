@@ -85,19 +85,19 @@ function Main() {
 
             <PrivateRoute
               exact
-              path="/profile/anotations"
+              path="/profile/annotations"
               component={Anotations}
             />
 
             <PrivateRoute
               exact
-              path="/anotations/new"
+              path="/annotations/new"
               component={NewAnotation}
             />
 
             <PrivateRoute
               exact
-              path="/profile/anotations/edit/:id"
+              path="/profile/annotations/edit/:id"
               component={Anotation}
             />
 
