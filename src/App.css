@@ -18,3 +18,7 @@ hr {
   height: 1px;
   border: none;
 }
+
+.ReactCrop__image {
+  max-height: none!important;
+}

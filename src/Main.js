@@ -16,7 +16,8 @@ import Test from './Test';
 import Anotation from './Anotation';
 import Home from './Home';
 import LoggedOut from './LoggedOut';
-import NewAnotation from './NewAnotation'
+import NewAnotation from './NewAnotation';
+import Screenshot from './Screenshot';
 
 import { PrivateRoute, PublicRoute } from './RoutesTypes';
 import { Loading } from './Store';
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(3, 2),
-    maxWidth: '800px',
+    // maxWidth: '800px',
     margin: '20px auto',
     // backgroundColor: 'rgb(254, 255, 247)',
   },
@@ -101,6 +102,12 @@ function Main() {
               exact
               path="/annotations/new"
               component={NewAnotation}
+            />
+
+            <PrivateRoute
+              exact
+              path="/image/new"
+              component={Screenshot}
             />
 
             <PrivateRoute
