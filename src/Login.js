@@ -118,6 +118,7 @@ function Login(props) {
             className={classes.textField}
             id="email"
             label="Email"
+            type="email"
             value={values.email}
             onChange={handleChange('email')}
             margin="normal"

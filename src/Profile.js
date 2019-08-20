@@ -59,6 +59,9 @@ function Profile(props) {
 
       const data = await response.json();
 
+      console.log('FETCHED USER -> ', data);
+      
+
       setUserData(data.user);
       setValues({...values, name: data.user.firstName, last: data.user.lastName, email: data.user.email})
       setLoading(false);
