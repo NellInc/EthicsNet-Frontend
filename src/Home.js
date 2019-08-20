@@ -58,9 +58,19 @@ function Home(props) {
         </Link>
       </Button>
 
-      <Button color="primary" variant="outlined">
+      <Button
+        color="primary"
+        variant="outlined"
+        style={{ marginRight: '10px' }}
+      >
         <Link className={classes.link} to="/profile">
           Profile
+        </Link>
+      </Button>
+
+      <Button color="primary" variant="outlined">
+        <Link className={classes.link} to="/image/new">
+          Annotate last cached website
         </Link>
       </Button>
     </div>

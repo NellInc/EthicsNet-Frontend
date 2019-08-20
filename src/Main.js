@@ -18,6 +18,7 @@ import Home from './Home';
 import LoggedOut from './LoggedOut';
 import NewAnotation from './NewAnotation';
 import Screenshot from './Screenshot';
+import Screenshot2 from './Screenshot2'
 
 import { PrivateRoute, PublicRoute } from './RoutesTypes';
 import { Loading } from './Store';
@@ -61,7 +62,7 @@ function Main() {
   return (
     <>
       <Navbar />
-      <Container className={classes.root} maxWidth="md">
+      <Container className={classes.root} maxWidth="xl">
         <Paper className={classes.paper} elevation={2}>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
@@ -102,6 +103,12 @@ function Main() {
               exact
               path="/annotations/new"
               component={NewAnotation}
+            />
+
+            <PrivateRoute
+              exact
+              path="/profile/anotations"
+              component={Screenshot2}
             />
 
             <PrivateRoute
