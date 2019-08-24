@@ -2,6 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { apiURL } from './globals';
 import { LinkBtn } from './components';
@@ -22,6 +26,10 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginRight: '10px'
+  },
+  formControl: {
+    width: '100%',
+    marginBottom: '20px'
   }
 }));
 
@@ -30,6 +38,7 @@ function Anotation(props) {
 
   const [anotation, setAnotation] = useState({});
   const [anotationEdit, setAnotationEdit] = useState('');
+  const [category, setCategory] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const notification = useContext(Notification);
@@ -58,17 +67,35 @@ function Anotation(props) {
 
       setAnotation(data.anotation);
       setAnotationEdit(data.anotation.content);
+      
+      const selectedCategory = {
+        ['morally preferable']: 0,
+        ['morally unpreferable']: 1,
+        ['aesthetically preferable']: 2,
+        ['aesthetically unpreferable']: 3,
+      };
+
+      console.log('SELECTED -> ', data);
+
+      setCategory(selectedCategory[data.anotation.category])
       setLoading(false);
     }
 
     fetchData();
-  }, [loading, props.match.params]);
+  }, [loading]);
 
   const editAnotation = async () => {
     setLoading(true);
 
     const { id } = props.match.params;
     const { token } = localStorage;
+
+    const selectedCategory = {
+      0: 'morally preferable',
+      1: 'morally unpreferable',
+      2: 'aesthetically preferable',
+      3: 'aesthetically unpreferable',
+    };
 
     const response = await fetch(
       `${apiURL}/api/user/anotations/${id}`,
@@ -83,6 +110,7 @@ function Anotation(props) {
         },
         body: JSON.stringify({
           content: anotationEdit,
+          category: selectedCategory[category]
         }),
       }
     );
@@ -112,6 +140,7 @@ function Anotation(props) {
   return (
     <div>
       <p>{anotation.createdAt.substring(0, 10)}</p>
+
       <TextField
         id="standard-multiline-flexible"
         label="edit anotation"
@@ -122,6 +151,25 @@ function Anotation(props) {
         className={classes.textField}
         margin="normal"
       />
+
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="category-simple">Category</InputLabel>
+          <Select
+            value={category}
+            onChange={e => setCategory(e.target.value)}
+            inputProps={{
+              name: 'category',
+              id: 'category-simple',
+            }}
+          >
+            <MenuItem selected value={0}>
+              Morally preferable
+            </MenuItem>
+            <MenuItem value={1}>Morally unpreferable</MenuItem>
+            <MenuItem value={2}>Aesthetically preferable</MenuItem>
+            <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
+          </Select>
+        </FormControl>
 
       <Button
         onClick={editAnotation}
