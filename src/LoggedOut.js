@@ -69,7 +69,7 @@ function LoggedOut(props) {
     return (
       <div className={classes.root}>
         <h1>are you sure you want to log out?</h1>
-        <Button color="primary" variant="outlined" onClick={handleLogOut}>
+        <Button style={{marginRight: '10px'}} color="primary" variant="outlined" onClick={handleLogOut}>
           Yes, log out
         </Button>
   
@@ -77,9 +77,9 @@ function LoggedOut(props) {
           No, keep logged in
         </Button>
 
-        <Button className="screenshot" color="primary" variant="outlined" onClick={saveScreenshot}>
+        {/* <Button className="screenshot" color="primary" variant="outlined" onClick={saveScreenshot}>
           save screenshot
-        </Button>
+        </Button> */}
       </div>
     );
   }

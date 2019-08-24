@@ -68,11 +68,11 @@ function Home(props) {
         </Link>
       </Button>
 
-      <Button color="primary" variant="outlined">
+      {/* <Button color="primary" variant="outlined">
         <Link className={classes.link} to="/image/new">
           Annotate last cached website
         </Link>
-      </Button>
+      </Button> */}
     </div>
   );
 }

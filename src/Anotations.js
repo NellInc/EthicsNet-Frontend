@@ -28,6 +28,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  category: {
+    background: '#282828',
+    color: '#fff',
+    padding: '4px',
+    borderRadius: '5px',
+    fontSize: '13px'
+  },
+  date: {
+    fontSize: '12px'
+  }
 }));
 
 function Anotations(props) {
@@ -100,8 +110,10 @@ function Anotations(props) {
         filterAnotations={filterAnotations}
       />
 
+      <span className={classes.category}>{el.category}</span>
+
       <p> {el.content} </p>
-      <p> {el.createdAt.substring(0, 10)} </p>
+      <p className={classes.date}> {el.createdAt.substring(0, 10)} </p>
 
       <div>
         <Button

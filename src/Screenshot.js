@@ -6,12 +6,14 @@ import './App.css';
 import img from './images/img.jpg';
 
 import { apiURL } from './globals';
+import { Loader } from './components';
 
 // This is a class component because of the librally
 // wont bother to refactor it to functional
 class Screenshot extends PureComponent {
   state = {
     showBtn: 'none',
+    loading: true,
     src: '',
     croppedImageUrl: '',
     crop: {
@@ -44,6 +46,7 @@ class Screenshot extends PureComponent {
           console.log(data);
           this.setState({
             src: data.user.cachedImg,
+            loading: false
           });
         }
       } catch (error) {
@@ -155,11 +158,17 @@ class Screenshot extends PureComponent {
   render() {
     const { crop, croppedImageUrl, src } = this.state;
 
+    if (this.state.loading) {
+      return <Loader />
+    }
+
     return (
-      <div>
-        {/* <div>
-          <input type="file" onChange={this.onSelectFile} />
-        </div> */}
+      <div style={{
+        position: 'absolute',
+        width: '100%',
+        left: '0',
+        top: '82px'
+      }}>
         {src && (
           <ReactCrop
             src={src}

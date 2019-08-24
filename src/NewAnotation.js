@@ -4,6 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { apiURL } from './globals';
 import { Loader } from './components';
@@ -18,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     color: 'inherit',
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   loaderWrapper: {
     height: '50vh',
@@ -34,6 +38,8 @@ function NewAnotation(props) {
 
   const [loading, setLoading] = useState(true);
   const [anotation, setAnotation] = useState('');
+
+  const [category, setCategory] = useState(0);
 
   const notification = useContext(Notification);
 
@@ -53,37 +59,44 @@ function NewAnotation(props) {
 
     const { token, userId } = localStorage;
 
+    const selectedCategory = {
+      0: 'morally preferable',
+      1: 'morally unpreferable',
+      2: 'aesthetically preferable',
+      3: 'aesthetically unpreferable',
+    };
+
     const data = {
+      category: selectedCategory[category],
       content: anotation,
-      authorId: userId
-    }
+      authorId: userId,
+    };
 
     try {
       const response = await fetch(`${apiURL}/api/post-text`, {
-       method: 'POST',
-       mode: 'cors',
-       cache: 'no-cache',
-       credentials: 'same-origin',
-       headers: {
-         'Content-Type': 'application/json',
-         'Authorization': `Bearer ${token}`,
-       },
-       redirect: 'follow',
-       referrer: 'no-referrer',
-       body: JSON.stringify(data),
-     });
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        body: JSON.stringify(data),
+      });
 
-     console.log(response.status);
+      console.log(response.status);
 
-     if (response.status === 200) {
-       const json = await response.json();
-       notification('annotation created!');
-       props.history.push('/profile/annotations')
-     } else {
-       console.log('error while fetching data!');
-     }
-
-    } catch(error) {
+      if (response.status === 200) {
+        const json = await response.json();
+        notification('annotation created!');
+        props.history.push('/profile/annotations');
+      } else {
+        console.log('error while fetching data!');
+      }
+    } catch (error) {
       console.log('there was an error ->', error);
     }
 
@@ -91,9 +104,7 @@ function NewAnotation(props) {
   };
 
   if (loading) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   return (
@@ -115,6 +126,25 @@ function NewAnotation(props) {
           rows="5"
         />
 
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-simple">Age</InputLabel>
+          <Select
+            value={category}
+            onChange={e => setCategory(e.target.value)}
+            inputProps={{
+              name: 'age',
+              id: 'age-simple',
+            }}
+          >
+            <MenuItem selected value={0}>
+              Morally preferable
+            </MenuItem>
+            <MenuItem value={1}>Morally unpreferable</MenuItem>
+            <MenuItem value={2}>Aesthetically preferable</MenuItem>
+            <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
+          </Select>
+        </FormControl>
+
         <Button
           color="primary"
           variant="outlined"
@@ -124,7 +154,9 @@ function NewAnotation(props) {
           Save
         </Button>
         <Button color="secondary" type="button" variant="outlined">
-          <Link className={classes.link} to="/">Cancel</Link>
+          <Link className={classes.link} to="/">
+            Cancel
+          </Link>
         </Button>
       </form>
     </div>

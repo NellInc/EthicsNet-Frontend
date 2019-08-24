@@ -62,7 +62,7 @@ function Main() {
   return (
     <>
       <Navbar />
-      <Container className={classes.root} maxWidth="xl">
+      <Container className={classes.root} maxWidth="md">
         <Paper className={classes.paper} elevation={2}>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
