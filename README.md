@@ -28,4 +28,4 @@ none yet - still in development mode - all files are in the ./src folder
 
 1 - `docker build -t ethics-net-frontend .`
 
-2 - `docker run -p 5000:5000 ethics-net-frontend` 
+2 - `docker run -p 80:80 ethics-net-frontend` 
