@@ -1,44 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import DeleteDialog from './DeleteDialog'
-
-import { apiURL } from './globals';
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    padding: theme.spacing(3, 2),
-    margin: '20px 20px',
-    '&:hover': {
-      // backgroundColor: 'rgb(7, 177, 77, 0.1)',
-      boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.4)',
-      cursor: 'pointer',
-    },
-  },
-  title: {
-    textAlign: 'center',
-  },
-  loaderWrapper: {
-    height: '50vh',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  category: {
-    background: '#282828',
-    color: '#fff',
-    padding: '4px',
-    borderRadius: '5px',
-    fontSize: '13px'
-  },
-  date: {
-    fontSize: '12px'
-  }
-}));
+import DeleteDialog from '../DeleteDialog';
+import { apiURL } from '../globals';
+import { useStyles } from './style';
 
 function Anotations(props) {
   const classes = useStyles();
@@ -47,13 +14,9 @@ function Anotations(props) {
   const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState('');
 
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
   function filterAnotations(idRemoved) {
     console.log('id to remove-> ', idRemoved);
-    setAnotations(anotations.filter(el => el._id !== idRemoved))
+    setAnotations(anotations.filter(el => el._id !== idRemoved));
   }
 
   function handleClose() {
@@ -64,23 +27,20 @@ function Anotations(props) {
     async function getUserData() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(
-        `${apiURL}/api/user/anotations`,
-        {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${apiURL}/api/user/anotations`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
       console.log(data);
-      
+
       setAnotations(data.anotations);
       setLoading(false);
     }
@@ -90,9 +50,9 @@ function Anotations(props) {
 
   const handleAnotationClick = (id, type) => {
     if (type === 'edit') {
-      props.history.push(`/profile/annotations/edit/${id}`)
+      props.history.push(`/profile/annotations/edit/${id}`);
     } else if (type === 'delete') {
-      console.log('delete id ->', id)
+      console.log('delete id ->', id);
       setIdToDelete(id);
       setOpen(true);
     }
@@ -100,31 +60,26 @@ function Anotations(props) {
 
   const anotationsComponent = anotations.map(el => (
     <Card className={classes.paper} key={el._id}>
-      
-      <DeleteDialog 
-        content={el.content} 
-        open={open} 
+      <DeleteDialog
+        content={el.content}
+        open={open}
         handleClose={handleClose}
         id={idToDelete}
         elId={el._id}
         filterAnotations={filterAnotations}
       />
-
       <span className={classes.category}>{el.category}</span>
-
       <p> {el.content} </p>
       <p className={classes.date}> {el.createdAt.substring(0, 10)} </p>
-
       <div>
         <Button
           color="primary"
           variant="outlined"
-          style={{marginRight: '10px'}}
+          style={{ marginRight: '10px' }}
           onClick={() => handleAnotationClick(el._id, 'edit')}
         >
           Edit
         </Button>
-
         <Button
           color="secondary"
           variant="outlined"
@@ -147,11 +102,7 @@ function Anotations(props) {
   return (
     <div>
       <h3 className={classes.title}>Annotations</h3>
-      <div>
-
-      {anotationsComponent}
-      
-      </div>
+      <div>{anotationsComponent}</div>
     </div>
   );
 }

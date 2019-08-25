@@ -1,39 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import './App.css';
+import '../App.css';
 
-import { IsLogged, Notification } from './Store'
-import { apiURL } from './globals';
+import { Notification } from '../Store'
+import { apiURL } from '../globals';
+import { useStyles } from './style';
 
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '47%',
-  },
-  submit: {
-    marginTop: '20px',
-  },
-  loaderWrapper: {
-    height: '100vh',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}));
-
-function App(props) {
+function App() {
   const classes = useStyles();
-  const [isLogged, setIsLogged] = useContext(IsLogged);
   const notification = useContext(Notification);
-
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
+  
   const [values, setValues] = React.useState({
     firstName: '',
     lastName: '',
@@ -45,10 +24,6 @@ function App(props) {
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
-
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
 
   const handleSubmit = async e => {
     const data = values;

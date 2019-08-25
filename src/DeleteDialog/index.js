@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
-import { apiURL } from './globals';
+import { apiURL } from '../globals';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -39,8 +39,10 @@ export default function AlertDialogSlide(props) {
           },
         }
       );
-
+      
+      // TODO: show a message here if it was deleted successfully
       const data = await response.json();
+      console.log(data);
       filterAnotations(id)
       handleClose();
     } catch (error) {
@@ -52,7 +54,6 @@ export default function AlertDialogSlide(props) {
     <div>
       <Dialog
         open={open && elId === id}
-        // open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
