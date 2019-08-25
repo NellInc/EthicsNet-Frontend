@@ -13,7 +13,7 @@ import Profile from './Profile';
 import Anotations from './Anotations';
 import NotFound from './NotFound';
 import Test from './Test';
-import Anotation from './Anotation';
+import Anotation from './Annotation';
 import Home from './Home';
 import LoggedOut from './LoggedOut';
 import NewAnotation from './NewAnotation';

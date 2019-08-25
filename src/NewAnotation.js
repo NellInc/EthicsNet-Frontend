@@ -31,6 +31,10 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  formControl: {
+    width: '100%',
+    marginBottom: '20px'
+  }
 }));
 
 function NewAnotation(props) {
@@ -45,7 +49,7 @@ function NewAnotation(props) {
 
   useEffect(() => {
     setLoading(false);
-    notification('welcome back!');
+    // notification('welcome back!');
   }, []);
 
   const handleChange = e => {
@@ -127,18 +131,16 @@ function NewAnotation(props) {
         />
 
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-simple">Age</InputLabel>
+          <InputLabel htmlFor="category-simple">Category</InputLabel>
           <Select
             value={category}
             onChange={e => setCategory(e.target.value)}
             inputProps={{
-              name: 'age',
-              id: 'age-simple',
+              name: 'category',
+              id: 'category-simple',
             }}
           >
-            <MenuItem selected value={0}>
-              Morally preferable
-            </MenuItem>
+            <MenuItem selected value={0}>Morally preferable</MenuItem>
             <MenuItem value={1}>Morally unpreferable</MenuItem>
             <MenuItem value={2}>Aesthetically preferable</MenuItem>
             <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
