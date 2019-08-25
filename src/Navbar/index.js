@@ -1,54 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
+
 import { Link, withRouter } from 'react-router-dom';
 
-import { IsLogged } from './Store'
-import { Loading } from './Store'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: '10px',
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    color: '#fff',
-    textDecoration: 'none'
-  },
-  link: {
-    color: '#fff',
-    textDecoration: 'none',
-  },
-}));
+import { Loading } from '../Store';
+import { useStyles } from './style';
 
 function Navbar(props) {
   const classes = useStyles();
 
-  const [loading, setLoading] = useContext(Loading)
-  const [isLogged, setIsLogged] = useContext(IsLogged)
+  const [loading, setLoading] = useContext(Loading);
 
   useEffect(() => {
     async function fetchData() {}
     fetchData();
     setLoading(false);
-  }, [loading]);
+  }, [loading, setLoading]);
 
   const handleLogout = () => {
     props.history.push('/logged-out');
-    // window.location.href = 'http://localhost:3000/#/logged-out';
-    // setTimeout(() => {
-    //   localStorage.isLogged = null;
-    //   setIsLogged('false')
-    // }, 200);
   };
 
   return (
@@ -63,12 +37,9 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" className={classes.title}>
-            
-          </Typography> */}
-            <Link color="inherit" className={classes.title} to="/">
-              Home
-            </Link>
+          <Link color="inherit" className={classes.title} to="/">
+            Home
+          </Link>
 
           {localStorage.isLogged === 'true' ? (
             <>

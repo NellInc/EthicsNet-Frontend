@@ -1,51 +1,30 @@
 import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 
-import Navbar from './Navbar';
-import Footer from './Footer';
-import Register from './Register';
-import Login from './Login';
-import Profile from './Profile';
-import Anotations from './Anotations';
-import NotFound from './NotFound';
-import Test from './Test';
-import Anotation from './Annotation';
-import Home from './Home';
-import LoggedOut from './LoggedOut';
-import NewAnotation from './NewAnotation';
-import Screenshot from './Screenshot';
-import Screenshot2 from './Screenshot2'
+import Navbar from '../Navbar';
+import Footer from '../Footer';
+import Register from '../Register';
+import Login from '../Login';
+import Profile from '../Profile';
+import Annotations from '../Annotations';
+import NotFound from '../NotFound';
+import Anotation from '../Annotation';
+import Home from '../Home';
+import LoggedOut from '../LoggedOut';
+import NewAnnotation from '../NewAnnotation';
+import Screenshot from '../Screenshot';
+import Screenshot2 from '../Screenshot/Screenshot2';
 
-import { PrivateRoute, PublicRoute } from './RoutesTypes';
-import { Loading } from './Store';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    minHeight: 'calc(100vh - 128px)',
-  },
-  paper: {
-    padding: theme.spacing(3, 2),
-    // maxWidth: '800px',
-    margin: '20px auto',
-    // backgroundColor: 'rgb(254, 255, 247)',
-  },
-  loaderWrapper: {
-    height: 'calc(100vh - 98px)',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}));
+import { PrivateRoute, PublicRoute } from '../RoutesTypes';
+import { Loading } from '../Store';
+import { useStyles } from './style';
 
 function Main() {
   const classes = useStyles();
-
-  const [loading, setLoading] = useContext(Loading);
+  const [loading] = useContext(Loading);
 
   if (loading) {
     return (
@@ -88,7 +67,7 @@ function Main() {
             <PrivateRoute
               exact
               path="/profile/annotations"
-              component={Anotations}
+              component={Annotations}
             />
 
             {/* TODO: remove this later, this was only to */}
@@ -96,13 +75,13 @@ function Main() {
             <PrivateRoute
               exact
               path="/profile/anotations"
-              component={Anotations}
+              component={Annotations}
             />
 
             <PrivateRoute
               exact
               path="/annotations/new"
-              component={NewAnotation}
+              component={NewAnnotation}
             />
 
             <PrivateRoute
@@ -111,11 +90,7 @@ function Main() {
               component={Screenshot2}
             />
 
-            <PrivateRoute
-              exact
-              path="/image/new"
-              component={Screenshot}
-            />
+            <PrivateRoute exact path="/image/new" component={Screenshot} />
 
             <PrivateRoute
               exact

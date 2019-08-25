@@ -1,38 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { IsLogged, Notification } from './Store';
+import { Notification } from '../Store';
+import { apiURL } from '../globals';
+import { useStyles } from './style'
 
-
-import { apiURL } from './globals';
-
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '47%',
-  },
-  submit: {
-    marginTop: '20px',
-  },
-  loaderWrapper: {
-    height: '50vh',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}));
-
-function Login(props) {
+function Login() {
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
 
   const notification = useContext(Notification);
-  const [isLogged, setIsLogged] = useContext(IsLogged);
 
   const [values, setValues] = React.useState({
     email: '',
@@ -42,19 +19,6 @@ function Login(props) {
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`${apiURL}`)
-      const json = await response.json()
-      console.log('response -> ', response);
-      console.log('json', json);
-      
-    }
-
-    fetchData()
-    
-  }, []);
 
   const handleSubmit = async e => {
     const data = values;
@@ -67,7 +31,6 @@ function Login(props) {
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`,
         },
         redirect: 'follow',
         referrer: 'no-referrer',
@@ -94,14 +57,6 @@ function Login(props) {
       console.log(error);
     }
   };
-
-  if (loading) {
-    return (
-      <div className={classes.loaderWrapper}>
-        <CircularProgress />
-      </div>
-    );
-  }
 
   return (
     <div className={classes.container}>

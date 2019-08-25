@@ -2,7 +2,7 @@
 // /* eslint-disable jsx-a11y/media-has-caption, class-methods-use-this */
 // import React, { PureComponent } from 'react';
 // import ReactDOM from 'react-dom'; // eslint-disable-line
-// import ReactCrop from '../node_modules/react-image-crop/lib/ReactCrop';
+// import ReactCrop from 'react-image-crop/lib/ReactCrop';
 // // import '../dist/ReactCrop.css';
 
 // import '../node_modules/react-image-crop/dist/ReactCrop.css'
