@@ -23,3 +23,9 @@ currently using the context api & react hooks  for global state pattern
 ### App structure
 
 none yet - still in development mode - all files are in the ./src folder
+
+#### Run it with docker 
+
+1 - `docker build -t ethics-net-frontend .`
+
+2 - `docker run -p 5000:5000 ethics-net-frontend` 
