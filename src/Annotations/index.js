@@ -70,7 +70,15 @@ function Anotations(props) {
       />
       <span className={classes.category}>{el.category}</span>
       <p> {el.content} </p>
-      <p className={classes.date}> {el.createdAt.substring(0, 10)} </p>
+
+      {el.font === 'none' || el.font === '' ? null : (
+        <small className={classes.font}>
+          Annotated from: <a target="_blank" rel="noopener noreferrer" href={el.font}>{el.font}</a>}
+        </small>
+      )}
+
+      <p className={classes.date}>{el.createdAt.substring(0, 10)} </p>
+
       <div>
         <Button
           color="primary"

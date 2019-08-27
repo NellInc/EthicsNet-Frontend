@@ -46,6 +46,8 @@ function App() {
 
       const json = await response.json();
 
+      console.log(json);
+
       if (response.status === 400) {
         notification(json.error, 'registration failed', 'danger');
       } else if (response.status === 200) {

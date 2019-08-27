@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Landing from '../Landing'
 import Register from '../Register';
 import Login from '../Login';
 import Profile from '../Profile';
@@ -22,9 +23,24 @@ import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
 import { useStyles } from './style';
 
-function Main() {
+function Main(props) {
   const classes = useStyles();
   const [loading] = useContext(Loading);
+
+  useEffect(() => {
+    var lastclear = localStorage.getItem('lastclear'),
+    time_now  = (new Date()).getTime();
+    console.log('time now -> ', time_now);
+    // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 * 30 = 30 days
+    if ((time_now - lastclear) > (1000 * 60 * 60 * 24 * 30)) {
+    // if ((time_now - lastclear) > (1000 * 60)) {
+    // if (true) {
+      localStorage.clear();
+      localStorage.setItem('lastclear', time_now);
+      props.history.push('/logged-out')
+      console.log('logging out!');      
+    }
+  }, [])
 
   if (loading) {
     return (
@@ -61,6 +77,8 @@ function Main() {
             />
 
             <PrivateRoute exact path="/profile" component={Profile} />
+
+            <Route exact path="/landing" component={Landing} />
 
             <Route exact path="/logged-out" component={LoggedOut} />
 
@@ -108,4 +126,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default withRouter(Main);
