@@ -12,8 +12,14 @@ export const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   textField: {
-    width: '330px',
+    width: '410px',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  info: {
+    marginTop: '20px'
+  },
+  buttonsWrapper: {
+    marginTop: '20px'
+  }
 }));

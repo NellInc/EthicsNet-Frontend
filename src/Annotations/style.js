@@ -28,5 +28,8 @@ export const useStyles = makeStyles(theme => ({
   },
   date: {
     fontSize: '12px'
+  },
+  font: {
+    fontSize: '11px'
   }
 }));

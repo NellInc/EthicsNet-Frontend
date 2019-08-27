@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { apiURL } from '../globals';
 import { useStyles } from './style';
+import Info from './Info';
 
 function Profile() {
   const classes = useStyles();
@@ -16,6 +17,17 @@ function Profile() {
     name: '',
     last: '',
     email: '',
+    country: '',
+    earnings: '',
+    ethnicity: '',
+    state: '',
+    age: '',
+    political: '',
+    religious: '',
+    sexualOrientation: '',
+    language: '',
+    education: '',
+    social: '',
   });
 
   const handleChange = name => event => {
@@ -39,11 +51,40 @@ function Profile() {
 
       const data = await response.json();
       setUserData(data.user);
+
+      const {
+        firstName,
+        lastName,
+        email,
+        country,
+        state,
+        age,
+        political,
+        religious,
+        sexualOrientation,
+        language,
+        education,
+        social,
+        earnings,
+        ethnicity
+      } = data.user
+
       setValues({
         ...values,
-        name: data.user.firstName,
-        last: data.user.lastName,
-        email: data.user.email,
+        name: firstName,
+        last: lastName,
+        email,
+        country,
+        state,
+        age,
+        political,
+        religious,
+        sexualOrientation,
+        language,
+        education,
+        social,
+        earnings,
+        ethnicity,
       });
       setLoading(false);
     }
@@ -54,11 +95,42 @@ function Profile() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    const {
+      name,
+      last,
+      email,
+      country,
+      state,
+      age,
+      political,
+      religious,
+      sexualOrientation,
+      language,
+      education,
+      social,
+      earnings,
+      ethnicity
+    } = values
+
     const data = {
-      firstName: values.name,
-      lastName: values.last,
-      email: values.email,
+      firstName: name,
+      lastName: last,
+      email,
+      country,
+      state,
+      age,
+      political,
+      religious,
+      sexualOrientation,
+      language,
+      education,
+      social,
+      earnings,
+      ethnicity
     };
+
+    console.log('VALUES -> ', values);
 
     const { token, userId } = localStorage;
     const response = await fetch(`${apiURL}/api/user/${userId}`, {
@@ -74,6 +146,7 @@ function Profile() {
     });
     const responseJson = await response.json();
     console.log(responseJson);
+    setLoading(true);
   };
 
   if (loading) {
@@ -110,11 +183,12 @@ function Profile() {
               margin="normal"
               required
             />
+
           </div>
 
           <div>
             <TextField
-              style={{ width: '330px', marginBottom: '20px' }}
+              style={{ marginBottom: '20px' }}
               id="standard-name"
               label="Email"
               className={classes.textField}
@@ -124,20 +198,36 @@ function Profile() {
               type="email"
               required
             />
+
+            <TextField
+              id="age"
+              label="Age"
+              type="number"
+              className={classes.textField}
+              value={values.age}
+              onChange={handleChange('age')}
+              margin="normal"
+              required
+            />
+
           </div>
 
-          <Button
-            color="primary"
-            variant="outlined"
-            style={{ marginRight: '10px' }}
-            type="submit"
-          >
-            Save
-          </Button>
+          <Info values={values} handleChange={handleChange}/>
 
-          <Button color="secondary" type="button" variant="outlined">
-            Delete account
-          </Button>
+          <div className={classes.buttonsWrapper}>
+            <Button
+              color="primary"
+              variant="outlined"
+              style={{ marginRight: '10px' }}
+              type="submit"
+            >
+              Save
+            </Button>
+
+            <Button color="secondary" type="button" variant="outlined">
+              Delete account
+            </Button>
+          </div>
         </form>
       </main>
     </div>
