@@ -73,7 +73,7 @@ function Anotations(props) {
 
       {el.font === 'none' || el.font === '' ? null : (
         <small className={classes.font}>
-          Annotated from: <a target="_blank" rel="noopener noreferrer" href={el.font}>{el.font}</a>}
+          Annotated from: <a target="_blank" rel="noopener noreferrer" href={el.font}>{el.font}</a>
         </small>
       )}
 
