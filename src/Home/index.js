@@ -29,6 +29,15 @@ function Home() {
         variant="outlined"
         style={{ marginRight: '10px' }}
       >
+        <Link className={classes.link} to="/user/images">
+          Images
+        </Link>
+      </Button>
+      <Button
+        color="primary"
+        variant="outlined"
+        style={{ marginRight: '10px' }}
+      >
         <Link className={classes.link} to="/annotations/new">
           Insert new annotation
         </Link>
