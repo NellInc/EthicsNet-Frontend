@@ -135,6 +135,9 @@ class Screenshot extends PureComponent {
   saveCroppedScreenshot = () => {
     console.log('\n\n\nshould save cropped screenshot');
     console.log(this.state.croppedImageUrl);
+    localStorage.img = this.state.croppedImageUrl;
+
+    this.props.history.push('./save')
   }
 
   renderSelectionAddon = () => (
