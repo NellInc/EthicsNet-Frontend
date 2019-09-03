@@ -61,7 +61,7 @@ function Login() {
   return (
     <div className={classes.container}>
       <header className="App-header">
-        <p>Ethics eth - login</p>
+        <p>EthicsNet - Login</p>
       </header>
 
       <hr />

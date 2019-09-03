@@ -77,7 +77,7 @@ function App() {
   return (
     <div className={classes.container}>
       <header className="App-header">
-        <p>Ethics eth - sign up</p>
+        <p>EthicsNet - Sign up</p>
       </header>
 
       <hr />

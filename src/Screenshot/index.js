@@ -15,6 +15,7 @@ class Screenshot extends PureComponent {
     loading: true,
     src: '',
     croppedImageUrl: '',
+    imageFont: '',
     crop: {
       unit: '%',
       width: 30,
@@ -44,6 +45,7 @@ class Screenshot extends PureComponent {
           console.log(data);
           this.setState({
             src: data.user.cachedImg,
+            imageFont: data.user.imageFont,
             loading: false
           });
         }
@@ -136,6 +138,7 @@ class Screenshot extends PureComponent {
     console.log('\n\n\nshould save cropped screenshot');
     console.log(this.state.croppedImageUrl);
     localStorage.img = this.state.croppedImageUrl;
+    localStorage.imageFont = this.state.imageFont;
 
     this.props.history.push('./save')
   }
@@ -171,6 +174,7 @@ class Screenshot extends PureComponent {
         left: '0',
         top: '82px'
       }}>
+        <h4 style={{backgroundColor: 'red', textAlign: 'center'}}>If the image hasn't loaded or if it's an old image, plese reload the page in a few seconds</h4>
         {src && (
           <ReactCrop
             src={src}

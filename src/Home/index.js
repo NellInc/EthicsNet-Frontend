@@ -10,10 +10,10 @@ function Home() {
   return (
     <div className={classes.root}>
       <Typography className={classes.title} variant="h5" gutterBottom>
-        Ethics Net
+        EthicsNet
       </Typography>
       <Typography variant="body1" gutterBottom>
-        Welcome to Ethics Net, now you can start to anotate things on the web.
+        Welcome to EthicsNet, now you can start to anotate things on the web.
       </Typography>
       <Button
         color="primary"

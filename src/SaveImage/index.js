@@ -31,12 +31,14 @@ function SaveImage(props) {
     console.log('submit!!!');
 
     const { title, description } = values;
-    const { token, userId } = localStorage;
+    const { token, userId, imageFont } = localStorage;
+    
 
     const data = {
       title,
       description,
       image,
+      imageFont,
       authorId: userId
     }
 
@@ -72,7 +74,7 @@ function SaveImage(props) {
       <Typography className={classes.typography} variant="h5" gutterBottom>
         Save Image
       </Typography>
-      <img src={image} alt="" />
+      <img className={classes.img} src={image} alt="" />
       <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
         <TextField
           id="title"

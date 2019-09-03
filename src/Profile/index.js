@@ -50,6 +50,8 @@ function Profile() {
       });
 
       const data = await response.json();
+      console.log('USER -> ', data);
+      
       setUserData(data.user);
 
       const {

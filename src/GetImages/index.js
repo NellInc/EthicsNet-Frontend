@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 import { apiURL } from '../globals';
+import { useStyles } from './style';
+import { Loader } from '../components';
 
 function GetImages() {
+  const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
@@ -27,22 +30,31 @@ function GetImages() {
     }
 
     getImageData();
-  }, [])
+  }, []);
 
-  const imagesEl = images.map(el =>(
-    <div key={el._id} style={{border: '1px solid red', marginBottom: '20px'}}>
-      <p>{el.title}</p>
-      <img src={el.image} alt="" />
-      <p>{el.description}</p>
+  const imagesEl = images.map(el => (
+    <div key={el._id} className={classes.image}>
+      <p className={classes.title}>{el.title}</p>
+      <hr className={classes.hr}/>
+      <img className={classes.img} src={el.image} alt="" />
+      <hr className={classes.hr}/>
+      <p className={classes.font}>
+        Font: <a href={el.imageFont}>{el.imageFont}</a>
+      </p>
+      <p className={classes.description}>{el.description}</p>
     </div>
-  ))
+  ));
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <div>
-      <h1>Images component!</h1>
+      <h3 className={classes.title}>All images</h3>
       {imagesEl}
     </div>
-  )
+  );
 }
 
 export default GetImages;
