@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import '../App.css';
 
 import { Notification } from '../Store'
 import { apiURL } from '../globals';
+import { Loader } from '../components';
 import { useStyles } from './style';
 
 function App() {
   const classes = useStyles();
   const notification = useContext(Notification);
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   const [values, setValues] = React.useState({
     firstName: '',
@@ -26,6 +26,7 @@ function App() {
   };
 
   const handleSubmit = async e => {
+    setLoading(true);
     const data = values;
     e.preventDefault();
     console.log(`${apiURL}/auth/register`);
@@ -67,11 +68,7 @@ function App() {
   };
 
   if (loading) {
-    return (
-      <div className={classes.loaderWrapper}>
-        <CircularProgress />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

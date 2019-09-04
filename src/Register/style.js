@@ -8,12 +8,5 @@ export const useStyles = makeStyles(theme => ({
   },
   submit: {
     marginTop: '20px',
-  },
-  loaderWrapper: {
-    height: '100vh',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  }
 }));
