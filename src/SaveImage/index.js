@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './style';
 import { apiURL } from '../globals';
+import { Loader } from '../components';
 
 function SaveImage(props) {
   const classes = useStyles();
@@ -24,9 +25,11 @@ function SaveImage(props) {
   useEffect(() => {
     setImage(localStorage.img);
     setLoading(false);
-  }, [loading]);
+  }, []);
 
   async function handleSubmit(e) {
+    setLoading(true);
+
     e.preventDefault();
     console.log('submit!!!');
 
@@ -66,6 +69,10 @@ function SaveImage(props) {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (

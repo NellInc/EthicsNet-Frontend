@@ -174,7 +174,7 @@ class Screenshot extends PureComponent {
         left: '0',
         top: '82px'
       }}>
-        <h4 style={{backgroundColor: 'red', textAlign: 'center'}}>If the image hasn't loaded or if it's an old image, plese reload the page in a few seconds</h4>
+        <h4 style={{textAlign: 'center'}}>If the image hasn't loaded or if it's an old image, plese reload the page in a few seconds</h4>
         {src && (
           <ReactCrop
             src={src}
