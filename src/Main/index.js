@@ -18,6 +18,9 @@ import LoggedOut from '../LoggedOut';
 import NewAnnotation from '../NewAnnotation';
 import Screenshot from '../Screenshot';
 import Screenshot2 from '../Screenshot/Screenshot2';
+import SaveImage from '../SaveImage';
+import GetImages from '../GetImages';
+import GetAllImages from '../GetAllImages';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -40,6 +43,7 @@ function Main(props) {
       props.history.push('/logged-out')
       console.log('logging out!');      
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (loading) {
@@ -109,6 +113,13 @@ function Main(props) {
             />
 
             <PrivateRoute exact path="/image/new" component={Screenshot} />
+
+            <PrivateRoute exact path="/image/save" component={SaveImage} />
+
+            <PrivateRoute exact path="/user/images" component={GetImages} />
+
+            {/* TODO: Better use pagination here */}
+            <PrivateRoute exact path="/user/images/all" component={GetAllImages} />
 
             <PrivateRoute
               exact

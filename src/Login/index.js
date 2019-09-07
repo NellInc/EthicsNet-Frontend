@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { Notification } from '../Store';
 import { apiURL } from '../globals';
+import { Loader } from '../components';
 import { useStyles } from './style'
 
 function Login() {
   const classes = useStyles();
 
   const notification = useContext(Notification);
-
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
     email: '',
     password: '',
@@ -21,6 +22,7 @@ function Login() {
   };
 
   const handleSubmit = async e => {
+    setLoading(true);
     const data = values;
     e.preventDefault();
     try {
@@ -58,10 +60,14 @@ function Login() {
     }
   };
 
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <div className={classes.container}>
       <header className="App-header">
-        <p>Ethics eth - login</p>
+        <p>EthicsNet - Login</p>
       </header>
 
       <hr />

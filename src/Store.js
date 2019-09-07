@@ -21,10 +21,12 @@ const theme = createMuiTheme({
 export const IsLogged = createContext(localStorage.isLogged);
 export const Loading = createContext(true);
 export const Notification = createContext('bla');
+export const ImageToSave = createContext('');
 
 function Store({ children }) {
   const [isLogged, setIsLogged] = useState(localStorage.isLogged);
   const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState('')
 
   const notificationDOMRef = React.createRef();
 
@@ -47,7 +49,9 @@ function Store({ children }) {
       <IsLogged.Provider value={[isLogged, setIsLogged]}>
         <ReactNotification ref={notificationDOMRef} />
         <Notification.Provider value={addNotification}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ImageToSave.Provider value={[image, setImage]}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </ImageToSave.Provider>
         </Notification.Provider>
       </IsLogged.Provider>
     </Loading.Provider>
