@@ -33,6 +33,16 @@ function Home() {
           Images
         </Link>
       </Button>
+
+      <Button
+        color="primary"
+        variant="outlined"
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to="/user/videos">
+          Videos
+        </Link>
+      </Button>
       <Button
         color="primary"
         variant="outlined"

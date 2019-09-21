@@ -16,4 +16,11 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  loggedOut: {
+    // backgroundColor: 'red',
+    padding: '20px'
+  },
+  title: {
+    textAlign: 'center'
+  }
 }));

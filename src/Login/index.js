@@ -55,8 +55,11 @@ function Login() {
       } else {
         notification('there was an error', 'we could not log you in', 'danger');
       }
+
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 

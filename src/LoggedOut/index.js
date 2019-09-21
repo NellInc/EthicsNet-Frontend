@@ -3,8 +3,10 @@ import Button from '@material-ui/core/Button';
 // import html2canvas from 'html2canvas';
 
 import { IsLogged } from '../Store';
+import { useStyles } from './style';
 
 function LoggedOut(props) {
+  const classes = useStyles();
   const setIsLogged = useContext(IsLogged)[1];
 
   function handleLogOut() {
@@ -50,8 +52,8 @@ function LoggedOut(props) {
   }
 
   return (
-    <div>
-      <h1>you're logged out!</h1>
+    <div className={classes.loggedOut}>
+      <h2 className={classes.title}>EthicsNet</h2>
     </div>
   );
   

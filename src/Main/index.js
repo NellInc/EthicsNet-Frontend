@@ -21,6 +21,7 @@ import Screenshot2 from '../Screenshot/Screenshot2';
 import SaveImage from '../SaveImage';
 import GetImages from '../GetImages';
 import GetAllImages from '../GetAllImages';
+import Videos from '../Videos';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -117,6 +118,8 @@ function Main(props) {
             <PrivateRoute exact path="/image/save" component={SaveImage} />
 
             <PrivateRoute exact path="/user/images" component={GetImages} />
+
+            <PrivateRoute exact path="/user/videos" component={Videos} />
 
             {/* TODO: Better use pagination here */}
             <PrivateRoute exact path="/user/images/all" component={GetAllImages} />
