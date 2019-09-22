@@ -22,6 +22,7 @@ import SaveImage from '../SaveImage';
 import GetImages from '../GetImages';
 import GetAllImages from '../GetAllImages';
 import Videos from '../Videos';
+import SaveVideo from '../SaveVideo';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -116,6 +117,8 @@ function Main(props) {
             <PrivateRoute exact path="/image/new" component={Screenshot} />
 
             <PrivateRoute exact path="/image/save" component={SaveImage} />
+
+            <PrivateRoute exact path="/video/save" component={SaveVideo} />
 
             <PrivateRoute exact path="/user/images" component={GetImages} />
 

@@ -31,7 +31,7 @@ function Videos(props) {
   }
 
   useEffect(() => {
-    getVideoData()
+    // getVideoData()
   }, [])
 
   if (loading) {
@@ -49,8 +49,6 @@ function Videos(props) {
 
   const videoElements = videos.map(el => (
     <div key={el._id}>
-      <h5>Video url: {el.videoUrl.slice(0,24) + 'embed' + el.videoUrl.slice(23)}</h5>
-
       <iframe 
         title={el._id}
         src={'https://www.youtube.com/embed/' + youtube_parser(el.videoUrl)}
@@ -61,9 +59,11 @@ function Videos(props) {
       >
       </iframe>
 
-      <p>Video start: {el.videoStart}</p>
-      <p>Video end: {el.videoEnd}</p>
-      <p>Description: {el.description}</p>
+      <h3>{el.title}</h3>
+      <h4>Url: <a href={el.videoUrl} target="_blank" rel="noopener noreferrer">{el.videoUrl.slice(0,24) + 'embed' + el.videoUrl.slice(23)}</a></h4>
+      <p>Start: {el.videoStart} </p>
+      <p>End: {el.videoEnd}</p>
+      <p>Description: {el.description ? el.description : 'no description provided'}</p>
 
       <hr className={classes.hr} />
     </div>
