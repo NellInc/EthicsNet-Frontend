@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { useStyles } from './style';
 import { apiURL } from '../globals';
@@ -16,6 +20,7 @@ function SaveImage(props) {
   const [values, setValues] = useState({
     title: '',
     description: '',
+    category: '',
   });
 
   const handleChange = name => event => {
@@ -33,13 +38,14 @@ function SaveImage(props) {
     e.preventDefault();
     console.log('submit!!!');
 
-    const { title, description } = values;
+    const { title, description, category } = values;
     const { token, userId, imageFont } = localStorage;
     
 
     const data = {
       title,
       description,
+      category,
       image,
       imageFont,
       authorId: userId
@@ -102,7 +108,26 @@ function SaveImage(props) {
           margin="normal"
         />
 
-        <Button type="submit" variant="outlined">Save</Button>
+        <FormControl className={classes.textField}>
+          <InputLabel htmlFor="category-simple">Category</InputLabel>
+          <Select
+            value={values.category}
+            onChange={handleChange('category')}
+            inputProps={{
+              name: 'category',
+              id: 'category-simple',
+            }}
+          >
+            <MenuItem selected value="morally preferable">
+              Morally preferable
+            </MenuItem>
+            <MenuItem value="morally unpreferable">Morally unpreferable</MenuItem>
+            <MenuItem value="aesthetically preferable">Aesthetically preferable</MenuItem>
+            <MenuItem value="aesthetically unpreferable">Aesthetically unpreferable</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Button className={classes.submit} type="submit" variant="outlined">Save</Button>
       </form>
     </div>
   );

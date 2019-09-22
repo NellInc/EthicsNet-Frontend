@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
 
 import { useStyles } from './style';
@@ -14,34 +19,13 @@ function SaveVideo(props) {
     'https://www.youtube.com/embed/keWi0PAodhw'
   );
 
-  const [videos, setVideos] = useState([]);
-
   const [values, setValues] = React.useState({
     title: '',
     description: '',
     start: '',
     end: '',
+    category: '',
   });
-
-  async function getVideoData() {
-    console.log('get video data called!');
-
-    const token = localStorage.getItem('token');
-
-    const response = await fetch(`${apiURL}/api/user/videos`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-    console.log('videos fetched -> ', data.videos);
-
-    setVideos(data.videos);
-    setLoading(false);
-  }
 
   function changeUrl() {
     function youtube_parser(url) {
@@ -57,12 +41,65 @@ function SaveVideo(props) {
   };
 
   useEffect(() => {
-    getVideoData();
     changeUrl();
+    setLoading(false);
   }, []);
 
   if (loading) {
     return <Loader />;
+  }
+
+  async function handleSubmit(e) {
+    setLoading(true);
+    e.preventDefault();
+
+    console.log('submit video form!');
+
+    const { 
+      title,
+      description,
+      category,
+      start,
+      end
+     } = values;
+    const { token, userId, imageFont } = localStorage;
+    
+
+    const data = {
+      category,
+      title,
+      description,
+      videoUrl,
+      videoStart: start,
+      videoEnd: end,
+      authorId: userId,
+    }
+
+    try {
+      const response = await fetch(`${apiURL}/api/video`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        body: JSON.stringify(data),
+      });
+
+      const json = await response.json();
+
+      console.log(json);
+
+      props.history.push('/user/videos');
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   return (
@@ -131,6 +168,30 @@ function SaveVideo(props) {
           onChange={handleChange('description')}
           margin="normal"
         />
+
+        <FormControl className={classes.textField}>
+          <InputLabel htmlFor="category-simple">Category</InputLabel>
+          <Select
+            required
+            value={values.category}
+            onChange={handleChange('category')}
+            inputProps={{
+              name: 'category',
+              id: 'category-simple',
+            }}
+          >
+            <MenuItem selected value="morally preferable">
+              Morally preferable
+            </MenuItem>
+            <MenuItem value="morally unpreferable">Morally unpreferable</MenuItem>
+            <MenuItem value="aesthetically preferable">Aesthetically preferable</MenuItem>
+            <MenuItem value="aesthetically unpreferable">Aesthetically unpreferable</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Button onClick={handleSubmit} color="primary" variant="outlined" className={classes.button}>
+          Save Video
+        </Button>
       </form>
     </div>
   );

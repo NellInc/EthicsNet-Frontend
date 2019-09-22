@@ -9,5 +9,8 @@ export const useStyles = makeStyles(theme => ({
   },
   typography: {
     textAlign: 'center'
+  },
+  submit: {
+    marginTop: 20
   }
 }));
