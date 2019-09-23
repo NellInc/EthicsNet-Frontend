@@ -13,12 +13,8 @@ import { Loader } from '../components';
 
 function SaveVideo(props) {
   const classes = useStyles();
-
   const [loading, setLoading] = useState(true);
-  const [videoUrl, setVideoUrl] = useState(
-    'https://www.youtube.com/embed/keWi0PAodhw'
-  );
-
+  const [videoUrl, setVideoUrl] = useState('');
   const [values, setValues] = React.useState({
     title: '',
     description: '',
@@ -27,21 +23,44 @@ function SaveVideo(props) {
     category: '',
   });
 
-  function changeUrl() {
-    function youtube_parser(url) {
-      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-      var match = url.match(regExp);
-      return match && match[7].length === 11 ? match[7] : false;
-    }
-    setVideoUrl('https://www.youtube.com/embed/' + youtube_parser(videoUrl));
-  }
-
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
+  const fetchData = async () => {
+    try {
+      const { token } = localStorage;
+
+      const response = await fetch(`${apiURL}/api/user`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      if (response.status === 200) {
+        function youtube_parser(url) {
+          var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+          var match = url.match(regExp);
+          return match && match[7].length === 11 ? match[7] : false;
+        }
+
+        const url = 'https://www.youtube.com/embed/' + youtube_parser(data.user.cachedVideo)
+
+        setVideoUrl(url)
+      }
+    } catch (error) {
+      console.log('there was an error -> ', error);
+    }
+  };
+
   useEffect(() => {
-    changeUrl();
+    fetchData();
     setLoading(false);
   }, []);
 

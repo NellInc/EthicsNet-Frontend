@@ -44,9 +44,6 @@ function Videos(props) {
     return (match&&match[7].length===11)? match[7] : false;
   } 
 
-  console.log(youtube_parser('https://www.youtube.com/embed/NC9YGuDcjrE'));
-  
-
   const videoElements = videos.map(el => (
     <div key={el._id}>
       <iframe 
@@ -60,7 +57,10 @@ function Videos(props) {
       </iframe>
 
       <h3>{el.title}</h3>
-      <h4>Url: <a href={el.videoUrl} target="_blank" rel="noopener noreferrer">{el.videoUrl.slice(0,24) + 'embed' + el.videoUrl.slice(23)}</a></h4>
+      <h4>Url: <a href={el.videoUrl} target="_blank" rel="noopener noreferrer">
+        {/* {el.videoUrl.slice(0,24) + 'embed' + el.videoUrl.slice(23)} */}
+        {el.videoUrl}
+      </a></h4>
       <p>Start: {el.videoStart} </p>
       <p>End: {el.videoEnd}</p>
       <p>Category: {el.category}</p>
