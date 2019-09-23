@@ -80,7 +80,7 @@ function GetImages() {
       <p className={classes.font}>
         Font: <a href={el.imageFont}>{el.imageFont}</a>
       </p>
-      <p>category: {el.category}</p>
+      <p><span className={classes.category}>{el.category}</span></p>
       <p className={classes.description}>{el.description}</p>
 
       <Button

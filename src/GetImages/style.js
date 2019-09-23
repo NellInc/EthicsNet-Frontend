@@ -19,5 +19,11 @@ export const useStyles = makeStyles(() => ({
   },
   hr: {
     backgroundColor: '#ddd'
+  },
+  category: {
+    backgroundColor: '#000',
+    color: '#fff',
+    padding: 3,
+    borderRadius: 4
   }
 }));
