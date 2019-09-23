@@ -11,10 +11,7 @@ function Videos(props) {
   const [videos, setVideos] = useState([]);
 
   async function getVideoData() {
-    console.log('get video data called!');
-    
     const token = localStorage.getItem('token');
-
     const response = await fetch(`${apiURL}/api/user/videos`, {
       method: 'GET',
       headers: {
@@ -57,13 +54,12 @@ function Videos(props) {
       </iframe>
 
       <h3>{el.title}</h3>
-      <h4>Url: <a href={el.videoUrl} target="_blank" rel="noopener noreferrer">
-        {/* {el.videoUrl.slice(0,24) + 'embed' + el.videoUrl.slice(23)} */}
+      <p><span className={classes.category}>{el.category}</span></p>
+      <p>Url: <a href={el.videoUrl} target="_blank" rel="noopener noreferrer">
         {el.videoUrl}
-      </a></h4>
+      </a></p>
       <p>Start: {el.videoStart} </p>
       <p>End: {el.videoEnd}</p>
-      <p>Category: {el.category}</p>
       <p>Description: {el.description ? el.description : 'no description provided'}</p>
 
       <hr className={classes.hr} />

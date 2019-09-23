@@ -10,5 +10,11 @@ export const useStyles = makeStyles(theme => ({
   hr: {
     backgroundColor: '#ddd',
     margin: '50px 0'
+  },
+  category: {
+    backgroundColor: '#000',
+    color: '#fff',
+    padding: 3,
+    borderRadius: 4
   }
 }));
