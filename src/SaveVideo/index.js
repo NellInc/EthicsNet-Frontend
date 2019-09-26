@@ -81,7 +81,7 @@ function SaveVideo(props) {
       start,
       end
      } = values;
-    const { token, userId, imageFont } = localStorage;
+    const { token, userId } = localStorage;
     
 
     const data = {

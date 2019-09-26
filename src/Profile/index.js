@@ -7,7 +7,7 @@ import { apiURL } from '../globals';
 import { useStyles } from './style';
 import Info from './Info';
 
-function Profile() {
+function Profile(props) {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
@@ -50,50 +50,61 @@ function Profile() {
       });
 
       const data = await response.json();
-      console.log('USER -> ', data);
-      
-      setUserData(data.user);
 
-      const {
-        firstName,
-        lastName,
-        email,
-        country,
-        state,
-        age,
-        political,
-        religious,
-        sexualOrientation,
-        language,
-        education,
-        social,
-        earnings,
-        ethnicity
-      } = data.user
+      console.log('USER -> ', data, response.status);
 
-      setValues({
-        ...values,
-        name: firstName,
-        last: lastName,
-        email,
-        country,
-        state,
-        age,
-        political,
-        religious,
-        sexualOrientation,
-        language,
-        education,
-        social,
-        earnings,
-        ethnicity,
-      });
+      if (response.status === 200) {
+
+        setUserData(data.user);
+
+        const {
+          firstName,
+          lastName,
+          email,
+          country,
+          state,
+          age,
+          political,
+          religious,
+          sexualOrientation,
+          language,
+          education,
+          social,
+          earnings,
+          ethnicity
+        } = data.user
+
+        setValues({
+          ...values,
+          name: firstName,
+          last: lastName,
+          email,
+          country,
+          state,
+          age,
+          political,
+          religious,
+          sexualOrientation,
+          language,
+          education,
+          social,
+          earnings,
+          ethnicity,
+        }); 
+      } else if (response.status === 404) {
+        // props.history.push('/logged-out')
+        // alert('your user doesnt exist')
+
+        localStorage.isLogged = null;
+        window.location.reload();
+      }
       setLoading(false);
     }
+
     getUserData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
+  }, []);
 
   const handleSubmit = async e => {
     e.preventDefault();
