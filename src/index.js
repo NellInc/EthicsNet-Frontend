@@ -7,14 +7,16 @@ import Main from './Main';
 import * as serviceWorker from './serviceWorker';
 import Store from './Store';
 
-ReactDOM.render(
-  <HashRouter>
-    <Store>
-      <Main />
-    </Store>
-  </HashRouter>,
-  document.getElementById('root')
-);
+setTimeout(() => {
+  ReactDOM.render(
+    <HashRouter>
+      <Store>
+        <Main />
+      </Store>
+    </HashRouter>,
+    document.getElementById('root')
+  );
+}, 20);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -23,6 +23,7 @@ import GetImages from '../GetImages';
 import GetAllImages from '../GetAllImages';
 import Videos from '../Videos';
 import SaveVideo from '../SaveVideo';
+import HowToUse from '../HowToUse';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -50,18 +51,18 @@ function Main(props) {
 
   if (loading) {
     return (
-      <>
+      <Fragment>
         <Navbar />
         <div className={classes.loaderWrapper}>
           <CircularProgress />
         </div>
         <Footer />
-      </>
+      </Fragment>
     );
   }
 
   return (
-    <>
+    <Fragment>
       <Navbar />
       <Container className={classes.root} maxWidth="md">
         <Paper className={classes.paper} elevation={2}>
@@ -82,11 +83,30 @@ function Main(props) {
               component={Login}
             />
 
-            <PrivateRoute exact path="/profile" component={Profile} />
+            <PrivateRoute
+              exact
+              path="/profile"
+              component={Profile}
+            />
 
-            <Route exact path="/landing" component={Landing} />
+            <Route 
+              exact
+              path="/landing"
+              component={Landing}
+            />
 
-            <Route exact path="/logged-out" component={LoggedOut} />
+            <PublicRoute
+              exact
+              path="/how-to-use"
+              // restricted={true}
+              component={HowToUse}
+            />
+
+            <Route
+              exact
+              path="/logged-out"
+              component={LoggedOut}
+            />
 
             <PrivateRoute
               exact
@@ -114,18 +134,42 @@ function Main(props) {
               component={Screenshot2}
             />
 
-            <PrivateRoute exact path="/image/new" component={Screenshot} />
+            <PrivateRoute
+              exact
+              path="/image/new"
+              component={Screenshot}
+            />
 
-            <PrivateRoute exact path="/image/save" component={SaveImage} />
+            <PrivateRoute
+              exact
+              path="/image/save"
+              component={SaveImage}
+            />
 
-            <PrivateRoute exact path="/video/save" component={SaveVideo} />
+            <PrivateRoute
+              exact
+              path="/video/save"
+              component={SaveVideo}
+            />
 
-            <PrivateRoute exact path="/user/images" component={GetImages} />
+            <PrivateRoute
+              exact
+              path="/user/images"
+              component={GetImages}
+            />
 
-            <PrivateRoute exact path="/user/videos" component={Videos} />
+            <PrivateRoute
+              exact
+              path="/user/videos"
+              component={Videos}
+            />
 
             {/* TODO: Better use pagination here */}
-            <PrivateRoute exact path="/user/images/all" component={GetAllImages} />
+            <PrivateRoute
+              exact
+              path="/user/images/all"
+              component={GetAllImages}
+            />
 
             <PrivateRoute
               exact
@@ -137,9 +181,8 @@ function Main(props) {
           </Switch>
         </Paper>
       </Container>
-
       <Footer />
-    </>
+    </Fragment>
   );
 }
 
