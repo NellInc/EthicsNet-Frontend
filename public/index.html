@@ -28,19 +28,22 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <style>
-      .loading {
-        background-color: rgba(196, 196, 196, 0.301);
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    </style>
-
     <div id="root">
       <div class="loading">
+        <style>
+          .loading {
+            background-color: rgba(196, 196, 196, 0.301);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .loading img {
+            width: 250px;
+          }
+        </style>
         <img src="./ethicsnet_logo_500-5k.png" alt="EthicsNet Logo" />
       </div>
     </div>
