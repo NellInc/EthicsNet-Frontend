@@ -13,6 +13,11 @@ import image1 from '../assets/images/image1.png';
 import image2 from '../assets/images/image2.png';
 import image3 from '../assets/images/image3.png';
 
+import video1 from '../assets/images/video1.png';
+import video2 from '../assets/images/video2.png';
+import video3 from '../assets/images/video3.png';
+import video4 from '../assets/images/video4.png';
+
 function HowToUse(props) {
   const classes = useStyles();
 
@@ -85,7 +90,8 @@ function HowToUse(props) {
       </Steps>
 
       <Steps img={text3}>
-        <span className={classes.numbers}>2 - </span>It's done! Now you can make another annotation or check all annotation on the EthicsNet website.
+        <span className={classes.numbers}>2 - </span>It's done! Now you can make
+        another annotation or check all annotation on the EthicsNet website.
       </Steps>
 
       <hr className={classes.hr} />
@@ -95,21 +101,65 @@ function HowToUse(props) {
       </Typography>
 
       <Typography className={classes.subtitle} variant='subtitle1'>
-        Image annotations work a little bit differently from text annotation, it first takes a screenshot of the current webpage you want to annotate, then you'll see a screen to crop the image and add more details. Follow these steps:
+        Image annotations work a little bit differently from text annotation, it
+        first takes a screenshot of the current webpage you want to annotate,
+        then you'll see a screen to crop the image and add more details. Follow
+        these steps:
       </Typography>
 
       <Steps img={image1}>
-        <span className={classes.numbers}>1 - </span>Open the page you want to annotate an image from and right click it, it will open a menu.
+        <span className={classes.numbers}>1 - </span>Open the page you want to
+        annotate an image from and right click it, it will open a menu.
       </Steps>
 
       <Steps img={image2}>
-        <span className={classes.numbers}>2 - </span>Click on the select area button, it will open a new window, so you can select the area you want to annotate. Select the area and then hit 'save image'.
+        <span className={classes.numbers}>2 - </span>Click on the select area
+        button, it will open a new window, so you can select the area you want
+        to annotate. Select the area and then hit 'save image'.
       </Steps>
 
       <Steps img={image3}>
-        <span className={classes.numbers}>3 - </span>Finally, you can review the selected area, add a title, description and category. When everything is ready to go, hit save and that's it! You just annotated an image!
+        <span className={classes.numbers}>3 - </span>Finally, you can review the
+        selected area, add a title, description and category. When everything is
+        ready to go, hit save and that's it! You just annotated an image!
       </Steps>
 
+      <hr className={classes.hr} />
+
+      <Typography variant='h5' className={classes.title}>
+        Annotating videos
+      </Typography>
+
+      <Typography className={classes.subtitle} variant='subtitle1'>
+        Currently we only support annotating videos from youtube. It works like
+        this:
+      </Typography>
+
+      <Steps img={video1}>
+        <span className={classes.numbers}>1 - </span>Open the youtube video you
+        want to annotate.
+      </Steps>
+
+      <Steps img={video2}>
+        <span className={classes.numbers}>2 - </span>Click the EthicsNet extension button on the top right of chrome, then click on the 'Annotate video' button.
+      </Steps>
+
+      <Steps img={video3}>
+        <span className={classes.numbers}>3 - </span>The input will already be with the current video url, change it if you need it, then click on 'save'. It will open a new window.
+      </Steps>
+      <Steps img={video4}>
+        <span className={classes.numbers}>4 - </span>Now you just need to add when the action happens, when it ends, a title, description and category, click on 'save video' and there you go! You have just annotated a video action with the EthicsNet extension.
+      </Steps>
+
+      <hr className={classes.hr} />
+
+      <Typography variant='h5' className={classes.title}>
+        Next steps
+      </Typography>
+
+      <Typography className={classes.subtitle} variant='subtitle1'>
+        Now you know to use the EthicsNet extension
+      </Typography>
     </Fragment>
   );
 }
