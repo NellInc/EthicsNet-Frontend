@@ -104,7 +104,7 @@ function Profile(props) {
     getUserData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loading]);
 
   const handleSubmit = async e => {
     e.preventDefault();

@@ -57,7 +57,7 @@ function Anotations(props) {
   }, [page]);
 
   function handleNextPage() {
-    if (page * 5 < count) {
+    if (page * 10 < count) {
       setPage(page + 1);
       setLoading(true);
     }

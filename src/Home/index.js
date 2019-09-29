@@ -21,7 +21,7 @@ function Home() {
         style={{ marginRight: '10px' }}
       >
         <Link className={classes.link} to='/profile/annotations'>
-          Annotations
+          Texts
         </Link>
       </Button>
       <Button
