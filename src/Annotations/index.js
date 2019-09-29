@@ -14,6 +14,9 @@ function Anotations(props) {
   const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState('');
 
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+
   function filterAnotations(idRemoved) {
     console.log('id to remove-> ', idRemoved);
     setAnotations(anotations.filter(el => el._id !== idRemoved));
@@ -27,7 +30,7 @@ function Anotations(props) {
     async function getUserData() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`${apiURL}/api/user/anotations`, {
+      const response = await fetch(`${apiURL}/api/user/anotations/${page}`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
@@ -39,14 +42,33 @@ function Anotations(props) {
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log('====================================');
+      console.log(data, page);
+      console.log('====================================');
 
       setAnotations(data.anotations);
+      setCount(data.count);
       setLoading(false);
     }
 
     getUserData();
-  }, [loading]);
+
+    // if you place 'loading' here it will run twice (make 2 api calls)
+  }, [page]);
+
+  function handleNextPage() {
+    if (page * 5 < count) {
+      setPage(page + 1);
+      setLoading(true);
+    }
+  }
+
+  function handlePreviousPage() {
+    if (page > 1) {
+      setPage(page - 1);
+      setLoading(true);
+    }
+  }
 
   const handleAnotationClick = (id, type) => {
     if (type === 'edit') {
@@ -73,7 +95,10 @@ function Anotations(props) {
 
       {el.font === 'none' || el.font === '' ? null : (
         <small className={classes.font}>
-          Annotated from: <a target="_blank" rel="noopener noreferrer" href={el.font}>{el.font}</a>
+          Annotated from:{' '}
+          <a target='_blank' rel='noopener noreferrer' href={el.font}>
+            {el.font}
+          </a>
         </small>
       )}
 
@@ -81,16 +106,16 @@ function Anotations(props) {
 
       <div>
         <Button
-          color="primary"
-          variant="outlined"
+          color='primary'
+          variant='outlined'
           style={{ marginRight: '10px' }}
           onClick={() => handleAnotationClick(el._id, 'edit')}
         >
           Edit
         </Button>
         <Button
-          color="secondary"
-          variant="outlined"
+          color='secondary'
+          variant='outlined'
           onClick={() => handleAnotationClick(el._id, 'delete')}
         >
           Delete
@@ -111,6 +136,28 @@ function Anotations(props) {
     <div>
       <h3 className={classes.title}>Annotations</h3>
       <div>{anotationsComponent}</div>
+
+      <div className={classes.pagination}>
+        <Button
+          color='primary'
+          variant='outlined'
+          style={{ marginRight: '10px' }}
+          onClick={handlePreviousPage}
+        >
+          Previous Page
+        </Button>
+
+        <span>{page}</span>
+
+        <Button
+          color='primary'
+          variant='outlined'
+          style={{ marginLeft: '10px' }}
+          onClick={handleNextPage}
+        >
+          Next Page
+        </Button>
+      </div>
     </div>
   );
 }

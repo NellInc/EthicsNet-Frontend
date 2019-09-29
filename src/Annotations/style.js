@@ -24,12 +24,17 @@ export const useStyles = makeStyles(theme => ({
     color: '#fff',
     padding: '4px',
     borderRadius: '5px',
-    fontSize: '13px'
+    fontSize: '13px',
   },
   date: {
-    fontSize: '12px'
+    fontSize: '12px',
   },
   font: {
-    fontSize: '11px'
-  }
+    fontSize: '11px',
+  },
+  pagination: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
