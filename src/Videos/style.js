@@ -5,16 +5,21 @@ export const useStyles = makeStyles(theme => ({
     background: 'red',
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   hr: {
     backgroundColor: '#ddd',
-    margin: '50px 0'
+    margin: '50px 0',
   },
   category: {
     backgroundColor: '#000',
     color: '#fff',
     padding: 3,
-    borderRadius: 4
-  }
+    borderRadius: 4,
+  },
+  pagination: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
