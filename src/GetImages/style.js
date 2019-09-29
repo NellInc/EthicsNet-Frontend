@@ -31,4 +31,9 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  pagination: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));

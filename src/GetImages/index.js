@@ -11,11 +11,14 @@ function GetImages() {
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     async function getImageData() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`${apiURL}/api/user/images`, {
+      const response = await fetch(`${apiURL}/api/user/images/${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -24,14 +27,18 @@ function GetImages() {
       });
 
       const data = await response.json();
-      console.log('Images fetched -> ', data.images);
+      // console.log('Images fetched -> ', data.images);
+      console.log('====================================');
+      console.log('images -> ', data);
+      console.log('====================================');
 
       setImages(data.images);
+      setCount(data.count);
       setLoading(false);
     }
 
     getImageData();
-  }, []);
+  }, [page]);
 
   async function deleteImage(id) {
     setLoading(true);
@@ -90,6 +97,20 @@ function GetImages() {
     </div>
   ));
 
+  function handleNextPage() {
+    if (page * 10 < count) {
+      setPage(page + 1);
+      setLoading(true);
+    }
+  }
+
+  function handlePreviousPage() {
+    if (page > 1) {
+      setPage(page - 1);
+      setLoading(true);
+    }
+  }
+
   if (loading) {
     return <Loader />;
   }
@@ -98,6 +119,28 @@ function GetImages() {
     <div>
       <h3 className={classes.title}>All images</h3>
       {imagesEl}
+
+      <div className={classes.pagination}>
+        <Button
+          color='primary'
+          variant='outlined'
+          style={{ marginRight: '10px' }}
+          onClick={handlePreviousPage}
+        >
+          Previous Page
+        </Button>
+
+        <span>{page}</span>
+
+        <Button
+          color='primary'
+          variant='outlined'
+          style={{ marginLeft: '10px' }}
+          onClick={handleNextPage}
+        >
+          Next Page
+        </Button>
+      </div>
     </div>
   );
 }
