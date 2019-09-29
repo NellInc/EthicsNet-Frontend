@@ -109,18 +109,18 @@ function Anotation(props) {
       <p>{anotation.createdAt.substring(0, 10)}</p>
 
       <TextField
-        id="standard-multiline-flexible"
-        label="edit anotation"
+        id='standard-multiline-flexible'
+        label='edit anotation'
         multiline
-        rowsMax="30"
+        rowsMax='30'
         value={anotationEdit}
         onChange={handleChange}
         className={classes.textField}
-        margin="normal"
+        margin='normal'
       />
 
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="category-simple">Category</InputLabel>
+        <InputLabel htmlFor='category-simple'>Category</InputLabel>
         <Select
           value={category}
           onChange={e => setCategory(e.target.value)}
@@ -140,18 +140,18 @@ function Anotation(props) {
 
       <Button
         onClick={editAnotation}
-        variant="outlined"
-        color="primary"
+        variant='outlined'
+        color='primary'
         className={classes.button}
       >
         Save
       </Button>
 
       <LinkBtn
-        variant="outlined"
-        color="secondary"
-        to="/profile/annotations"
-        name="cancel"
+        variant='outlined'
+        color='secondary'
+        to='/profile/annotations'
+        name='cancel'
       />
     </div>
   );

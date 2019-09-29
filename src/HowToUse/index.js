@@ -6,9 +6,7 @@ import Title from './Title';
 import { useStyles } from './style';
 import { textSteps, imageSteps, videoSteps } from './data';
 
-
-function HowToUse(props) { 
-
+function HowToUse(props) {
   const classes = useStyles();
 
   const webStoreLink =

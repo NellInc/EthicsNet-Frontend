@@ -35,9 +35,9 @@ function GetAllImages() {
   const imagesEl = images.map(el => (
     <div key={el._id} className={classes.image}>
       <p className={classes.title}>{el.title}</p>
-      <hr className={classes.hr}/>
-      <img className={classes.img} src={el.image} alt="" />
-      <hr className={classes.hr}/>
+      <hr className={classes.hr} />
+      <img className={classes.img} src={el.image} alt='' />
+      <hr className={classes.hr} />
       <p className={classes.font}>
         Font: <a href={el.imageFont}>{el.imageFont}</a>
       </p>
@@ -46,7 +46,7 @@ function GetAllImages() {
   ));
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
