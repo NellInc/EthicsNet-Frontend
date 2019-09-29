@@ -94,7 +94,7 @@ function NewAnotation(props) {
       <form onSubmit={handleSubmit}>
         <TextField
           id="standard-name"
-          label="Anotation"
+          label="Annotation"
           className={classes.textField}
           value={anotation}
           onChange={handleChange}

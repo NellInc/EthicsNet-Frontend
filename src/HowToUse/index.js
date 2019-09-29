@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
 import Steps from './Steps';
+import Title from './Title';
 import { useStyles } from './style';
 
 import text1 from '../assets/images/text1.png';
@@ -19,12 +20,73 @@ import video3 from '../assets/images/video3.png';
 import video4 from '../assets/images/video4.png';
 
 function HowToUse(props) {
+  const txt = {
+    0: text1,
+    1: text2,
+    2: text3,
+  };
+
+  const img = {
+    0: image1,
+    1: image2,
+    2: image3,
+  };
+
+  const vi = {
+    0: video1,
+    1: video2,
+    2: video3,
+    3: video4,
+  };
+
   const classes = useStyles();
 
   const webStoreLink =
     'https://chrome.google.com/webstore/detail/djamiamgnjcpjhkknjddilkaibbhmhgc/';
 
   const extensionLink = 'http://extension.lupuselit.me/#/register';
+
+  const textTitles = [
+    `Select the text, you'll see a yellow button, click it to open the sidebar.`,
+    `The sidebar will open on the right, you can now edit the text if you'd like, select a category and save the text annotation.`,
+    `It's done! Now you can make another annotation or check all annotation on the EthicsNet website.`,
+  ];
+
+  const imageTitles = [
+    `Open the page you want to annotate an image from and right click it, it will open a menu.`,
+    `Click on the select area button, it will open a new window, so you can select the area you want to annotate. Select the area and then hit 'save image'.`,
+    `Finally, you can review the
+    selected area, add a title, description and category. When everything is
+    ready to go, hit save and that's it! You just annotated an image!`,
+  ];
+
+  const videoTitles = [
+    `Open the youtube video you want to annotate.`,
+    `Click the EthicsNet extension button on the top right of chrome, then click on the 'Annotate video' button.`,
+    `he input will already be with the current video url, change it if you need it, then click on 'save'. It will open a new window.`,
+    `Now you just need to add when the action happens, when it ends, a title, description and category, click on 'save video' and there you go! You have just annotated a video action with the EthicsNet extension.`,
+  ];
+
+  const textSteps = textTitles.map((text, index) => (
+    <Steps key={index} img={txt[index]}>
+      <span className={classes.numbers}>{index + 1} - </span>
+      {text}
+    </Steps>
+  ));
+
+  const imageSteps = imageTitles.map((image, index) => (
+    <Steps key={index} img={img[index]}>
+      <span className={classes.numbers}>{index + 1} - </span>
+      {image}
+    </Steps>
+  ));
+
+  const videoSteps = videoTitles.map((video, index) => (
+    <Steps key={index} img={vi[index]}>
+      <span className={classes.numbers}>{index + 1} - </span>
+      {video}
+    </Steps>
+  ));
 
   return (
     <Fragment>
@@ -67,99 +129,35 @@ function HowToUse(props) {
         </Link>
       </Typography>
 
-      <hr className={classes.hr} />
+      <Title
+        title='Annotating text'
+        subtitle='While you are browsing the web, once you have the EthicsNet extension
+        installed you can annotate text from any website.'
+      />
 
-      <Typography variant='h5' className={classes.title}>
-        Annotating text
-      </Typography>
+      {textSteps}
 
-      <Typography className={classes.subtitle} variant='subtitle1'>
-        While you are browsing the web, once you have the EthicsNet extension
-        installed you can annotate text from any website.
-      </Typography>
-
-      <Steps img={text1}>
-        <span className={classes.numbers}>1 - </span>Select the text, you'll see
-        a yellow button, click it to open the sidebar.
-      </Steps>
-
-      <Steps img={text2}>
-        <span className={classes.numbers}>2 - </span>The sidebar will open on
-        the right, you can now edit the text if you'd like, select a category
-        and save the text annotation.
-      </Steps>
-
-      <Steps img={text3}>
-        <span className={classes.numbers}>2 - </span>It's done! Now you can make
-        another annotation or check all annotation on the EthicsNet website.
-      </Steps>
-
-      <hr className={classes.hr} />
-
-      <Typography variant='h5' className={classes.title}>
-        Annotating images
-      </Typography>
-
-      <Typography className={classes.subtitle} variant='subtitle1'>
-        Image annotations work a little bit differently from text annotation, it
+      <Title
+        title='Annotating images'
+        subtitle='Image annotations work a little bit differently from text annotation, it
         first takes a screenshot of the current webpage you want to annotate,
-        then you'll see a screen to crop the image and add more details. Follow
-        these steps:
-      </Typography>
+        then you will see a screen to crop the image and add more details. Follow
+        these steps:'
+      />
 
-      <Steps img={image1}>
-        <span className={classes.numbers}>1 - </span>Open the page you want to
-        annotate an image from and right click it, it will open a menu.
-      </Steps>
+      {imageSteps}
 
-      <Steps img={image2}>
-        <span className={classes.numbers}>2 - </span>Click on the select area
-        button, it will open a new window, so you can select the area you want
-        to annotate. Select the area and then hit 'save image'.
-      </Steps>
+      <Title
+        title='Annotating videos'
+        subtitle='Currently we only support annotating videos from youtube. It works like this:'
+      />
 
-      <Steps img={image3}>
-        <span className={classes.numbers}>3 - </span>Finally, you can review the
-        selected area, add a title, description and category. When everything is
-        ready to go, hit save and that's it! You just annotated an image!
-      </Steps>
+      {videoSteps}
 
-      <hr className={classes.hr} />
-
-      <Typography variant='h5' className={classes.title}>
-        Annotating videos
-      </Typography>
-
-      <Typography className={classes.subtitle} variant='subtitle1'>
-        Currently we only support annotating videos from youtube. It works like
-        this:
-      </Typography>
-
-      <Steps img={video1}>
-        <span className={classes.numbers}>1 - </span>Open the youtube video you
-        want to annotate.
-      </Steps>
-
-      <Steps img={video2}>
-        <span className={classes.numbers}>2 - </span>Click the EthicsNet extension button on the top right of chrome, then click on the 'Annotate video' button.
-      </Steps>
-
-      <Steps img={video3}>
-        <span className={classes.numbers}>3 - </span>The input will already be with the current video url, change it if you need it, then click on 'save'. It will open a new window.
-      </Steps>
-      <Steps img={video4}>
-        <span className={classes.numbers}>4 - </span>Now you just need to add when the action happens, when it ends, a title, description and category, click on 'save video' and there you go! You have just annotated a video action with the EthicsNet extension.
-      </Steps>
-
-      <hr className={classes.hr} />
-
-      <Typography variant='h5' className={classes.title}>
-        Next steps
-      </Typography>
-
-      <Typography className={classes.subtitle} variant='subtitle1'>
-        Now you know to use the EthicsNet extension
-      </Typography>
+      <Title
+        title='Next steps'
+        subtitle='Now you know how to use the EthicsNet extension'
+      />
     </Fragment>
   );
 }
