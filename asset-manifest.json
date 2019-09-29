@@ -1,17 +1,27 @@
 {
   "files": {
     "main.css": "/static/css/main.0c46a219.chunk.css",
-    "main.js": "/static/js/main.0057f9f5.chunk.js",
-    "main.js.map": "/static/js/main.0057f9f5.chunk.js.map",
+    "main.js": "/static/js/main.165a2401.chunk.js",
+    "main.js.map": "/static/js/main.165a2401.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/css/2.e0c0157e.chunk.css": "/static/css/2.e0c0157e.chunk.css",
-    "static/js/2.5d03f8f6.chunk.js": "/static/js/2.5d03f8f6.chunk.js",
-    "static/js/2.5d03f8f6.chunk.js.map": "/static/js/2.5d03f8f6.chunk.js.map",
+    "static/js/2.3477d859.chunk.js": "/static/js/2.3477d859.chunk.js",
+    "static/js/2.3477d859.chunk.js.map": "/static/js/2.3477d859.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.48353e2bcae32ed01366e59144d5b106.js": "/precache-manifest.48353e2bcae32ed01366e59144d5b106.js",
+    "precache-manifest.685419cd9f88bc09078fd7cfab51217c.js": "/precache-manifest.685419cd9f88bc09078fd7cfab51217c.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.e0c0157e.chunk.css.map": "/static/css/2.e0c0157e.chunk.css.map",
-    "static/css/main.0c46a219.chunk.css.map": "/static/css/main.0c46a219.chunk.css.map"
+    "static/css/main.0c46a219.chunk.css.map": "/static/css/main.0c46a219.chunk.css.map",
+    "static/media/image1.png": "/static/media/image1.789090fc.png",
+    "static/media/image2.png": "/static/media/image2.47a2da96.png",
+    "static/media/image3.png": "/static/media/image3.40b62698.png",
+    "static/media/text1.png": "/static/media/text1.4f322a6e.png",
+    "static/media/text2.png": "/static/media/text2.95d80ca6.png",
+    "static/media/text3.png": "/static/media/text3.6ff28d94.png",
+    "static/media/video1.png": "/static/media/video1.a78939ee.png",
+    "static/media/video2.png": "/static/media/video2.9cd0df78.png",
+    "static/media/video3.png": "/static/media/video3.e531ec32.png",
+    "static/media/video4.png": "/static/media/video4.707da6db.png"
   }
 }
