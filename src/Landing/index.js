@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './style';
 
-function Landing(props) {
+function Landing() {
   const classes = useStyles();
 
   return (

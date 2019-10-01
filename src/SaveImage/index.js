@@ -63,7 +63,12 @@ function SaveImage(props) {
         body: JSON.stringify(data),
       });
 
-      // const json = await response.json();
+
+      const json = await response.json();
+
+      // TODO: add a notification with the response
+      console.log(json);
+      
 
       props.history.push('/user/images');
     } catch (error) {

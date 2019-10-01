@@ -36,6 +36,11 @@ export default function AlertDialogSlide(props) {
           },
         }
       );
+
+      console.log('====================================');
+      // TODO: Add a notification about the response
+      console.log(response);
+      console.log('====================================');
       
       // TODO: show a message here if it was deleted successfully
       // const data = await response.json();

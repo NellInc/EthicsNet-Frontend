@@ -62,6 +62,10 @@ function NewAnotation(props) {
 
       if (response.status === 200) {
         const json = await response.json();
+
+        // TODO: add a notification from notification
+        console.log(json);
+        
         notification('annotation created!');
         props.history.push('/profile/annotations');
       } else {

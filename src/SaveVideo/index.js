@@ -102,7 +102,11 @@ function SaveVideo(props) {
         body: JSON.stringify(data),
       });
 
-      // const json = await response.json();
+      const json = await response.json();
+
+      // TODO: Add notification with the response
+      console.log(json);
+      
 
       props.history.push('/user/videos');
     } catch (error) {

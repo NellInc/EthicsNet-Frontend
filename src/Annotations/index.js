@@ -53,20 +53,6 @@ function Anotations(props) {
     // if you place 'loading' here it will run twice (make 2 api calls)
   }, [page]);
 
-  function handleNextPage() {
-    if (page * 10 < count) {
-      setPage(page + 1);
-      setLoading(true);
-    }
-  }
-
-  function handlePreviousPage() {
-    if (page > 1) {
-      setPage(page - 1);
-      setLoading(true);
-    }
-  }
-
   const handleAnotationClick = (id, type) => {
     if (type === 'edit') {
       props.history.push(`/profile/annotations/edit/${id}`);

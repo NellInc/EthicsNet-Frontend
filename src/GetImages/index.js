@@ -55,6 +55,9 @@ function GetImages() {
         });
 
         const data = await response.json();
+        // TODO: Add a notification with the response
+        console.log(data);
+        
         setImages(images.filter(el => el._id !== id));
         setLoading(false);
       } catch (error) {
