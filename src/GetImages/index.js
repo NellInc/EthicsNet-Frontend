@@ -15,11 +15,6 @@ function GetImages() {
 
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    document.title = 'EthicsNet - All Images ';
-  }, []);
-
   useEffect(() => {
     async function getImageData() {
       const token = localStorage.getItem('token');
@@ -32,11 +27,6 @@ function GetImages() {
         },
       });
       const data = await response.json();
-
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
-
       setImages(data.images);
       setCount(data.count);
       setLoading(false);
@@ -95,13 +85,6 @@ function GetImages() {
     <div>
       <h3 className={classes.title}>All images</h3>
       {imagesEl}
-
-      {/* <Pagination
-        handlePreviousPage={handlePreviousPage}
-        handleNextPage={handleNextPage}
-        page={page}
-      /> */}
-
       <Pagination
         setPage={setPage}
         setLoading={setLoading}
