@@ -23,8 +23,6 @@ class Screenshot extends PureComponent {
   };
 
   componentDidMount() {
-    console.log('component did mount!');
-
     const fetchData = async () => {
       try {
         const { token } = localStorage;
@@ -42,15 +40,14 @@ class Screenshot extends PureComponent {
 
         const data = await response.json();
         if (response.status === 200) {
-          console.log(data);
           this.setState({
             src: data.user.cachedImg,
             imageFont: data.user.imageFont,
-            loading: false
+            loading: false,
           });
         }
       } catch (error) {
-        console.log('there was an error -> ', error);
+        console.error('there was an error -> ', error);
       }
     };
 
@@ -73,7 +70,7 @@ class Screenshot extends PureComponent {
   };
 
   onCropComplete = crop => {
-    this.makeClientCrop(crop);    
+    this.makeClientCrop(crop);
   };
 
   onCropChange = (crop, percentCrop) => {
@@ -90,9 +87,6 @@ class Screenshot extends PureComponent {
         'newFile.jpeg'
       );
       this.setState({ croppedImageUrl, showBtn: 'block' });
-
-      console.log('crop is done!');
-      console.log(this.state.showBtn);
     }
   }
 
@@ -135,19 +129,17 @@ class Screenshot extends PureComponent {
   }
 
   saveCroppedScreenshot = () => {
-    console.log('\n\n\nshould save cropped screenshot');
-    console.log(this.state.croppedImageUrl);
     localStorage.img = this.state.croppedImageUrl;
     localStorage.imageFont = this.state.imageFont;
 
-    this.props.history.push('./save')
-  }
+    this.props.history.push('./save');
+  };
 
   renderSelectionAddon = () => (
     <Button
-      color="primary"
-      type="button"
-      variant="contained"
+      color='primary'
+      type='button'
+      variant='contained'
       style={{
         position: 'absolute',
         bottom: -45,
@@ -164,17 +156,22 @@ class Screenshot extends PureComponent {
     const { crop, croppedImageUrl, src } = this.state;
 
     if (this.state.loading) {
-      return <Loader />
+      return <Loader />;
     }
 
     return (
-      <div style={{
-        position: 'absolute',
-        width: '100%',
-        left: '0',
-        top: '82px'
-      }}>
-        <h4 style={{textAlign: 'center'}}>If the image hasn't loaded or if it's an old image, plese reload the page in a few seconds</h4>
+      <div
+        style={{
+          position: 'absolute',
+          width: '100%',
+          left: '0',
+          top: '82px',
+        }}
+      >
+        <h4 style={{ textAlign: 'center' }}>
+          If the image hasn't loaded or if it's an old image, plese reload the
+          page in a few seconds
+        </h4>
         {src && (
           <ReactCrop
             src={src}
@@ -187,7 +184,7 @@ class Screenshot extends PureComponent {
         )}
 
         {croppedImageUrl && (
-          <img alt="Crop" style={{ width: 'auto' }} src={croppedImageUrl} />
+          <img alt='Crop' style={{ width: 'auto' }} src={croppedImageUrl} />
         )}
       </div>
     );

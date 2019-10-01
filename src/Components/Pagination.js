@@ -17,11 +17,7 @@ function Pagination({ setPage, setLoading, page, count }) {
   const [numPages, setNumPages] = useState(1);
 
   useEffect(() => {
-    // console.log('====================================');
-    // console.log(Math.ceil(count / 5));
     setNumPages(Math.ceil(count / 5));
-    // console.log(count / 5);
-    // console.log('====================================');
   }, [count]);
 
   function handleNextPage() {

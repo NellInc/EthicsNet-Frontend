@@ -17,9 +17,6 @@ export default function AlertDialogSlide(props) {
   const { open, handleClose, content, id, filterAnotations, elId } = props;
 
   useEffect(() => {
-    console.log('dialog opened...', props.open);
-    console.log('hello');
-    console.log('id -> ', id);
   }, [id, props.open]);
 
   const handleDelete = async () => {
@@ -41,12 +38,11 @@ export default function AlertDialogSlide(props) {
       );
       
       // TODO: show a message here if it was deleted successfully
-      const data = await response.json();
-      console.log(data);
+      // const data = await response.json();
       filterAnotations(id)
       handleClose();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

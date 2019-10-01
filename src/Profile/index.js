@@ -55,8 +55,6 @@ function Profile(props) {
 
       const data = await response.json();
 
-      console.log('USER -> ', data, response.status);
-
       if (response.status === 200) {
 
         setUserData(data.user);
@@ -147,8 +145,6 @@ function Profile(props) {
       ethnicity
     };
 
-    console.log('VALUES -> ', values);
-
     const { token, userId } = localStorage;
     const response = await fetch(`${apiURL}/api/user/${userId}`, {
       method: 'PUT',
@@ -161,8 +157,6 @@ function Profile(props) {
       },
       body: JSON.stringify(data),
     });
-    const responseJson = await response.json();
-    console.log(responseJson);
     setLoading(true);
   };
 

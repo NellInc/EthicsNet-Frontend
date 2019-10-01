@@ -36,8 +36,6 @@ function SaveImage(props) {
     setLoading(true);
 
     e.preventDefault();
-    console.log('submit!!!');
-
     const { title, description, category } = values;
     const { token, userId, imageFont } = localStorage;
 
@@ -65,13 +63,11 @@ function SaveImage(props) {
         body: JSON.stringify(data),
       });
 
-      const json = await response.json();
-
-      console.log(json);
+      // const json = await response.json();
 
       props.history.push('/user/images');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

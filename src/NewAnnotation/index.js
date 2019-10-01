@@ -60,21 +60,16 @@ function NewAnotation(props) {
         body: JSON.stringify(data),
       });
 
-      console.log(response.status);
-
       if (response.status === 200) {
         const json = await response.json();
-        console.log(json);
         notification('annotation created!');
         props.history.push('/profile/annotations');
       } else {
-        console.log('error while fetching data!');
+        console.error('error while fetching data!');
       }
     } catch (error) {
-      console.log('there was an error ->', error);
+      console.error('there was an error ->', error);
     }
-
-    console.log('submiting!');
   };
 
   if (loading) {

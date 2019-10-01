@@ -58,7 +58,7 @@ function SaveVideo(props) {
         setVideoUrl(url);
       }
     } catch (error) {
-      console.log('there was an error -> ', error);
+      console.error('there was an error -> ', error);
     }
   };
 
@@ -74,9 +74,6 @@ function SaveVideo(props) {
   async function handleSubmit(e) {
     setLoading(true);
     e.preventDefault();
-
-    console.log('submit video form!');
-
     const { title, description, category, start, end } = values;
     const { token, userId } = localStorage;
 
@@ -105,13 +102,11 @@ function SaveVideo(props) {
         body: JSON.stringify(data),
       });
 
-      const json = await response.json();
-
-      console.log(json);
+      // const json = await response.json();
 
       props.history.push('/user/videos');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

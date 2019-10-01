@@ -43,7 +43,6 @@ function Login() {
 
       if (response.status === 400) {
         notification(json.error, 'login failed', 'danger');
-        console.log('status -> ', response.status, json);
       } else if (response.status === 200) {
         notification('welcome back!');
         const { token, user } = json;
@@ -58,7 +57,7 @@ function Login() {
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setLoading(false);
     }
   };

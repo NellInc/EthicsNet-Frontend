@@ -19,7 +19,6 @@ function Anotations(props) {
   const [count, setCount] = useState(0);
 
   function filterAnotations(idRemoved) {
-    console.log('id to remove-> ', idRemoved);
     setAnotations(anotations.filter(el => el._id !== idRemoved));
   }
 
@@ -72,7 +71,6 @@ function Anotations(props) {
     if (type === 'edit') {
       props.history.push(`/profile/annotations/edit/${id}`);
     } else if (type === 'delete') {
-      console.log('delete id ->', id);
       setIdToDelete(id);
       setOpen(true);
     }

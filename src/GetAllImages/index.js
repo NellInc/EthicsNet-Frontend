@@ -23,8 +23,6 @@ function GetAllImages() {
       });
 
       const data = await response.json();
-      console.log('Images fetched -> ', data.images);
-
       setImages(data.images);
       setLoading(false);
     }

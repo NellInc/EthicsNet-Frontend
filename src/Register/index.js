@@ -28,9 +28,7 @@ function App() {
   const handleSubmit = async e => {
     setLoading(true);
     const data = values;
-    e.preventDefault();
-    console.log(`${apiURL}/auth/register`);
-    
+    e.preventDefault();    
     try {
       const response = await fetch(`${apiURL}/auth/register`, {
         method: 'POST',
@@ -47,8 +45,6 @@ function App() {
 
       const json = await response.json();
 
-      console.log(json);
-
       if (response.status === 400) {
         notification(json.error, 'registration failed', 'danger');
       } else if (response.status === 200) {
@@ -63,7 +59,7 @@ function App() {
         notification('there was an error', 'we could not register you', 'danger');
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

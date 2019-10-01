@@ -6,16 +6,6 @@ import { useStyles } from './style';
 function Landing(props) {
   const classes = useStyles();
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      console.log(setLoading);
-    }
-
-    fetchData();
-  }, [loading]);
-
   return (
     <div className={classes.root}>
       <Typography variant='h4' gutterBottom>

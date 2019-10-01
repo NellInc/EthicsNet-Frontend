@@ -36,7 +36,6 @@ function Main(props) {
   useEffect(() => {
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
-    console.log('time now -> ', time_now);
     // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 * 30 = 30 days
     if (localStorage.isLogged) {
       if (time_now - lastclear > 1000 * 60 * 60 * 24 * 30) {
@@ -46,7 +45,6 @@ function Main(props) {
         localStorage.clear();
         localStorage.setItem('lastclear', time_now);
         props.history.push('/logged-out');
-        console.log('logging out!');
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

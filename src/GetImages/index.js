@@ -37,7 +37,6 @@ function GetImages() {
 
   async function deleteImage(id) {
     setLoading(true);
-    console.log(id);
 
     // Remove from the DOM
     if (window.confirm('are you sure you want to delete this image?')) {
@@ -56,11 +55,10 @@ function GetImages() {
         });
 
         const data = await response.json();
-        console.log(data);
         setImages(images.filter(el => el._id !== id));
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   }

@@ -9,7 +9,7 @@ export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
       {...rest}
       render={props =>
         localStorage.isLogged === 'true' && restricted ? (
-          <Redirect to="/" />
+          <Redirect to='/' />
         ) : (
           <Component {...props} />
         )
@@ -19,35 +19,26 @@ export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
 };
 
 export const PrivateRoute = ({ title, component: Component, ...rest }) => {
-
   console.log('**********');
   console.log(title);
   console.log(document.title);
-  console.log('**********')
+  console.log('**********');
   if (title) {
-    document.title = title
+    document.title = title;
   }
-  
+
   return (
     // Show the component only when the user is logged in
     // Otherwise, redirect the user to /signin page
     <Route
       {...rest}
       render={props => {
-
-        // console.log('====================================');
-        // console.log(title);
-        // console.log('====================================');
-
-        return (
-        localStorage.getItem('isLogged') === 'true' ? (
+        return localStorage.getItem('isLogged') === 'true' ? (
           <Component title={title} {...props} />
         ) : (
-          <Redirect to="/login" />
-        )
-        )
-      }
-      }
+          <Redirect to='/login' />
+        );
+      }}
     />
   );
 };
