@@ -40,7 +40,7 @@ function Main(props) {
     // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 * 30 = 30 days
     if (localStorage.isLogged) {
       if (time_now - lastclear > 1000 * 60 * 60 * 24 * 30) {
-      // if (time_now - lastclear > 1000 * 60) {
+        // if (time_now - lastclear > 1000 * 60) {
         // if ((time_now - lastclear) > (1000 * 60)) {
         // if (true) {
         localStorage.clear();
@@ -125,17 +125,41 @@ function Main(props) {
               component={Screenshot2}
             />
 
-            <PrivateRoute exact path='/image/new' component={Screenshot} />
+            <PrivateRoute
+              title='EthicsNet - New Image'
+              exact
+              path='/image/new'
+              component={Screenshot}
+            />
 
-            <PrivateRoute exact path='/image/save' component={SaveImage} />
+            <PrivateRoute
+              title='EthicsNet - Save Image'
+              exact
+              path='/image/save'
+              component={SaveImage}
+            />
 
-            <PrivateRoute exact path='/video/save' component={SaveVideo} />
+            <PrivateRoute
+              title='EthicsNet - Save Video'
+              exact
+              path='/video/save'
+              component={SaveVideo}
+            />
 
-            <PrivateRoute exact path='/user/images' component={GetImages} />
+            <PrivateRoute
+              title='EthicsNet - Images'
+              exact
+              path='/user/images'
+              component={GetImages}
+            />
 
-            <PrivateRoute exact path='/user/videos' component={Videos} />
+            <PrivateRoute
+              title='EthicsNet - Videos'
+              exact
+              path='/user/videos'
+              component={Videos}
+            />
 
-            {/* TODO: Better use pagination here */}
             <PrivateRoute
               exact
               path='/user/images/all'
@@ -143,6 +167,7 @@ function Main(props) {
             />
 
             <PrivateRoute
+              title='EthicsNet - Edit Annotation'
               exact
               path='/profile/annotations/edit/:id'
               component={Anotation}
