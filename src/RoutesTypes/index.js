@@ -1,7 +1,16 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
+export const PublicRoute = ({ title, component: Component, restricted, ...rest }) => {
+
+  console.log('**********');
+  console.log(title);
+  console.log(document.title);
+  console.log('**********');
+  if (title) {
+    document.title = title;
+  }
+
   return (
     // restricted = false meaning public route
     // restricted = true meaning restricted route

@@ -7,7 +7,7 @@ import { apiURL } from '../globals';
 import { useStyles } from './style';
 import Info from './Info';
 
-function Profile(props) {
+function Profile() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
@@ -157,6 +157,11 @@ function Profile(props) {
       },
       body: JSON.stringify(data),
     });
+
+    console.log('====================================');
+    console.log(response);
+    console.log('====================================');
+    
     setLoading(true);
   };
 

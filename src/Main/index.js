@@ -24,6 +24,7 @@ import GetAllImages from '../GetAllImages';
 import Videos from '../Videos';
 import SaveVideo from '../SaveVideo';
 import HowToUse from '../HowToUse';
+import SaveVideoAction from '../SaveVideoAction';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -89,6 +90,7 @@ function Main(props) {
             <Route exact path='/landing' component={Landing} />
 
             <PublicRoute
+              title='EthicsNet - How to use'
               exact
               path='/how-to-use'
               // restricted={true}
@@ -98,6 +100,7 @@ function Main(props) {
             <Route exact path='/logged-out' component={LoggedOut} />
 
             <PrivateRoute
+              title='EthicsNet - Annotations'
               exact
               path='/profile/annotations'
               component={Annotations}
@@ -106,20 +109,30 @@ function Main(props) {
             {/* TODO: remove this later, this was only to */}
             {/* not break the deployed extension */}
             <PrivateRoute
+              title='EthicsNet - New Annotation'
               exact
               path='/profile/anotations'
               component={Annotations}
             />
 
             <PrivateRoute
+              title='EthicsNet - New Annotation'
               exact
               path='/annotations/new'
               component={NewAnnotation}
             />
 
             <PrivateRoute
+              title='EthicsNet - Save Video Action'
               exact
-              path='/profile/anotations'
+              path='/save-video-action'
+              component={SaveVideoAction}
+            />
+
+            <PrivateRoute
+              title='EthicsNet - Screenshot'
+              exact
+              path='/profile/anotations/screenshots'
               component={Screenshot2}
             />
 
@@ -159,6 +172,7 @@ function Main(props) {
             />
 
             <PrivateRoute
+              title='EthicsNet - All Images'
               exact
               path='/user/images/all'
               component={GetAllImages}
