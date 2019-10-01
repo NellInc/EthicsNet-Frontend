@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,11 +17,11 @@ function Pagination({ setPage, setLoading, page, count }) {
   const [numPages, setNumPages] = useState(1);
 
   useEffect(() => {
-    console.log('====================================');
-    console.log(Math.ceil(count / 5));
+    // console.log('====================================');
+    // console.log(Math.ceil(count / 5));
     setNumPages(Math.ceil(count / 5));
-    console.log(count / 5);
-    console.log('====================================');
+    // console.log(count / 5);
+    // console.log('====================================');
   }, [count]);
 
   function handleNextPage() {
@@ -98,5 +99,12 @@ function Pagination({ setPage, setLoading, page, count }) {
     </div>
   );
 }
+
+Pagination.propTypes = {
+  page: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
+  setLoading: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
+};
 
 export default Pagination;
