@@ -138,37 +138,21 @@ function SaveVideo(props) {
           margin='normal'
         />
 
-        <InputMask
-          mask='99:99'
-          value={values.start}
-          onChange={handleChange('start')}
+        <TextField
+          id="time"
+          label="Video start"
+          type="time"
+          defaultValue="00:00"
           className={classes.time}
-        >
-          {() => (
-            <TextField
-              label='Video start'
-              className={classes.time}
-              margin='normal'
-              type='text'
-            />
-          )}
-        </InputMask>
+        />
 
-        <InputMask
-          mask='99:99'
-          value={values.end}
-          onChange={handleChange('end')}
+        <TextField
+          id="time"
+          label="Video end"
+          type="time"
+          defaultValue="00:10"
           className={classes.time}
-        >
-          {() => (
-            <TextField
-              label='Video end'
-              className={classes.time}
-              margin='normal'
-              type='text'
-            />
-          )}
-        </InputMask>
+        />
 
         <TextField
           id='standard-multiline-static'
