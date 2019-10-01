@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@material-ui/core/Button';
 
 import { apiURL } from '../globals';
-import { useStyles } from './style';
 import { Loader } from '../components';
+
+import Image from './Image';
+import Pagination from '../Components/Pagination';
+import { useStyles } from './style';
 
 function GetImages() {
   const classes = useStyles();
@@ -15,21 +17,24 @@ function GetImages() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    document.title = 'EthicsNet - All Images ';
+  }, []);
+
+  useEffect(() => {
     async function getImageData() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`${apiURL}/api/user/images/${page}`, {
+      const response = await fetch(`${apiURL}/api2/image/page/${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
-
       const data = await response.json();
-      // console.log('Images fetched -> ', data.images);
+
       console.log('====================================');
-      console.log('images -> ', data);
+      console.log(data);
       console.log('====================================');
 
       setImages(data.images);
@@ -49,7 +54,7 @@ function GetImages() {
       try {
         const { token } = localStorage;
 
-        const response = await fetch(`${apiURL}/api/user/images/${id}`, {
+        const response = await fetch(`${apiURL}/api2/image/${id}`, {
           method: 'DELETE',
           mode: 'cors',
           cache: 'no-cache',
@@ -71,48 +76,19 @@ function GetImages() {
   }
 
   const imagesEl = images.map(el => (
-    <div key={el._id} className={classes.image}>
-      <p className={classes.title}>{el.title}</p>
-      <hr className={classes.hr} />
-      <div className={classes.imgWrapper}>
-        <img className={classes.img} src={el.image} alt='' />
-      </div>
-
-      <hr className={classes.hr} />
-      <p className={classes.font}>
-        Font: <a href={el.imageFont}>{el.imageFont}</a>
-      </p>
-      <p>
-        <span className={classes.category}>{el.category}</span>
-      </p>
-      <p className={classes.description}>{el.description}</p>
-
-      <Button
-        color='secondary'
-        variant='outlined'
-        onClick={() => deleteImage(el._id)}
-      >
-        Delete
-      </Button>
-    </div>
+    <Image key={el._id} el={el} deleteImage={deleteImage} />
   ));
-
-  function handleNextPage() {
-    if (page * 10 < count) {
-      setPage(page + 1);
-      setLoading(true);
-    }
-  }
-
-  function handlePreviousPage() {
-    if (page > 1) {
-      setPage(page - 1);
-      setLoading(true);
-    }
-  }
 
   if (loading) {
     return <Loader />;
+  }
+
+  if (!images.length) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        you haven't annotated any image yet...
+      </div>
+    );
   }
 
   return (
@@ -120,27 +96,18 @@ function GetImages() {
       <h3 className={classes.title}>All images</h3>
       {imagesEl}
 
-      <div className={classes.pagination}>
-        <Button
-          color='primary'
-          variant='outlined'
-          style={{ marginRight: '10px' }}
-          onClick={handlePreviousPage}
-        >
-          Previous Page
-        </Button>
+      {/* <Pagination
+        handlePreviousPage={handlePreviousPage}
+        handleNextPage={handleNextPage}
+        page={page}
+      /> */}
 
-        <span>{page}</span>
-
-        <Button
-          color='primary'
-          variant='outlined'
-          style={{ marginLeft: '10px' }}
-          onClick={handleNextPage}
-        >
-          Next Page
-        </Button>
-      </div>
+      <Pagination
+        setPage={setPage}
+        setLoading={setLoading}
+        count={count}
+        page={page}
+      />
     </div>
   );
 }

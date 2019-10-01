@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,11 @@ import { useStyles } from './style';
 
 function Home() {
   const classes = useStyles();
+
+  useEffect(() => {
+    document.title = 'EthicsNet - Home ';
+  }, []);
+
   return (
     <div className={classes.root}>
       <Typography className={classes.title} variant='h5' gutterBottom>

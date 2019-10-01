@@ -35,6 +35,10 @@ function Profile(props) {
   };
 
   useEffect(() => {
+    document.title = 'EthicsNet - Profile ';
+  }, []);
+
+  useEffect(() => {
     async function getUserData() {
       const token = localStorage.getItem('token');
 

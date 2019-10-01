@@ -53,8 +53,6 @@ function Anotation(props) {
       };
 
       setCategory(selectedCategory[data.anotation.category]);
-
-
       setLoading(false);
     }
 

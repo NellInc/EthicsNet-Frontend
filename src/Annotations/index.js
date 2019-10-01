@@ -42,9 +42,6 @@ function Anotations(props) {
       });
 
       const data = await response.json();
-      console.log('====================================');
-      console.log(data, page);
-      console.log('====================================');
 
       setAnotations(data.anotations);
       setCount(data.count);
