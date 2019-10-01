@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -16,14 +16,10 @@ import { useStyles } from './style';
 function NewAnotation(props) {
   const classes = useStyles();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [anotation, setAnotation] = useState('');
   const [category, setCategory] = useState(0);
   const notification = useContext(Notification);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
 
   const handleChange = e => {
     setAnotation(e.target.value);
@@ -50,7 +46,7 @@ function NewAnotation(props) {
     };
 
     try {
-      const response = await fetch(`${apiURL}/api/post-text`, {
+      const response = await fetch(`${apiURL}/api2/text`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -87,25 +83,25 @@ function NewAnotation(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         Create a new annotation
       </Typography>
 
       <form onSubmit={handleSubmit}>
         <TextField
-          id="standard-name"
-          label="Annotation"
+          id='standard-name'
+          label='Annotation'
           className={classes.textField}
           value={anotation}
           onChange={handleChange}
-          margin="normal"
+          margin='normal'
           required
           multiline
-          rows="5"
+          rows='5'
         />
 
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="category-simple">Category</InputLabel>
+          <InputLabel htmlFor='category-simple'>Category</InputLabel>
           <Select
             value={category}
             onChange={e => setCategory(e.target.value)}
@@ -114,7 +110,9 @@ function NewAnotation(props) {
               id: 'category-simple',
             }}
           >
-            <MenuItem selected value={0}>Morally preferable</MenuItem>
+            <MenuItem selected value={0}>
+              Morally preferable
+            </MenuItem>
             <MenuItem value={1}>Morally unpreferable</MenuItem>
             <MenuItem value={2}>Aesthetically preferable</MenuItem>
             <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
@@ -122,15 +120,15 @@ function NewAnotation(props) {
         </FormControl>
 
         <Button
-          color="primary"
-          variant="outlined"
+          color='primary'
+          variant='outlined'
           style={{ marginRight: '10px' }}
-          type="submit"
+          type='submit'
         >
           Save
         </Button>
-        <Button color="secondary" type="button" variant="outlined">
-          <Link className={classes.link} to="/">
+        <Button color='secondary' type='button' variant='outlined'>
+          <Link className={classes.link} to='/'>
             Cancel
           </Link>
         </Button>

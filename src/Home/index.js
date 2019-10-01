@@ -65,7 +65,7 @@ function Home() {
       <Button
         color='primary'
         variant='outlined'
-        style={{ marginRight: '10px', marginTop: 10 }}
+        style={{ marginRight: '10px' }}
       >
         <Link className={classes.link} to='/how-to-use'>
           How to use it

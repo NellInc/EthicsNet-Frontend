@@ -43,6 +43,11 @@ function SaveVideo(props) {
       });
 
       const data = await response.json();
+
+      console.log('====================================');
+      console.log(data);
+      console.log('====================================');
+
       if (response.status === 200) {
         function youtube_parser(url) {
           var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;

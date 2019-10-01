@@ -26,7 +26,7 @@ export const ImageToSave = createContext('');
 function Store({ children }) {
   const [isLogged, setIsLogged] = useState(localStorage.isLogged);
   const [loading, setLoading] = useState(true);
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState('');
 
   const notificationDOMRef = React.createRef();
 

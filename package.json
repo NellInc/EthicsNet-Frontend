@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.0",
     "@material-ui/icons": "^4.2.1",
+    "axios": "^0.19.0",
     "gh-pages": "^2.1.1",
     "html-screen-capture-js": "^1.0.21",
     "html2canvas": "^1.0.0-rc.3",
@@ -23,8 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "npm run build &&  echo 'extension.lupuselit.me' > build/CNAME && gh-pages -d build"
+    "predeploy": "yarn run build",
+    "deploy": "yarn run build &&  echo 'extension.lupuselit.me' > build/CNAME && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
