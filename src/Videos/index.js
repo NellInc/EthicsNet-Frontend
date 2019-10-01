@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
+import { Helmet } from 'react-helmet';
 
+import Pagination from '../Components/Pagination';
 import { useStyles } from './style';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
+
+import Video from './Video';
 
 function Videos(props) {
   const classes = useStyles();
@@ -26,9 +29,6 @@ function Videos(props) {
       });
 
       const data = await response.json();
-      console.log('====================================');
-      console.log('videos -> ', data);
-      console.log('====================================');
 
       setVideos(data.videos);
       setCount(data.count);
@@ -38,24 +38,6 @@ function Videos(props) {
     getVideoData();
   }, [page]);
 
-  function handleNextPage() {
-    if (page * 5 < count) {
-      setPage(page + 1);
-      setLoading(true);
-    }
-  }
-
-  function handlePreviousPage() {
-    if (page > 1) {
-      setPage(page - 1);
-      setLoading(true);
-    }
-  }
-
-  if (loading) {
-    return <Loader />;
-  }
-
   function youtube_parser(url) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
@@ -63,63 +45,36 @@ function Videos(props) {
   }
 
   const videoElements = videos.map(el => (
-    <div key={el._id}>
-      <iframe
-        title={el._id}
-        src={'https://www.youtube.com/embed/' + youtube_parser(el.videoUrl)}
-        width='100%'
-        height='500px'
-        frameBorder='0'
-        allowFullScreen
-      ></iframe>
-
-      <h3>{el.title}</h3>
-      <p>
-        <span className={classes.category}>{el.category}</span>
-      </p>
-      <p>
-        Url:{' '}
-        <a href={el.videoUrl} target='_blank' rel='noopener noreferrer'>
-          {el.videoUrl}
-        </a>
-      </p>
-      <p>Start: {el.videoStart} </p>
-      <p>End: {el.videoEnd}</p>
-      <p>
-        Description:{' '}
-        {el.description ? el.description : 'no description provided'}
-      </p>
-
-      <hr className={classes.hr} />
-    </div>
+    <Video key={el._id} youtube_parser={youtube_parser} el={el} />
   ));
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!videos.length) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        you haven't annotated any video yet...
+      </div>
+    );
+  }
 
   return (
     <div className={classes.root}>
+      <Helmet>
+        <title>{`EthicsNet - Videos - ${page}`}</title>
+      </Helmet>
       <h3 className={classes.title}>All videos</h3>
+
       {videoElements}
 
-      <div className={classes.pagination}>
-        <Button
-          color='primary'
-          variant='outlined'
-          style={{ marginRight: '10px' }}
-          onClick={handlePreviousPage}
-        >
-          Previous Page
-        </Button>
-
-        <span>{page}</span>
-
-        <Button
-          color='primary'
-          variant='outlined'
-          style={{ marginLeft: '10px' }}
-          onClick={handleNextPage}
-        >
-          Next Page
-        </Button>
-      </div>
+      <Pagination
+        setPage={setPage}
+        setLoading={setLoading}
+        count={count}
+        page={page}
+      />
     </div>
   );
 }
