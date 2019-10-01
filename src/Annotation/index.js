@@ -28,7 +28,8 @@ function Anotation(props) {
       const { id } = props.match.params;
       const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api/user/anotation/${id}`, {
+      // const response = await fetch(`${apiURL}/api/user/anotation/${id}`, {
+      const response = await fetch(`${apiURL}/api2/text/${id}`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
@@ -75,7 +76,7 @@ function Anotation(props) {
       3: 'aesthetically unpreferable',
     };
 
-    const response = await fetch(`${apiURL}/api/user/anotations/${id}`, {
+    const response = await fetch(`${apiURL}/api2/text/${id}`, {
       method: 'PUT',
       mode: 'cors',
       cache: 'no-cache',

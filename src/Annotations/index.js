@@ -30,7 +30,7 @@ function Anotations(props) {
     async function getUserData() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`${apiURL}/api/user/anotations/${page}`, {
+      const response = await fetch(`${apiURL}/api2/text/page/${page}`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',

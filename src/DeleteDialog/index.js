@@ -27,7 +27,7 @@ export default function AlertDialogSlide(props) {
       const { token } = localStorage;
 
       const response = await fetch(
-        `${apiURL}/api/user/anotations/${id}`,
+        `${apiURL}/api2/text/${id}`,
         {
           method: 'DELETE',
           mode: 'cors',
