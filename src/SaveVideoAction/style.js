@@ -4,8 +4,15 @@ export const useStyles = makeStyles(theme => ({
   img: {
     // width: '100%'
   },
+  title: {
+    textAlign: 'center',
+    marginBottom: 30
+  },
   textField: {
     width: '100%',
+  },
+  hr: {
+    backgroundColor: '#ddd',
   },
   typography: {
     textAlign: 'center',

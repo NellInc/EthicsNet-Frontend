@@ -22,11 +22,13 @@ export const IsLogged = createContext(localStorage.isLogged);
 export const Loading = createContext(true);
 export const Notification = createContext('bla');
 export const ImageToSave = createContext('');
+export const VideoInfoContext = createContext({});
 
 function Store({ children }) {
   const [isLogged, setIsLogged] = useState(localStorage.isLogged);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
+  const [videoInfo, setVideoInfo] = useState({});
 
   const notificationDOMRef = React.createRef();
 
@@ -50,7 +52,9 @@ function Store({ children }) {
         <ReactNotification ref={notificationDOMRef} />
         <Notification.Provider value={addNotification}>
           <ImageToSave.Provider value={[image, setImage]}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <VideoInfoContext.Provider value={[videoInfo, setVideoInfo]}>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </VideoInfoContext.Provider>
           </ImageToSave.Provider>
         </Notification.Provider>
       </IsLogged.Provider>

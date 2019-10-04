@@ -79,6 +79,7 @@ function Main(props) {
             />
 
             <PublicRoute
+              title='EthicsNet - Login'
               exact
               path='/login'
               restricted={true}

@@ -1,187 +1,146 @@
-import React, { PureComponent } from 'react';
-import ReactCrop from 'react-image-crop';
+import React, { useState, useEffect, useContext } from 'react';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import 'react-image-crop/dist/ReactCrop.css';
-import '../App.css';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 
+import { VideoInfoContext } from '../Store';
+
+import { useStyles } from './style';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
 
-// This is a class component because of the librally
-// wont bother to refactor it to functional
-class SaveVideoAction extends PureComponent {
-  state = {
-    showBtn: 'none',
-    loading: true,
-    src: '', // place video start here
-    croppedImageUrl: '',
-    imageFont: '',
-    videoFont: '',
-    crop: {
-      unit: '%',
-      width: 30,
-    },
-  };
+function SaveVideo(props) {
+  const classes = useStyles();
+  const [loading, setLoading] = useState(true);
+  const [videoInfo, setVideoInfo] = useContext(VideoInfoContext);
+  const [timedVideo, setTimeVideo] = useState('');
 
-  componentDidMount() {
-    const fetchData = async () => {
-      try {
-        const { token } = localStorage;
+  useEffect(() => {
+    setLoading(false);
 
-        const response = await fetch(`${apiURL}/api/user`, {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    console.log('videoinfo -> ', videoInfo);
 
-        const data = await response.json();
-        if (response.status === 200) {
-          this.setState({
-            src: data.user.cachedImg, // cached video url??!??!?
-            imageFont: data.user.imageFont,
-            loading: false,
-          });
-        }
-      } catch (error) {
-        console.error('there was an error -> ', error);
-      }
-    };
+    console.log(videoInfo.start);
+    console.log(videoInfo.start[0]);
+    console.log(videoInfo.start[1]);
+    console.log(videoInfo.start[2]);
+    console.log(videoInfo.start[3]);
+    console.log(videoInfo.start[4]);
 
-    fetchData();
+    const { end, start, videoUrl } = videoInfo;
 
-    // console.log('====================================');
-    // console.log('component did mount');
-    // console.log('====================================');
+    const minutesStart = start[0] * 10 + start[1] * 1;
 
-    // this.setState({
-    //   loading: false
-    // })
-  }
+    const secondStart = start[3] * 10 + start[4] * 1 + minutesStart * 60;
 
-  onSelectFile = e => {
-    if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener('load', () =>
-        this.setState({ src: reader.result })
-      );
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
+    const minutesEnd = end[0] * 10 + end[1] * 1;
+    const secondEnd = end[3] * 10 + end[4] * 1 + minutesEnd * 60;
 
-  // If you setState the crop in here you should return false.
-  onImageLoaded = image => {
-    this.imageRef = image;
-  };
-
-  onCropComplete = crop => {
-    this.makeClientCrop(crop);
-  };
-
-  onCropChange = (crop, percentCrop) => {
-    // You could also use percentCrop:
-    // this.setState({ crop: percentCrop });
-    this.setState({ crop });
-  };
-
-  async makeClientCrop(crop) {
-    if (this.imageRef && crop.width && crop.height) {
-      const croppedImageUrl = await this.getCroppedImg(
-        this.imageRef,
-        crop,
-        'newFile.jpeg'
-      );
-      this.setState({ croppedImageUrl, showBtn: 'block' });
-    }
-  }
-
-  getCroppedImg(image, crop, fileName) {
-    const canvas = document.createElement('canvas');
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
-    const ctx = canvas.getContext('2d');
-
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      crop.width,
-      crop.height
+    setTimeVideo(
+      `${videoUrl}?start=${secondStart}&end=${secondEnd}&autoplay=1`
     );
 
-    const base64Image = canvas.toDataURL('image/jpeg');
-    return base64Image;
+    console.log('====================================');
+    console.log(
+      secondStart,
+      secondEnd,
+      videoUrl + `?start=${secondStart}&end=${secondEnd}&autoplay=1`
+    );
+    console.log('====================================');
+  }, [videoInfo]);
+
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   const { title, description, category, start, end } = values;
+  //   const { token, userId } = localStorage;
+
+  //   const data = {
+  //     category,
+  //     title,
+  //     description,
+  //     videoUrl,
+  //     videoStart: start,
+  //     videoEnd: end,
+  //     authorId: userId,
+  //   };
+
+  //   try {
+  //     const response = await fetch(`${apiURL}/api/video`, {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       cache: 'no-cache',
+  //       credentials: 'same-origin',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       redirect: 'follow',
+  //       referrer: 'no-referrer',
+  //       body: JSON.stringify(data),
+  //     });
+
+  //     const json = await response.json();
+
+  //     // TODO: Add notification with the response
+  //     console.log(json);
+
+  //     props.history.push('/user/videos');
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  if (loading) {
+    return <Loader />;
   }
 
-  saveCroppedScreenshot = () => {
-    localStorage.img = this.state.croppedImageUrl;
-    localStorage.imageFont = this.state.imageFont;
-
-    this.props.history.push('./save');
-  };
-
-  renderSelectionAddon = () => (
-    <Button
-      color='primary'
-      type='button'
-      variant='contained'
-      style={{
-        position: 'absolute',
-        bottom: -45,
-        right: 0,
-      }}
-      onClick={this.saveCroppedScreenshot}
-    >
-      Save
-    </Button>
-  );
-
-  render() {
-    const { crop, croppedImageUrl, src } = this.state;
-
-    if (this.state.loading) {
-      return <Loader />;
-    }
-
+  if (videoInfo.videoUrl) {
+    const { videoUrl } = videoInfo;
     return (
-      <div
-        style={{
-          position: 'absolute',
-          width: '100%',
-          left: '0',
-          top: '82px',
-        }}
-      >
-        <h4 style={{ textAlign: 'center' }}>
-          Now select the person who's doing the action you want to annotate
-        </h4>
-        {src && (
-          <ReactCrop
-            src={src}
-            crop={crop}
-            onImageLoaded={this.onImageLoaded}
-            onComplete={this.onCropComplete}
-            onChange={this.onCropChange}
-            renderSelectionAddon={this.renderSelectionAddon}
-          />
-        )}
+      <div className={classes.root}>
+        <Typography variant='h4' className={classes.title}>
+          Save video
+        </Typography>
 
-        {croppedImageUrl && (
-          <img alt='Crop' style={{ width: 'auto' }} src={croppedImageUrl} />
-        )}
+        <iframe
+          title={videoUrl}
+          src={timedVideo}
+          frameBorder='0'
+          width='100%'
+          height='500px'
+          allowFullScreen
+        ></iframe>
+
+        <hr className={classes.hr} />
+
+        <div>
+          <Typography variant='body1' gutterBottom>
+            Play the video then pause when you want to save the person who's
+            doing the action
+          </Typography>
+          <Typography variant='body1' gutterBottom>
+            When you see the person clearly, hit the 'Select person' button.
+          </Typography>
+        </div>
+
+        {/* when the user clicks this button I want to send a message to the chrome extension */}
+        <Button data-extension-person color='primary' variant='outlined'>
+          Select person
+        </Button>
       </div>
     );
   }
+
+  return (
+    <div>
+      <p>ops... there was an error processing your request</p>
+    </div>
+  );
 }
 
-export default SaveVideoAction;
+export default SaveVideo;

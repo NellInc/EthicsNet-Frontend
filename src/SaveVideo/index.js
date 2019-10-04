@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputMask from 'react-input-mask';
+
+import { VideoInfoContext } from '../Store';
 
 import { useStyles } from './style';
 import { apiURL } from '../globals';
@@ -16,12 +17,14 @@ function SaveVideo(props) {
   const [loading, setLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
   const [values, setValues] = React.useState({
-    title: '',
-    description: '',
-    start: '',
-    end: '',
-    category: '',
+    title: 'r',
+    description: 'uu',
+    start: '00:05',
+    end: '01:00',
+    category: 'morally preferable',
   });
+
+  const [videoInfo, setVideoInfo] = useContext(VideoInfoContext);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -31,7 +34,7 @@ function SaveVideo(props) {
     try {
       const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api/user`, {
+      const response = await fetch(`${apiURL}/api2/user`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
@@ -67,52 +70,66 @@ function SaveVideo(props) {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    console.log('state has changed!');
+    console.log('====================================');
+    console.log(videoInfo);
+    console.log('====================================');
+  }, [videoInfo]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setVideoInfo({ ...values, videoUrl });
+
+    props.history.push('/save-video-action')
+  }
+
   if (loading) {
     return <Loader />;
   }
 
-  async function handleSubmit(e) {
-    setLoading(true);
-    e.preventDefault();
-    const { title, description, category, start, end } = values;
-    const { token, userId } = localStorage;
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   const { title, description, category, start, end } = values;
+  //   const { token, userId } = localStorage;
 
-    const data = {
-      category,
-      title,
-      description,
-      videoUrl,
-      videoStart: start,
-      videoEnd: end,
-      authorId: userId,
-    };
+  //   const data = {
+  //     category,
+  //     title,
+  //     description,
+  //     videoUrl,
+  //     videoStart: start,
+  //     videoEnd: end,
+  //     authorId: userId,
+  //   };
 
-    try {
-      const response = await fetch(`${apiURL}/api/video`, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        redirect: 'follow',
-        referrer: 'no-referrer',
-        body: JSON.stringify(data),
-      });
+  //   try {
+  //     const response = await fetch(`${apiURL}/api/video`, {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       cache: 'no-cache',
+  //       credentials: 'same-origin',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       redirect: 'follow',
+  //       referrer: 'no-referrer',
+  //       body: JSON.stringify(data),
+  //     });
 
-      const json = await response.json();
+  //     const json = await response.json();
 
-      // TODO: Add notification with the response
-      console.log(json);
-      
+  //     // TODO: Add notification with the response
+  //     console.log(json);
 
-      props.history.push('/user/videos');
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //     props.history.push('/user/videos');
+
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   return (
     <div className={classes.root}>
@@ -128,7 +145,11 @@ function SaveVideo(props) {
         allowFullScreen
       ></iframe>
 
-      <form className={classes.container} noValidate autoComplete='off'>
+      <form
+        className={classes.container}
+        onSubmit={handleSubmit}
+        autoComplete='off'
+      >
         <TextField
           id='standard-name'
           label='Video title'
@@ -136,22 +157,27 @@ function SaveVideo(props) {
           value={values.title}
           onChange={handleChange('title')}
           margin='normal'
+          required
         />
 
         <TextField
-          id="time"
-          label="Video start"
-          type="time"
-          defaultValue="00:00"
+          id='time'
+          label='Video start'
+          type='time'
+          value={values.start}
+          onChange={handleChange('start')}
           className={classes.time}
+          required
         />
 
         <TextField
-          id="time"
-          label="Video end"
-          type="time"
-          defaultValue="00:10"
+          id='time'
+          label='Video end'
+          type='time'
+          value={values.end}
+          onChange={handleChange('end')}
           className={classes.time}
+          required
         />
 
         <TextField
@@ -163,6 +189,7 @@ function SaveVideo(props) {
           className={classes.textField}
           onChange={handleChange('description')}
           margin='normal'
+          required
         />
 
         <FormControl className={classes.textField}>
@@ -192,7 +219,7 @@ function SaveVideo(props) {
         </FormControl>
 
         <Button
-          onClick={handleSubmit}
+          type='submit'
           color='primary'
           variant='outlined'
           className={classes.button}

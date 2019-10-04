@@ -18,7 +18,7 @@ function Video({ el, youtube_parser }) {
     <div key={_id}>
       <iframe
         title={_id}
-        src={'https://www.youtube.com/embed/' + youtube_parser(videoUrl)}
+        src={'https://www.youtube.com/embed/' + youtube_parser(videoUrl) + '?start=11&end=1&autoplay=1'}
         width='100%'
         height='500px'
         frameBorder='0'
