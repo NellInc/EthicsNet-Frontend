@@ -53,6 +53,12 @@ function SaveVideo(props) {
     console.log('====================================');
   }, [videoInfo]);
 
+  function handleSelectPersonClick() {
+    setTimeout(() => {
+      props.history.push('/select-person-action')
+    }, 500);
+  }
+
   // async function handleSubmit(e) {
   //   e.preventDefault();
   //   setLoading(true);
@@ -129,7 +135,7 @@ function SaveVideo(props) {
         </div>
 
         {/* when the user clicks this button I want to send a message to the chrome extension */}
-        <Button data-extension-person color='primary' variant='outlined'>
+        <Button onClick={handleSelectPersonClick} data-extension-person color='primary' variant='outlined'>
           Select person
         </Button>
       </div>

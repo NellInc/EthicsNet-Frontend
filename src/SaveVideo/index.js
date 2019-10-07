@@ -17,8 +17,8 @@ function SaveVideo(props) {
   const [loading, setLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
   const [values, setValues] = React.useState({
-    title: 'r',
-    description: 'uu',
+    title: '',
+    description: '',
     start: '00:05',
     end: '01:00',
     category: 'morally preferable',
@@ -81,7 +81,7 @@ function SaveVideo(props) {
     e.preventDefault();
     setVideoInfo({ ...values, videoUrl });
 
-    props.history.push('/save-video-action')
+    props.history.push('/save-video-action');
   }
 
   if (loading) {
@@ -144,6 +144,13 @@ function SaveVideo(props) {
         height='500px'
         allowFullScreen
       ></iframe>
+      {/* <video
+        tabIndex='-1'
+        className='video-stream html5-main-video'
+        controlsList='nodownload'
+        style={{ width: '826px', height: '465px', left: '0px', top: '0px' }}
+        src='blob:https://www.youtube.com/21c81753-6f95-47f5-8440-e160b237e9fa'
+      ></video> */}
 
       <form
         className={classes.container}
