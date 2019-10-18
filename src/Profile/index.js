@@ -232,7 +232,7 @@ function Profile() {
 
           </div>
 
-          <Info values={values} handleChange={handleChange}/>
+          {/* <Info values={values} handleChange={handleChange}/> */}
 
           <div className={classes.buttonsWrapper}>
             <Button
