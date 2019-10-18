@@ -28,6 +28,7 @@ import SaveVideoAction from '../SaveVideoAction';
 import SelectPerson from '../SaveVideoAction/SelectPerson';
 import PrivacyPolicy from '../PrivacyPolicy';
 import TermsAndConditions from '../TermsAndConditions';
+import EULA from '../EULA';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -116,6 +117,14 @@ function Main(props) {
               path='/terms-and-conditions'
               // restricted={true}
               component={TermsAndConditions}
+            />
+
+            <PublicRoute
+              title='EthicsNet - How to use'
+              exact
+              path='/eula'
+              // restricted={true}
+              component={EULA}
             />
 
             <Route exact path='/logged-out' component={LoggedOut} />
