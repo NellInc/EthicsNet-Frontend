@@ -10,7 +10,7 @@ export default function TermsAndConditions() {
         height="100%"
         title="privacy"
         src='https://www.termsfeed.com/terms-conditions/729e707a3a2a572778819a2b17eeec2b'
-        frameborder='0'
+        frameBorder='0'
       ></iframe>
     </div>
   );

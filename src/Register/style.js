@@ -8,5 +8,10 @@ export const useStyles = makeStyles(theme => ({
   },
   submit: {
     marginTop: '20px',
+  },
+  headline: {
+    marginTop: 20,
+    padding: 20,
+    border: '1px solid #ddd'
   }
 }));

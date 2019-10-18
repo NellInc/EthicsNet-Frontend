@@ -3,7 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../App.css';
 
-import { Notification } from '../Store'
+import TermsAndConditions from '../TermsAndConditions';
+import PrivacyPolicy from '../PrivacyPolicy';
+import { Notification } from '../Store';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { useStyles } from './style';
@@ -12,7 +14,8 @@ function App() {
   const classes = useStyles();
   const notification = useContext(Notification);
   const [loading, setLoading] = useState(false);
-  
+  const [showTerms, setShowTerms] = useState(0);
+
   const [values, setValues] = React.useState({
     firstName: '',
     lastName: '',
@@ -28,7 +31,7 @@ function App() {
   const handleSubmit = async e => {
     setLoading(true);
     const data = values;
-    e.preventDefault();    
+    e.preventDefault();
     try {
       const response = await fetch(`${apiURL}/auth/register`, {
         method: 'POST',
@@ -45,6 +48,10 @@ function App() {
 
       const json = await response.json();
 
+      console.log('====================================');
+      console.log('json response -> ', json);
+      console.log('====================================');
+
       if (response.status === 400) {
         notification(json.error, 'registration failed', 'danger');
       } else if (response.status === 200) {
@@ -56,12 +63,24 @@ function App() {
         localStorage.setItem('token', token);
         window.location.reload();
       } else {
-        notification('there was an error', 'we could not register you', 'danger');
+        notification(
+          'there was an error',
+          'we could not register you',
+          'danger'
+        );
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  function next() {
+    setShowTerms(showTerms + 1);
+  }
+
+  function previous() {
+    setShowTerms(showTerms - 1);
+  }
 
   if (loading) {
     return <Loader />;
@@ -69,7 +88,7 @@ function App() {
 
   return (
     <div className={classes.container}>
-      <header className="App-header">
+      <header className='App-header'>
         <p>EthicsNet - Sign up</p>
       </header>
 
@@ -80,21 +99,21 @@ function App() {
           <TextField
             required
             className={classes.textField}
-            id="first-name"
-            label="First Name"
+            id='first-name'
+            label='First Name'
             value={values.firstName}
             onChange={handleChange('firstName')}
-            margin="normal"
+            margin='normal'
           />
 
           <TextField
             required
             className={classes.textField}
-            id="last-name"
-            label="Last Name"
+            id='last-name'
+            label='Last Name'
             value={values.lastName}
             onChange={handleChange('lastName')}
-            margin="normal"
+            margin='normal'
           />
         </div>
 
@@ -102,33 +121,100 @@ function App() {
           <TextField
             required
             className={classes.textField}
-            id="email"
-            type="email"
-            label="Email"
+            id='email'
+            type='email'
+            label='Email'
             value={values.email}
             onChange={handleChange('email')}
-            margin="normal"
+            margin='normal'
           />
           <TextField
             required
             className={classes.textField}
-            id="password"
-            type="password"
-            label="Password"
+            id='password'
+            type='password'
+            label='Password'
             value={values.password}
             onChange={handleChange('password')}
-            margin="normal"
+            margin='normal'
           />
         </div>
 
-        <Button
-          className={classes.submit}
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
-          Sign up
-        </Button>
+        {!showTerms && (
+          <Button
+            className={classes.submit}
+            type='button'
+            onClick={next}
+            variant='contained'
+            color='primary'
+          >
+            Next
+          </Button>
+        )}
+
+        {showTerms > 0 && (
+          <div className={classes.headline}>
+            To create an EthicsNet Account, you’ll need to agree to the{' '}
+            <a
+              href='https://www.termsfeed.com/terms-conditions/729e707a3a2a572778819a2b17eeec2b'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Terms of Service
+            </a>{' '}
+            below. In addition, when you create an account, we process your
+            information as described in our{' '}
+            <a
+              href='https://www.termsfeed.com/privacy-policy/9966271a11492eb0ef2fd7776baaa38c'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Privacy Policy
+            </a>
+            .
+          </div>
+        )}
+
+        {showTerms === 1 && (
+          <div>
+            <TermsAndConditions />
+            <Button
+              className={classes.submit}
+              type='button'
+              onClick={next}
+              variant='contained'
+              color='primary'
+            >
+              Next
+            </Button>
+          </div>
+        )}
+
+        {showTerms === 2 && (
+          <div>
+            <PrivacyPolicy />
+
+            <Button
+              className={classes.submit}
+              style={{ marginRight: 10 }}
+              type='button'
+              onClick={previous}
+              variant='contained'
+              color='primary'
+            >
+              Previous
+            </Button>
+
+            <Button
+              className={classes.submit}
+              type='submit'
+              variant='contained'
+              color='primary'
+            >
+              I agree
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
         height="100%"
         title="privacy"
         src='https://www.termsfeed.com/privacy-policy/9966271a11492eb0ef2fd7776baaa38c'
-        frameborder='0'
+        frameBorder='0'
       ></iframe>
     </div>
   );
