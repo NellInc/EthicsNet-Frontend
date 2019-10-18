@@ -25,6 +25,8 @@ import Videos from '../Videos';
 import SaveVideo from '../SaveVideo';
 import HowToUse from '../HowToUse';
 import SaveVideoAction from '../SaveVideoAction';
+import SelectPerson from '../SaveVideoAction/SelectPerson';
+import PrivacyPolicy from '../PrivacyPolicy';
 
 import { PrivateRoute, PublicRoute } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -98,6 +100,15 @@ function Main(props) {
               component={HowToUse}
             />
 
+
+            <PublicRoute
+              title='EthicsNet - How to use'
+              exact
+              path='/privacy-policy'
+              // restricted={true}
+              component={PrivacyPolicy}
+            />
+
             <Route exact path='/logged-out' component={LoggedOut} />
 
             <PrivateRoute
@@ -135,6 +146,13 @@ function Main(props) {
               exact
               path='/profile/anotations/screenshots'
               component={Screenshot2}
+            />
+
+            <PrivateRoute
+              title='EthicsNet - Select person'
+              exact
+              path='/select-person-action'
+              component={SelectPerson}
             />
 
             <PrivateRoute

@@ -55,8 +55,11 @@ function SaveVideo(props) {
 
   function handleSelectPersonClick() {
     setTimeout(() => {
+      console.log('====================================');
+      console.log('handle person click!');
+      console.log('====================================');
       props.history.push('/select-person-action')
-    }, 500);
+    }, 3000);
   }
 
   // async function handleSubmit(e) {

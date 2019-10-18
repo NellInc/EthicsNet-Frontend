@@ -17,8 +17,8 @@ function SaveVideo(props) {
   const [loading, setLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
   const [values, setValues] = React.useState({
-    title: '',
-    description: '',
+    title: 'ooo',
+    description: 'mmmm',
     start: '00:05',
     end: '01:00',
     category: 'morally preferable',
@@ -77,59 +77,62 @@ function SaveVideo(props) {
     console.log('====================================');
   }, [videoInfo]);
 
-  function handleSubmit(e) {
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+    
+
+    
+  // }
+
+  async function handleSubmit(e) {
     e.preventDefault();
     setVideoInfo({ ...values, videoUrl });
+    setLoading(true);
+    const { title, description, category, start, end } = values;
+    const { token, userId } = localStorage;
 
-    props.history.push('/save-video-action');
+    const data = {
+      category,
+      title,
+      description,
+      videoUrl,
+      videoStart: start,
+      videoEnd: end,
+      authorId: userId,
+    };
+
+    try {
+      const response = await fetch(`${apiURL}/api/video`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        body: JSON.stringify(data),
+      });
+
+      const json = await response.json();
+
+      // TODO: Add notification with the response
+      console.log(json);
+
+      // props.history.push('/user/videos');
+      props.history.push('/save-video-action');
+
+    } catch (error) {
+      console.error(error);
+    }
   }
+
 
   if (loading) {
     return <Loader />;
   }
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   const { title, description, category, start, end } = values;
-  //   const { token, userId } = localStorage;
-
-  //   const data = {
-  //     category,
-  //     title,
-  //     description,
-  //     videoUrl,
-  //     videoStart: start,
-  //     videoEnd: end,
-  //     authorId: userId,
-  //   };
-
-  //   try {
-  //     const response = await fetch(`${apiURL}/api/video`, {
-  //       method: 'POST',
-  //       mode: 'cors',
-  //       cache: 'no-cache',
-  //       credentials: 'same-origin',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       redirect: 'follow',
-  //       referrer: 'no-referrer',
-  //       body: JSON.stringify(data),
-  //     });
-
-  //     const json = await response.json();
-
-  //     // TODO: Add notification with the response
-  //     console.log(json);
-
-  //     props.history.push('/user/videos');
-
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   return (
     <div className={classes.root}>
