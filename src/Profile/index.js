@@ -42,6 +42,10 @@ function Profile() {
     async function getUserData() {
       const token = localStorage.getItem('token');
 
+      console.log('====================================');
+    console.log('api url -> ', apiURL);
+    console.log('====================================');
+
       const response = await fetch(`${apiURL}/api/user`, {
         method: 'GET',
         mode: 'cors',
