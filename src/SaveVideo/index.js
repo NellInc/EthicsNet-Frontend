@@ -17,8 +17,8 @@ function SaveVideo(props) {
   const [loading, setLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
   const [values, setValues] = React.useState({
-    title: 'ooo',
-    description: 'mmmm',
+    title: '',
+    description: '',
     start: '00:05',
     end: '01:00',
     category: 'morally preferable',
@@ -121,8 +121,8 @@ function SaveVideo(props) {
       // TODO: Add notification with the response
       console.log(json);
 
-      // props.history.push('/user/videos');
-      props.history.push('/save-video-action');
+      props.history.push('/user/videos'); // just for deployment
+      // props.history.push('/save-video-action');
 
     } catch (error) {
       console.error(error);
