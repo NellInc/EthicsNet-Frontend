@@ -119,10 +119,21 @@ function SaveVideo(props) {
       const json = await response.json();
 
       // TODO: Add notification with the response
-      console.log(json);
+      // console.log(json);
+      console.log('====================================');
+      console.log('Video saved -> ', json.videoCreated._id);
+      const { _id } = json.videoCreated
 
-      props.history.push('/user/videos'); // just for deployment
-      // props.history.push('/save-video-action');
+      localStorage.selectVideoId = _id;
+
+      // console.log('====================================');
+      // console.log('Video id -> ', _id);
+      // console.log('====================================');
+      // console.log('====================================');
+      // setVideoInfo({ ...values, videoUrl, _id });
+
+      // props.history.push('/user/videos'); // just for deployment
+      props.history.push('/save-video-action');
 
     } catch (error) {
       console.error(error);

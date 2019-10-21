@@ -116,6 +116,36 @@ class Screenshot extends PureComponent {
     return base64Image;
   }
 
+  updateVideoPerson = async () => {
+    const { token, selectVideoId } = localStorage;
+
+    const response = await fetch(
+      `${apiURL}/api2/video/update/${selectVideoId}`,
+      {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          selectedPerson: this.state.croppedImageUrl,
+        }),
+      }
+    );
+
+    const json = await response.json();
+
+    console.log(json.video.selectedPerson);
+
+    setTimeout(() => {
+      this.props.history.push('/user/videos');
+    }, 1000);
+
+    // console.log(apiURL + '/api2/video/update/' + localStorage.selectVideoId);
+  };
+
   saveCroppedScreenshot = () => {
     // localStorage.img = this.state.croppedImageUrl;
     // localStorage.imageFont = this.state.imageFont;
@@ -123,9 +153,14 @@ class Screenshot extends PureComponent {
 
     // make a post request to add the image to the video
 
+    // const { _id, userId } = localStorage;
+
     console.log('====================================');
     console.log('save select person!');
+    console.log(this.state.croppedImageUrl);
     console.log('====================================');
+
+    this.updateVideoPerson();
   };
 
   renderSelectionAddon = () => (

@@ -32,6 +32,10 @@ function Videos(props) {
 
       setVideos(data.videos);
       setCount(data.count);
+
+      console.log('====================================');
+      console.log(data.videos);
+      console.log('====================================');
       setLoading(false);
     }
 

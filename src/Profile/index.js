@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { apiURL } from '../globals';
 import { useStyles } from './style';
-import Info from './Info';
+// import Info from './Info';
 
 function Profile() {
   const classes = useStyles();
@@ -43,8 +43,8 @@ function Profile() {
       const token = localStorage.getItem('token');
 
       console.log('====================================');
-    console.log('api url -> ', apiURL);
-    console.log('====================================');
+      console.log('api url -> ', apiURL);
+      console.log('====================================');
 
       const response = await fetch(`${apiURL}/api/user`, {
         method: 'GET',
@@ -60,7 +60,6 @@ function Profile() {
       const data = await response.json();
 
       if (response.status === 200) {
-
         setUserData(data.user);
 
         const {
@@ -77,8 +76,8 @@ function Profile() {
           education,
           social,
           earnings,
-          ethnicity
-        } = data.user
+          ethnicity,
+        } = data.user;
 
         setValues({
           ...values,
@@ -96,7 +95,7 @@ function Profile() {
           social,
           earnings,
           ethnicity,
-        }); 
+        });
       } else if (response.status === 404) {
         // props.history.push('/logged-out')
         // alert('your user doesnt exist')
@@ -129,8 +128,8 @@ function Profile() {
       education,
       social,
       earnings,
-      ethnicity
-    } = values
+      ethnicity,
+    } = values;
 
     const data = {
       firstName: name,
@@ -146,7 +145,7 @@ function Profile() {
       education,
       social,
       earnings,
-      ethnicity
+      ethnicity,
     };
 
     const { token, userId } = localStorage;
@@ -165,9 +164,35 @@ function Profile() {
     console.log('====================================');
     console.log(response);
     console.log('====================================');
-    
+
     setLoading(true);
   };
+
+  async function handleDeleteAccount() {
+    // deletes an user account
+    // change from confirm to a better looking UI
+
+    if (window.confirm('are you sure you want to delete your account?')) {
+      const { token, userId } = localStorage;
+
+      const response = await fetch(`${apiURL}/api2/user/${userId}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      console.log(response);
+
+      console.log(data);
+    }
+  }
 
   if (loading) {
     return (
@@ -185,66 +210,69 @@ function Profile() {
         <form onSubmit={handleSubmit}>
           <div>
             <TextField
-              id="standard-name"
-              label="First name"
+              id='first-name'
+              label='First name'
               className={classes.textField}
               value={values.name}
               onChange={handleChange('name')}
-              margin="normal"
+              margin='normal'
               required
             />
 
             <TextField
-              id="standard-name"
-              label="Last name"
+              id='last-name'
+              label='Last name'
               className={classes.textField}
               value={values.last}
               onChange={handleChange('last')}
-              margin="normal"
+              margin='normal'
               required
             />
-
           </div>
 
           <div>
             <TextField
               style={{ marginBottom: '20px' }}
-              id="standard-name"
-              label="Email"
+              id='email'
+              label='Email'
               className={classes.textField}
               value={values.email}
               onChange={handleChange('email')}
-              margin="normal"
-              type="email"
+              margin='normal'
+              type='email'
               required
             />
 
             <TextField
-              id="age"
-              label="Age"
-              type="number"
+              id='age'
+              label='Age'
+              type='number'
               className={classes.textField}
               value={values.age}
               onChange={handleChange('age')}
-              margin="normal"
+              margin='normal'
               required
             />
-
           </div>
 
           {/* <Info values={values} handleChange={handleChange}/> */}
 
           <div className={classes.buttonsWrapper}>
             <Button
-              color="primary"
-              variant="outlined"
+              color='primary'
+              variant='outlined'
               style={{ marginRight: '10px' }}
-              type="submit"
+              type='submit'
             >
               Save
             </Button>
 
-            <Button color="secondary" type="button" variant="outlined">
+            <Button
+              onClick={handleDeleteAccount}
+              color='secondary'
+              type='button'
+              variant='outlined'
+            >
               Delete account
             </Button>
           </div>

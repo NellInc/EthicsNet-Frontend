@@ -12,13 +12,18 @@ function Video({ el, youtube_parser }) {
     videoStart,
     videoEnd,
     description,
+    selectedPerson,
   } = el;
 
   return (
     <div key={_id}>
       <iframe
         title={_id}
-        src={'https://www.youtube.com/embed/' + youtube_parser(videoUrl) + '?start=11&end=1&autoplay=1'}
+        src={
+          'https://www.youtube.com/embed/' +
+          youtube_parser(videoUrl) +
+          '?start=11&end=1&autoplay=1'
+        }
         width='100%'
         height='500px'
         frameBorder='0'
@@ -29,6 +34,10 @@ function Video({ el, youtube_parser }) {
       <p>
         <span className={classes.category}>{category}</span>
       </p>
+
+      <p>Person doing the action: </p>
+      <img src={selectedPerson} alt='' srcSet='' />
+
       <p>
         Url:{' '}
         <a href={videoUrl} target='_blank' rel='noopener noreferrer'>

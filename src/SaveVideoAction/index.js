@@ -1,22 +1,20 @@
+// This component is a placeholder for the chrome extension to
+// take a screenshot of the youtube video
+
 import React, { useState, useEffect, useContext } from 'react';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 
 import { VideoInfoContext } from '../Store';
 
 import { useStyles } from './style';
-import { apiURL } from '../globals';
+// import { apiURL } from '../globals';
 import { Loader } from '../components';
 
-function SaveVideo(props) {
+function SaveVideoAction(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
-  const [videoInfo, setVideoInfo] = useContext(VideoInfoContext);
+  const [videoInfo] = useContext(VideoInfoContext);
   const [timedVideo, setTimeVideo] = useState('');
 
   useEffect(() => {
@@ -54,6 +52,7 @@ function SaveVideo(props) {
   }, [videoInfo]);
 
   function handleSelectPersonClick() {
+    setLoading(true)
     setTimeout(() => {
       console.log('====================================');
       console.log('handle person click!');
@@ -152,4 +151,4 @@ function SaveVideo(props) {
   );
 }
 
-export default SaveVideo;
+export default SaveVideoAction;
