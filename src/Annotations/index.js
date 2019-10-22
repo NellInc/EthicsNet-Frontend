@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import DeleteDialog from '../DeleteDialog';
-import Pagination from '../Components/Pagination'
+import Pagination from '../Components/Pagination';
 import { apiURL } from '../globals';
 import { useStyles } from './style';
 
@@ -118,7 +118,6 @@ function Anotations(props) {
     <div>
       <h3 className={classes.title}>Annotations</h3>
       <div>{anotationsComponent}</div>
-
 
       <Pagination
         setPage={setPage}
