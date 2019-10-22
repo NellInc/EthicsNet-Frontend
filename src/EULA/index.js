@@ -20,6 +20,7 @@ export default function EULA(props) {
         type='button'
         color='primary'
         variant='outlined'
+        // 
         onClick={() => props.history.push('/')}
       >
         Accept
