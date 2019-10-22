@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 
 import Title from './Title';
 import { useStyles } from './style';
@@ -13,6 +14,10 @@ function HowToUse(props) {
     'https://chrome.google.com/webstore/detail/djamiamgnjcpjhkknjddilkaibbhmhgc/';
 
   const extensionLink = 'http://extension.lupuselit.me/#/register';
+
+  function redirectHome() {
+    props.history.push('/');
+  }
 
   return (
     <Fragment>
@@ -84,6 +89,10 @@ function HowToUse(props) {
         title='Next steps'
         subtitle='Now you know how to use the EthicsNet extension'
       />
+
+      <Button variant='outlined' color='primary' onClick={redirectHome}>
+        Home
+      </Button>
     </Fragment>
   );
 }

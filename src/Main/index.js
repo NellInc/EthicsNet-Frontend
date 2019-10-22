@@ -30,7 +30,7 @@ import PrivacyPolicy from '../PrivacyPolicy';
 import TermsAndConditions from '../TermsAndConditions';
 import EULA from '../EULA';
 
-import { PrivateRoute, PublicRoute } from '../RoutesTypes';
+import { PrivateRoute, PublicRoute, PublicRouteRedirectHowtoUse } from '../RoutesTypes';
 import { Loading } from '../Store';
 import { useStyles } from './style';
 
@@ -75,7 +75,7 @@ function Main(props) {
           <Switch>
             <PrivateRoute exact path='/' component={Home} />
 
-            <PublicRoute
+            <PublicRouteRedirectHowtoUse
               exact
               path='/register'
               restricted={true}

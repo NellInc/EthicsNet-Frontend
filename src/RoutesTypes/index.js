@@ -27,6 +27,32 @@ export const PublicRoute = ({ title, component: Component, restricted, ...rest }
   );
 };
 
+export const PublicRouteRedirectHowtoUse = ({ title, component: Component, restricted, ...rest }) => {
+
+  console.log('**********');
+  console.log(title);
+  console.log(document.title);
+  console.log('**********');
+  if (title) {
+    document.title = title;
+  }
+
+  return (
+    // restricted = false meaning public route
+    // restricted = true meaning restricted route
+    <Route
+      {...rest}
+      render={props =>
+        localStorage.isLogged === 'true' && restricted ? (
+          <Redirect to='/how-to-use' />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
+};
+
 export const PrivateRoute = ({ title, component: Component, ...rest }) => {
   console.log('**********');
   console.log(title);
