@@ -49,6 +49,7 @@ function Login() {
         localStorage.setItem('userId', user._id);
         localStorage.setItem('userName', user.firstName);
         localStorage.setItem('isLogged', 'true');
+        localStorage.setItem('lastclear', new Date().getTime());
         localStorage.setItem('token', token);
         window.location.reload();
       } else {

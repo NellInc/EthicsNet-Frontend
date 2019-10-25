@@ -30,7 +30,11 @@ import PrivacyPolicy from '../PrivacyPolicy';
 import TermsAndConditions from '../TermsAndConditions';
 import EULA from '../EULA';
 
-import { PrivateRoute, PublicRoute, PublicRouteRedirectHowtoUse } from '../RoutesTypes';
+import {
+  PrivateRoute,
+  PublicRoute,
+  PublicRouteRedirectHowtoUse,
+} from '../RoutesTypes';
 import { Loading } from '../Store';
 import { useStyles } from './style';
 
@@ -42,7 +46,8 @@ function Main(props) {
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
     // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 * 30 = 30 days
-    if (localStorage.isLogged) {
+
+    if (localStorage.isLogged && lastclear) {
       if (time_now - lastclear > 1000 * 60 * 60 * 24 * 30) {
         // if (time_now - lastclear > 1000 * 60) {
         // if ((time_now - lastclear) > (1000 * 60)) {
@@ -101,7 +106,6 @@ function Main(props) {
               // restricted={true}
               component={HowToUse}
             />
-
 
             <PublicRoute
               title='EthicsNet - How to use'
