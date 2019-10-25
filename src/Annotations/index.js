@@ -114,6 +114,27 @@ function Anotations(props) {
     );
   }
 
+  console.log('====================================');
+  console.log(!anotations.length);
+  console.log('====================================');
+
+  if (!anotations.length) {
+    return (
+      <div>
+        <div style={{ textAlign: 'center' }}>
+          you haven't annotated any text yet...
+        </div>
+        <Button
+          color='secondary'
+          variant='outlined'
+          onClick={() => handleAnotationClick(props.history.push('/how-to-use'))}
+        >
+          How to use
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h3 className={classes.title}>Annotations</h3>
