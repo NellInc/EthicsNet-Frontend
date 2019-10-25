@@ -79,9 +79,7 @@ function SaveVideo(props) {
 
   // function handleSubmit(e) {
   //   e.preventDefault();
-    
 
-    
   // }
 
   async function handleSubmit(e) {
@@ -122,7 +120,7 @@ function SaveVideo(props) {
       // console.log(json);
       console.log('====================================');
       console.log('Video saved -> ', json.videoCreated._id);
-      const { _id } = json.videoCreated
+      const { _id } = json.videoCreated;
 
       localStorage.selectVideoId = _id;
 
@@ -134,12 +132,10 @@ function SaveVideo(props) {
 
       // props.history.push('/user/videos'); // just for deployment
       props.history.push('/save-video-action');
-
     } catch (error) {
       console.error(error);
     }
   }
-
 
   if (loading) {
     return <Loader />;
@@ -235,6 +231,9 @@ function SaveVideo(props) {
             </MenuItem>
             <MenuItem value='aesthetically unpreferable'>
               Aesthetically unpreferable
+            </MenuItem>
+            <MenuItem value='not unethical, but strange'>
+              Not unethical, but strange
             </MenuItem>
           </Select>
         </FormControl>

@@ -37,6 +37,7 @@ function NewAnotation(props) {
       1: 'morally unpreferable',
       2: 'aesthetically preferable',
       3: 'aesthetically unpreferable',
+      4: 'not unethical, but strange',
     };
 
     const data = {
@@ -65,7 +66,7 @@ function NewAnotation(props) {
 
         // TODO: add a notification from notification
         console.log(json);
-        
+
         notification('annotation created!');
         props.history.push('/profile/annotations');
       } else {
@@ -115,6 +116,7 @@ function NewAnotation(props) {
             <MenuItem value={1}>Morally unpreferable</MenuItem>
             <MenuItem value={2}>Aesthetically preferable</MenuItem>
             <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
+            <MenuItem value={4}>Not unethical, but strange</MenuItem>
           </Select>
         </FormControl>
 

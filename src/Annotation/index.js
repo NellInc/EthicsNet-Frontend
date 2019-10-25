@@ -50,6 +50,7 @@ function Anotation(props) {
         'morally unpreferable': 1,
         'aesthetically preferable': 2,
         'aesthetically unpreferable': 3,
+        'not unethical, but strange': 4
       };
 
       setCategory(selectedCategory[data.anotation.category]);
@@ -72,6 +73,7 @@ function Anotation(props) {
       1: 'morally unpreferable',
       2: 'aesthetically preferable',
       3: 'aesthetically unpreferable',
+      4: 'not unethical, but strange',
     };
 
     const response = await fetch(`${apiURL}/api2/text/${id}`, {
@@ -136,6 +138,7 @@ function Anotation(props) {
           <MenuItem value={1}>Morally unpreferable</MenuItem>
           <MenuItem value={2}>Aesthetically preferable</MenuItem>
           <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
+          <MenuItem value={4}>Not unethical, but strange</MenuItem>
         </Select>
       </FormControl>
 

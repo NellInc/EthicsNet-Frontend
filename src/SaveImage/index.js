@@ -63,12 +63,10 @@ function SaveImage(props) {
         body: JSON.stringify(data),
       });
 
-
       const json = await response.json();
 
       // TODO: add a notification with the response
       console.log(json);
-      
 
       props.history.push('/user/images');
     } catch (error) {
@@ -134,6 +132,9 @@ function SaveImage(props) {
             </MenuItem>
             <MenuItem value='aesthetically unpreferable'>
               Aesthetically unpreferable
+            </MenuItem>
+            <MenuItem value='not unethical, but strange'>
+              Not unethical, but strange
             </MenuItem>
           </Select>
         </FormControl>

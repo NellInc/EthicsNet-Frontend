@@ -44,7 +44,7 @@ function Main(props) {
 
   useEffect(() => {
     console.log('\n\n****************');
-    console.log('VERSION: 0.0.27');
+    console.log('VERSION: 0.0.28');
     console.log('****************\n\n');
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
