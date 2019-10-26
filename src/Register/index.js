@@ -22,6 +22,7 @@ function App() {
     email: '',
     password: '',
     age: '',
+    gender: ''
   });
 
   const handleChange = name => event => {
@@ -29,9 +30,9 @@ function App() {
   };
 
   const handleSubmit = async e => {
+    e.preventDefault();
     setLoading(true);
     const data = values;
-    e.preventDefault();
     try {
       const response = await fetch(`${apiURL}/auth/register`, {
         method: 'POST',
@@ -72,6 +73,11 @@ function App() {
       }
     } catch (error) {
       console.error(error);
+      notification(
+        'there was an error',
+        'we could not register you',
+        'danger'
+      );
     }
   };
 
@@ -137,6 +143,19 @@ function App() {
             label='Password'
             value={values.password}
             onChange={handleChange('password')}
+            margin='normal'
+          />
+        </div>
+
+        <div>
+          <TextField
+            // required
+            className={classes.textField}
+            id='gender'
+            type='text'
+            label='Gender'
+            value={values.gender}
+            onChange={handleChange('gender')}
             margin='normal'
           />
         </div>

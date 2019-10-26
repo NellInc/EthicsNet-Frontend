@@ -44,8 +44,8 @@ function Main(props) {
 
   useEffect(() => {
     console.log('\n\n****************');
-    console.log('VERSION: 0.0.28');
-    console.log('****************\n\n');
+    console.log('ALPHA: 0.0.28');
+    console.log('****************\n\n\n');
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
     // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 * 30 = 30 days

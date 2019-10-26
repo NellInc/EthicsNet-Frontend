@@ -24,6 +24,7 @@ function Profile() {
     age: '',
     political: '',
     religious: '',
+    gender: '',
     sexualOrientation: '',
     language: '',
     education: '',
@@ -71,6 +72,7 @@ function Profile() {
           age,
           political,
           religious,
+          gender,
           sexualOrientation,
           language,
           education,
@@ -89,6 +91,7 @@ function Profile() {
           age,
           political,
           religious,
+          gender,
           sexualOrientation,
           language,
           education,
@@ -123,6 +126,7 @@ function Profile() {
       age,
       political,
       religious,
+      gender,
       sexualOrientation,
       language,
       education,
@@ -140,6 +144,7 @@ function Profile() {
       age,
       political,
       religious,
+      gender,
       sexualOrientation,
       language,
       education,
@@ -252,6 +257,19 @@ function Profile() {
               onChange={handleChange('age')}
               margin='normal'
               required
+            />
+          </div>
+
+          <div>
+            <TextField
+              // required
+              className={classes.textField}
+              id='gender'
+              type='text'
+              label='Gender'
+              value={values.gender}
+              onChange={handleChange('gender')}
+              margin='normal'
             />
           </div>
 
