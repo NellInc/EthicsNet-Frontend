@@ -112,6 +112,9 @@ function NewAnotation(props) {
           >
             <MenuItem selected value={0}>
               Morally preferable
+
+              {/* <img style={{ width: 20, height: 20}} src="https://avatars0.githubusercontent.com/u/24904209?s=460&v=4" alt="" srcSet=""/> */}
+
             </MenuItem>
             <MenuItem value={1}>Morally unpreferable</MenuItem>
             <MenuItem value={2}>Aesthetically preferable</MenuItem>
