@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -10,12 +10,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './style';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
+import { Notification } from '../Store';
 
 function SaveImage(props) {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
+  const notification = useContext(Notification);
 
   const [values, setValues] = useState({
     title: '',
@@ -64,6 +66,12 @@ function SaveImage(props) {
       });
 
       const json = await response.json();
+
+      if (response.status === 200) {
+        notification('Image saved');
+      } else {
+        notification('there was a problem saving the image');
+      }
 
       // TODO: add a notification with the response
       console.log(json);
