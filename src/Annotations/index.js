@@ -114,10 +114,6 @@ function Anotations(props) {
     );
   }
 
-  console.log('====================================');
-  console.log(!anotations.length);
-  console.log('====================================');
-
   if (!anotations.length) {
     return (
       <div>
@@ -127,7 +123,9 @@ function Anotations(props) {
         <Button
           color='secondary'
           variant='outlined'
-          onClick={() => handleAnotationClick(props.history.push('/how-to-use'))}
+          onClick={() =>
+            handleAnotationClick(props.history.push('/how-to-use'))
+          }
         >
           How to use
         </Button>

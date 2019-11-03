@@ -36,4 +36,7 @@ export const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttons: {
+    display: 'flex'
+  }
 }));

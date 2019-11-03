@@ -60,6 +60,7 @@ export default function AlertDialogSlide(props) {
       }
     } catch (error) {
       console.error(error);
+      notification('There was a problem deleting the annotation', '', 'danger');
     }
   };
 

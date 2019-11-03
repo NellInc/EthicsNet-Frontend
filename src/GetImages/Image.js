@@ -1,18 +1,13 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { useStyles } from './style';
 
-function Image({el, deleteImage}) {
+import { useStyles } from './style';
+import DeleteImage from './DeleteImage';
+import EditImage from './EditImage';
+
+function Image({ el, deleteImage }) {
   const classes = useStyles();
 
-  const {
-    _id,
-    title,
-    image,
-    imageFont,
-    category,
-    description,
-  } = el;
+  const { _id, title, image, imageFont, category, description } = el;
 
   return (
     <div className={classes.image}>
@@ -21,7 +16,6 @@ function Image({el, deleteImage}) {
       <div className={classes.imgWrapper}>
         <img className={classes.img} src={image} alt='' />
       </div>
-
       <hr className={classes.hr} />
       <p className={classes.font}>
         Font: <a href={imageFont}>{imageFont}</a>
@@ -30,14 +24,20 @@ function Image({el, deleteImage}) {
         <span className={classes.category}>{category}</span>
       </p>
       <p className={classes.description}>{description}</p>
-
-      <Button
-        color='secondary'
-        variant='outlined'
-        onClick={() => deleteImage(_id)}
-      >
-        Delete
-      </Button>
+      <div className={classes.buttons}>
+        <DeleteImage
+          title={title}
+          id={_id}
+          image={image}
+          deleteImage={deleteImage}
+        />
+        <EditImage
+          title={title}
+          id={_id}
+          image={image}
+          deleteImage={deleteImage}
+        />
+      </div>
     </div>
   );
 }

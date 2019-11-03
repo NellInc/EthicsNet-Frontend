@@ -2,18 +2,15 @@ import React, { useState, createContext } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 // import { purple } from '@material-ui/core/colors';
+import red from '@material-ui/core/colors/red';
 
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 
 const theme = createMuiTheme({
   palette: {
-    // primary: { main: 'rgb(255, 127, 80)' },
     primary: { main: 'rgb(49, 54, 57)' },
-    // primary: { main: purple[500] },
-    // primary: { main: '#32a' },
     secondary: { main: '#11cb5f' },
-    // secondary: { main: '#282828' },
   },
 });
 
