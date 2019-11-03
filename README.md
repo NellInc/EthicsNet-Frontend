@@ -1,4 +1,4 @@
-# Ethics Net frontend extension app
+# EthicsNet frontend app
 
 ### To get the app running
 
@@ -17,7 +17,7 @@
 
 3 - `React Router`
 
-currently using the context api & react hooks  for global state pattern
+Using the react context api & react hooks for global state pattern
 
 
 ### App structure
