@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import MomentInput from 'react-moment-input';
 
 import { VideoInfoContext } from '../Store';
 
@@ -177,10 +178,25 @@ function SaveVideo(props) {
           required
         />
 
+        
+        {/* <MomentInput
+          // max={moment().add(5,'days')}
+          // min={moment()}
+          format='HH:mm'
+          options={true}
+          readOnly={false}
+          icon={false}
+          onChange={date => {
+            console.log(date);
+          }}
+        /> */}
+
         <TextField
           id='time'
           label='Video start'
           type='time'
+          // type='text'
+          // pattern='([1]?[0-9]|2[0-3]):[0-5][0-9]'
           value={values.start}
           onChange={handleChange('start')}
           className={classes.time}
