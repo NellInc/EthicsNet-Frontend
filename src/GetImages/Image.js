@@ -4,7 +4,7 @@ import { useStyles } from './style';
 import DeleteImage from './DeleteImage';
 import EditImage from './EditImage';
 
-function Image({ el, deleteImage }) {
+function Image({ el, deleteImage, editImage }) {
   const classes = useStyles();
 
   const { _id, title, image, imageFont, category, description } = el;
@@ -35,7 +35,9 @@ function Image({ el, deleteImage }) {
           title={title}
           id={_id}
           image={image}
-          deleteImage={deleteImage}
+          editImage={editImage}
+          category={category}
+          description={description}
         />
       </div>
     </div>

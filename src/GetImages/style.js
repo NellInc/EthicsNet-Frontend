@@ -37,6 +37,13 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'center',
   },
   buttons: {
-    display: 'flex'
-  }
+    display: 'flex',
+  },
+  formControl: {
+    margin: '15px 0',
+  },
+  editImage: {
+    width: '99%',
+    alignSelf: 'center',
+  },
 }));
