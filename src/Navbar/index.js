@@ -50,7 +50,7 @@ function Navbar(props) {
               </Button>
               <Button color="inherit">
                 <Link className={classes.link} to="/profile/annotations">
-                  Annotations
+                  Text annotations
                 </Link>
               </Button>
               <Button color="inherit" onClick={handleLogout}>

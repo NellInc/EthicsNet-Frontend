@@ -47,7 +47,7 @@ function Profile() {
       console.log('api url -> ', apiURL);
       console.log('====================================');
 
-      const response = await fetch(`${apiURL}/api/user`, {
+      const response = await fetch(`${apiURL}/api2/user`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
@@ -59,6 +59,8 @@ function Profile() {
       });
 
       const data = await response.json();
+
+      console.log(data);
 
       if (response.status === 200) {
         setUserData(data.user);
@@ -99,6 +101,8 @@ function Profile() {
           earnings,
           ethnicity,
         });
+
+
       } else if (response.status === 404) {
         // props.history.push('/logged-out')
         // alert('your user doesnt exist')
