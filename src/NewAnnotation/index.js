@@ -12,6 +12,7 @@ import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { Notification } from '../Store';
 import { useStyles } from './style';
+import RangeSlider from '../Slider' ;
 
 function NewAnotation(props) {
   const classes = useStyles();
@@ -100,7 +101,7 @@ function NewAnotation(props) {
           rows='5'
         />
 
-        <FormControl className={classes.formControl}>
+        {/* <FormControl className={classes.formControl}>
           <InputLabel htmlFor='category-simple'>Category</InputLabel>
           <Select
             value={category}
@@ -113,7 +114,6 @@ function NewAnotation(props) {
             <MenuItem selected value={0}>
               Morally preferable
 
-              {/* <img style={{ width: 20, height: 20}} src="https://avatars0.githubusercontent.com/u/24904209?s=460&v=4" alt="" srcSet=""/> */}
 
             </MenuItem>
             <MenuItem value={1}>Morally unpreferable</MenuItem>
@@ -121,7 +121,9 @@ function NewAnotation(props) {
             <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
             <MenuItem value={4}>Not unethical, but strange</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
+
+        <RangeSlider />
 
         <Button
           color='primary'
