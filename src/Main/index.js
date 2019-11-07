@@ -29,6 +29,7 @@ import SelectPerson from '../SaveVideoAction/SelectPerson';
 import PrivacyPolicy from '../PrivacyPolicy';
 import TermsAndConditions from '../TermsAndConditions';
 import EULA from '../EULA';
+import About from '../About'
 
 import {
   PrivateRoute,
@@ -96,6 +97,14 @@ function Main(props) {
               path='/login'
               restricted={true}
               component={Login}
+            />
+
+            <PublicRoute
+              title='EthicsNet - About'
+              exact
+              path='/about'
+              // restricted={true}
+              component={About}
             />
 
             <PrivateRoute exact path='/profile' component={Profile} />

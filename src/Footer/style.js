@@ -7,7 +7,8 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     bottom: '1px',
     color: '#fff',
-    background: theme.palette.primary.main
+    background: theme.palette.primary.main,
+    fontSize: 13
   },
   p: {
     margin: '2px'

@@ -158,7 +158,7 @@ function Profile() {
     };
 
     const { token, userId } = localStorage;
-    const response = await fetch(`${apiURL}/api/user/${userId}`, {
+    const response = await fetch(`${apiURL}/api2/user/${userId}`, {
       method: 'PUT',
       mode: 'cors',
       cache: 'no-cache',
