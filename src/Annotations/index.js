@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import DeleteDialog from '../DeleteDialog';
 import Pagination from '../Components/Pagination';
@@ -43,6 +44,8 @@ function Anotations(props) {
 
       const data = await response.json();
 
+      console.log('annoatations -> ', data);
+
       setAnotations(data.anotations);
       setCount(data.count);
       setLoading(false);
@@ -72,8 +75,56 @@ function Anotations(props) {
         elId={el._id}
         filterAnotations={filterAnotations}
       />
-      <span className={classes.category}>{el.category}</span>
-      <p> {el.content} </p>
+
+      <p>Annotation: </p>
+
+      <p className={classes.content}>{el.content}</p>
+
+      <hr className={classes.hr} />
+
+      {/* <span className={classes.category}>{el.category}</span> */}
+
+      <p>Content/Action</p>
+
+      <div className={classes.marksWrapper}>
+        <div className={classes.marks}>
+          <span className={classes.rangeMargin}>Very dispreferable</span>
+          <span className={classes.rangeMargin}>Not ok</span>
+          <span className={classes.rangeMargin}>Neutral</span>
+          <span className={classes.rangeMargin}>Ok</span>
+          <span className={classes.rangeMargin}>Very preferable</span>
+        </div>
+      </div>
+
+      <LinearProgress
+        className={classes.bar}
+        variant='determinate'
+        color='primary'
+        value={el.categoryRangeContentAction}
+      />
+
+      {/* <hr className={classes.hr} /> */}
+
+      <p>Tone/Form</p>
+
+      <div className={classes.marksWrapper}>
+        <div className={classes.marks}>
+          <span className={classes.rangeMargin}>Very dispreferable</span>
+          <span className={classes.rangeMargin}>Not ok</span>
+          <span className={classes.rangeMargin}>Neutral</span>
+          <span className={classes.rangeMargin}>Ok</span>
+          <span className={classes.rangeMargin}>Very preferable</span>
+        </div>
+      </div>
+
+      <LinearProgress
+        className={classes.bar}
+        variant='determinate'
+        color='primary'
+        value={el.categoryRangeToneForm}
+      />
+
+      <hr className={classes.hr} />
 
       {el.font === 'none' || el.font === '' ? null : (
         <small className={classes.font}>

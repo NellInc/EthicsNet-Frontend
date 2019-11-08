@@ -37,4 +37,32 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  bar: {
+    margin: '20px auto',
+    width: '625px'
+
+  },
+  hr: {
+    backgroundColor: '#aaa',
+    margin: '0 0 20px 0',
+  },
+  rangeMargin: {
+    // marginRight: '80px',
+    flexGrow: 1,
+    flexBasis: 0,
+    textAlign: 'center',
+  },
+  marksWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  marks: {
+    display: 'flex',
+    width: '100%',
+  },
+  content: {
+    backgroundColor: '#eee',
+    padding: 20,
+    borderRadius: 5
+  }
 }));

@@ -31,8 +31,6 @@ const useStyles = makeStyles(theme => ({
   },
   marks: {
     display: 'flex',
-    // flex: '0 0 4fr',
-    // justifyContent: 'space-between',
     width: '100%',
   },
   rangeWidth: {
@@ -45,129 +43,51 @@ const useStyles = makeStyles(theme => ({
   },
   hr: {
     backgroundColor: '#aaa',
-    margin: '10px 0 20px 0'
-  }
+    margin: '10px 0 20px 0',
+  },
 }));
 
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
 
-  const popperRef = React.useRef(null);
-  React.useEffect(() => {
-    if (popperRef.current) {
-      popperRef.current.update();
-    }
-
-    console.log('====================================');
-    console.log(value);
-    console.log('====================================');
-  });
-
-  return (
-    <Tooltip
-      PopperProps={{
-        popperRef,
-      }}
-      open={open}
-      enterTouchDelay={0}
-      placement='top'
-      // not to show the numbes on the tooltip
-      title=''
-    >
-      {children}
-    </Tooltip>
-  );
-}
-
-ValueLabelComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-export default function CustomizedSlider() {
+export default function CustomizedSlider({ range, setValue, name }) {
   const classes = useStyles();
 
+  console.log('====================================');
+  console.log('range -> ', range);
+  console.log('====================================');
+
+  const handleChange = (e, newValue) => {
+    console.log('handle change -> ', newValue);
+    setValue(newValue);
+  };
+
   return (
-    <>
-      <Paper className={classes.root}>
-        <div className={classes.wrapper}>
-          <Typography gutterBottom>Content/Action</Typography>
+    <Paper className={classes.root}>
+      <div className={classes.wrapper}>
+        <Typography gutterBottom>{name}</Typography>
 
-          <hr className={classes.hr}/>
+        <hr className={classes.hr} />
 
-          <div className={classes.marksWrapper}>
-            <div className={classes.marks}>
-              <span className={classes.rangeMargin} gutterBottom>
-                Very dispreferable
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Not ok
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Neutral
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Ok
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Very preferable
-              </span>
-            </div>
+        <div className={classes.marksWrapper}>
+          <div className={classes.marks}>
+            <span className={classes.rangeMargin}>Very dispreferable</span>
+            <span className={classes.rangeMargin}>Not ok</span>
+            <span className={classes.rangeMargin}>Neutral</span>
+            <span className={classes.rangeMargin}>Ok</span>
+            <span className={classes.rangeMargin}>Very preferable</span>
           </div>
-
-          <div className={classes.rangeWidth}>
-            <Slider
-              className={classes.slider}
-              ValueLabelComponent={ValueLabelComponent}
-              aria-label='custom thumb label'
-              defaultValue={50}
-            />
-          </div>
-
-          <div className={classes.margin} />
         </div>
-      </Paper>
 
-
-      <Paper className={classes.root}>
-        <div className={classes.wrapper}>
-          <Typography gutterBottom>Tone/Form</Typography>
-
-          <hr className={classes.hr}/>
-
-          <div className={classes.marksWrapper}>
-            <div className={classes.marks}>
-              <span className={classes.rangeMargin} gutterBottom>
-                Very dispreferable
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Not ok
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Neutral
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Ok
-              </span>
-              <span className={classes.rangeMargin} gutterBottom>
-                Very preferable
-              </span>
-            </div>
-          </div>
-
-          <div className={classes.rangeWidth}>
-            <Slider
-              className={classes.slider}
-              ValueLabelComponent={ValueLabelComponent}
-              aria-label='custom thumb label'
-              defaultValue={50}
-            />
-          </div>
-
-          <div className={classes.margin} />
+        <div className={classes.rangeWidth}>
+          <Slider
+            className={classes.slider}
+            aria-label='tone/form'
+            defaultValue={range}
+            onChange={handleChange}
+          />
         </div>
-      </Paper>
-    </>
+
+        <div className={classes.margin} />
+      </div>
+    </Paper>
   );
 }

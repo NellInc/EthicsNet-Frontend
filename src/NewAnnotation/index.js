@@ -1,11 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 
 import { apiURL } from '../globals';
@@ -19,8 +15,17 @@ function NewAnotation(props) {
 
   const [loading, setLoading] = useState(false);
   const [anotation, setAnotation] = useState('');
-  const [category, setCategory] = useState(0);
+
   const notification = useContext(Notification);
+
+  const [contentAction, setContentAction] = useState(50)
+  const [toneForm, setToneForm] = useState(50)
+
+  useEffect(() => {
+    console.log('contentAction ->', contentAction);
+    console.log('toneForm ->', toneForm);
+    
+  }, [contentAction, toneForm])
 
   const handleChange = e => {
     setAnotation(e.target.value);
@@ -33,16 +38,9 @@ function NewAnotation(props) {
 
     const { token, userId } = localStorage;
 
-    const selectedCategory = {
-      0: 'morally preferable',
-      1: 'morally unpreferable',
-      2: 'aesthetically preferable',
-      3: 'aesthetically unpreferable',
-      4: 'not unethical, but strange',
-    };
-
     const data = {
-      category: selectedCategory[category],
+      categoryRangeContentAction: contentAction,
+      categoryRangeToneForm: toneForm,
       content: anotation,
       authorId: userId,
     };
@@ -101,29 +99,17 @@ function NewAnotation(props) {
           rows='5'
         />
 
-        {/* <FormControl className={classes.formControl}>
-          <InputLabel htmlFor='category-simple'>Category</InputLabel>
-          <Select
-            value={category}
-            onChange={e => setCategory(e.target.value)}
-            inputProps={{
-              name: 'category',
-              id: 'category-simple',
-            }}
-          >
-            <MenuItem selected value={0}>
-              Morally preferable
+        <RangeSlider
+          range={contentAction}
+          setValue={setContentAction}
+          name="Content/Action"
+        />
 
-
-            </MenuItem>
-            <MenuItem value={1}>Morally unpreferable</MenuItem>
-            <MenuItem value={2}>Aesthetically preferable</MenuItem>
-            <MenuItem value={3}>Aesthetically unpreferable</MenuItem>
-            <MenuItem value={4}>Not unethical, but strange</MenuItem>
-          </Select>
-        </FormControl> */}
-
-        <RangeSlider />
+        <RangeSlider
+          range={toneForm}
+          setValue={setToneForm}
+          name="Tone/Form"
+        />
 
         <Button
           color='primary'
