@@ -47,8 +47,12 @@ export const useStyles = makeStyles(theme => ({
     margin: '0 0 20px 0',
   },
   rangeMargin: {
+    // marginRight: '80px',
+    // display: 'flex',
+    // alignItems: 'center',
     flexGrow: 1,
     flexBasis: 0,
+    
   },
   marksWrapper: {
     display: 'flex',
@@ -60,7 +64,7 @@ export const useStyles = makeStyles(theme => ({
   },
   content: {
     backgroundColor: '#eee',
-    padding: '20px 10px',
+    padding: 20,
     borderRadius: 5
   },
   iconWrapper: {

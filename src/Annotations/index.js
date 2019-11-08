@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 import DeleteDialog from '../DeleteDialog';
 import Pagination from '../Components/Pagination';
 import { apiURL } from '../globals';
 import { useStyles } from './style';
+import Category from '../Components/Category';
 
 function Anotations(props) {
   const classes = useStyles();
@@ -77,51 +77,17 @@ function Anotations(props) {
       />
 
       <p>Annotation: </p>
-
       <p className={classes.content}>{el.content}</p>
-
       <hr className={classes.hr} />
 
-      {/* <span className={classes.category}>{el.category}</span> */}
-
-      <p>Content/Action</p>
-
-      <div className={classes.marksWrapper}>
-        <div className={classes.marks}>
-          <span className={classes.rangeMargin}>Very dispreferable</span>
-          <span className={classes.rangeMargin}>Not ok</span>
-          <span className={classes.rangeMargin}>Neutral</span>
-          <span className={classes.rangeMargin}>Ok</span>
-          <span className={classes.rangeMargin}>Very preferable</span>
-        </div>
-      </div>
-
-      <LinearProgress
-        className={classes.bar}
-        variant='determinate'
-        color='primary'
-        value={el.categoryRangeContentAction}
+      <Category
+        title='Content/Action'
+        categoryRangeContentAction={el.categoryRangeContentAction}
       />
 
-      {/* <hr className={classes.hr} /> */}
-
-      <p>Tone/Form</p>
-
-      <div className={classes.marksWrapper}>
-        <div className={classes.marks}>
-          <span className={classes.rangeMargin}>Very dispreferable</span>
-          <span className={classes.rangeMargin}>Not ok</span>
-          <span className={classes.rangeMargin}>Neutral</span>
-          <span className={classes.rangeMargin}>Ok</span>
-          <span className={classes.rangeMargin}>Very preferable</span>
-        </div>
-      </div>
-
-      <LinearProgress
-        className={classes.bar}
-        variant='determinate'
-        color='primary'
-        value={el.categoryRangeToneForm}
+      <Category
+        title='Tone/Form'
+        categoryRangeContentAction={el.categoryRangeToneForm}
       />
 
       <hr className={classes.hr} />
@@ -146,6 +112,7 @@ function Anotations(props) {
         >
           Edit
         </Button>
+
         <Button
           color='secondary'
           variant='outlined'

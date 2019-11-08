@@ -6,6 +6,12 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -21,9 +27,13 @@ const useStyles = makeStyles(theme => ({
   },
   rangeMargin: {
     // marginRight: '80px',
+    display: 'flex',
+    alignItems: 'center',
+
     flexGrow: 1,
     flexBasis: 0,
     textAlign: 'center',
+    justifyContent: 'center',
   },
   marksWrapper: {
     display: 'flex',
@@ -45,8 +55,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#aaa',
     margin: '10px 0 20px 0',
   },
+  iconWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column-reverse',
+  },
 }));
-
 
 export default function CustomizedSlider({ range, setValue, name }) {
   const classes = useStyles();
@@ -67,13 +83,39 @@ export default function CustomizedSlider({ range, setValue, name }) {
 
         <hr className={classes.hr} />
 
+        {/* migrate this to a component */}
         <div className={classes.marksWrapper}>
           <div className={classes.marks}>
-            <span className={classes.rangeMargin}>Very dispreferable</span>
-            <span className={classes.rangeMargin}>Not ok</span>
-            <span className={classes.rangeMargin}>Neutral</span>
-            <span className={classes.rangeMargin}>Ok</span>
-            <span className={classes.rangeMargin}>Very preferable</span>
+            <span className={classes.rangeMargin}>
+              <div className={classes.iconWrapper}>
+                <span>Very dispreferable</span>
+                <SentimentVeryDissatisfiedIcon />
+              </div>
+            </span>
+            <span className={classes.rangeMargin}>
+              <div className={classes.iconWrapper}>
+                <span>Not ok</span>
+                <SentimentDissatisfiedIcon />
+              </div>
+            </span>
+            <span className={classes.rangeMargin}>
+              <div className={classes.iconWrapper}>
+                <span>Neutral</span>
+                <SentimentSatisfiedIcon />
+              </div>
+            </span>
+            <span className={classes.rangeMargin}>
+              <div className={classes.iconWrapper}>
+                <span>Ok</span>
+                <SentimentSatisfiedAltIcon />
+              </div>
+            </span>
+            <span className={classes.rangeMargin}>
+              <div className={classes.iconWrapper}>
+                <span>Very preferable</span>
+                <SentimentVerySatisfiedIcon />
+              </div>
+            </span>
           </div>
         </div>
 
