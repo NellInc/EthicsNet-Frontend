@@ -29,11 +29,13 @@ import SelectPerson from '../SaveVideoAction/SelectPerson';
 import PrivacyPolicy from '../PrivacyPolicy';
 import TermsAndConditions from '../TermsAndConditions';
 import EULA from '../EULA';
-import About from '../About'
+import About from '../About';
+import Admin from '../Admin';
 
 import {
   PrivateRoute,
   PublicRoute,
+  AdminRoutes,
   PublicRouteRedirectHowtoUse,
 } from '../RoutesTypes';
 import { Loading } from '../Store';
@@ -45,7 +47,7 @@ function Main(props) {
 
   useEffect(() => {
     console.log('\n\n****************');
-    console.log('ALPHA: 0.0.32');
+    console.log('ALPHA: 0.0.33');
     console.log('****************\n\n\n');
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
@@ -108,6 +110,14 @@ function Main(props) {
             />
 
             <PrivateRoute exact path='/profile' component={Profile} />
+
+            {/* Type of user */}
+            <AdminRoutes
+              exact
+              path='/admin'
+              title='EthicsNet - Admin'
+              component={Admin}
+            />
 
             <Route exact path='/landing' component={Landing} />
 

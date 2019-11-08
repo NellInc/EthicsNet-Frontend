@@ -28,6 +28,7 @@ function Anotations(props) {
   }
 
   useEffect(() => {
+    document.title = 'EthicsNet - Annotations'
     async function getUserData() {
       const token = localStorage.getItem('token');
 
@@ -80,6 +81,7 @@ function Anotations(props) {
       <p className={classes.content}>{el.content}</p>
       <hr className={classes.hr} />
 
+      {/* Keep compatible with the extensions text annotation flow */}
       {el.category ? (
         <div className={classes.categoryWrapper}>
           <span className={classes.category}>{el.category}</span>

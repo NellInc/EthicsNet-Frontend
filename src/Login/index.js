@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button';
 import { Notification } from '../Store';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
-import { useStyles } from './style'
+import { useStyles } from './style';
 
-function Login() {
+function Login({ history }) {
   const classes = useStyles();
 
   const notification = useContext(Notification);
@@ -39,10 +39,11 @@ function Login() {
         body: JSON.stringify(data),
       });
 
-      const json = await response.json()
+      const json = await response.json();
 
       if (response.status === 400) {
         notification(json.error, 'login failed', 'danger');
+        setLoading(false);
       } else if (response.status === 200) {
         notification('welcome back!');
         const { token, user } = json;
@@ -51,12 +52,12 @@ function Login() {
         localStorage.setItem('isLogged', 'true');
         localStorage.setItem('lastclear', new Date().getTime());
         localStorage.setItem('token', token);
-        window.location.reload();
+        history.push('/');
+        // window.location.reload();
       } else {
+        setLoading(false);
         notification('there was an error', 'we could not log you in', 'danger');
       }
-
-      setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -64,12 +65,12 @@ function Login() {
   };
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
     <div className={classes.container}>
-      <header className="App-header">
+      <header className='App-header'>
         <p>EthicsNet - Login</p>
       </header>
 
@@ -80,31 +81,31 @@ function Login() {
           <TextField
             required
             className={classes.textField}
-            id="email"
-            label="Email"
-            type="email"
+            id='email'
+            label='Email'
+            type='email'
             value={values.email}
             onChange={handleChange('email')}
-            margin="normal"
+            margin='normal'
           />
 
           <TextField
             required
             className={classes.textField}
-            type="password"
-            id="password"
-            label="Password"
+            type='password'
+            id='password'
+            label='Password'
             value={values.password}
             onChange={handleChange('password')}
-            margin="normal"
+            margin='normal'
           />
         </div>
 
         <Button
           className={classes.submit}
-          type="submit"
-          variant="contained"
-          color="primary"
+          type='submit'
+          variant='contained'
+          color='primary'
         >
           login
         </Button>

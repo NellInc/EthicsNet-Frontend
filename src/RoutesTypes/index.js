@@ -77,3 +77,28 @@ export const PrivateRoute = ({ title, component: Component, ...rest }) => {
     />
   );
 };
+
+export const AdminRoutes = ({ title, component: Component, ...rest }) => {
+  console.log('**********');
+  console.log(title);
+  console.log(document.title);
+  console.log('**********');
+  if (title) {
+    document.title = title;
+  }
+
+  return (
+    // Show the component only when the user is logged in
+    // Otherwise, redirect the user to /signin page
+    <Route
+      {...rest}
+      render={props => {
+        return localStorage.getItem('isAdmin') === 'true' ? (
+          <Component title={title} {...props} />
+        ) : (
+          <Redirect to='/login' />
+        );
+      }}
+    />
+  );
+};

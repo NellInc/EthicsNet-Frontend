@@ -10,9 +10,11 @@ function LoggedOut(props) {
   const setIsLogged = useContext(IsLogged)[1];
 
   function handleLogOut() {
-    localStorage.isLogged = null;
+    // localStorage.isLogged = null;
+    localStorage.clear();
     setIsLogged(false);
-    window.location.reload();
+    props.history.push('/');
+    // window.location.reload();
   };
 
   function redirectHome() {
