@@ -19,6 +19,9 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  categoryWrapper: {
+    marginBottom: 10
+  },
   category: {
     background: '#282828',
     color: '#fff',

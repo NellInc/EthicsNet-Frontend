@@ -2,7 +2,6 @@ import React, { useState, createContext } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 // import { purple } from '@material-ui/core/colors';
-import red from '@material-ui/core/colors/red';
 
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';

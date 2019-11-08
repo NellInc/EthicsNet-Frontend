@@ -80,17 +80,26 @@ function Anotations(props) {
       <p className={classes.content}>{el.content}</p>
       <hr className={classes.hr} />
 
-      <Category
-        title='Content/Action'
-        categoryRangeContentAction={el.categoryRangeContentAction}
-      />
+      {el.category ? (
+        <div className={classes.categoryWrapper}>
+          <span className={classes.category}>{el.category}</span>
+          <br />
+        </div>
+      ) : (
+        <div>
+          <Category
+            title='Content/Action'
+            categoryRangeContentAction={el.categoryRangeContentAction}
+          />
 
-      <Category
-        title='Tone/Form'
-        categoryRangeContentAction={el.categoryRangeToneForm}
-      />
+          <Category
+            title='Tone/Form'
+            categoryRangeContentAction={el.categoryRangeToneForm}
+          />
 
-      <hr className={classes.hr} />
+          <hr className={classes.hr} />
+        </div>
+      )}
 
       {el.font === 'none' || el.font === '' ? null : (
         <small className={classes.font}>
