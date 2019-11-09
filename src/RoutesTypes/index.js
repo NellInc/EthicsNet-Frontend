@@ -1,8 +1,15 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-export const PublicRoute = ({ title, component: Component, restricted, ...rest }) => {
+import { apiURL } from '../globals';
+import { Loader } from '../components';
 
+export const PublicRoute = ({
+  title,
+  component: Component,
+  restricted,
+  ...rest
+}) => {
   console.log('**********');
   console.log(title);
   console.log(document.title);
@@ -27,8 +34,12 @@ export const PublicRoute = ({ title, component: Component, restricted, ...rest }
   );
 };
 
-export const PublicRouteRedirectHowtoUse = ({ title, component: Component, restricted, ...rest }) => {
-
+export const PublicRouteRedirectHowtoUse = ({
+  title,
+  component: Component,
+  restricted,
+  ...rest
+}) => {
   console.log('**********');
   console.log(title);
   console.log(document.title);
@@ -79,12 +90,43 @@ export const PrivateRoute = ({ title, component: Component, ...rest }) => {
 };
 
 export const AdminRoutes = ({ title, component: Component, ...rest }) => {
-  console.log('**********');
-  console.log(title);
-  console.log(document.title);
-  console.log('**********');
   if (title) {
     document.title = title;
+  }
+
+  const [isAdmin, setIsAdmin] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
+
+  async function getUserData() {
+    const { token } = localStorage;
+
+    const response = await fetch(`${apiURL}/api2/user`, {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    console.log('====================================');
+    console.log('admin routes user data -> ', data.user);
+    console.log('====================================');
+
+    setIsAdmin(data.user.isAdmin);
+    setLoading(false);
+  }
+
+  React.useEffect(() => {
+    getUserData();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
   }
 
   return (
@@ -93,10 +135,10 @@ export const AdminRoutes = ({ title, component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props => {
-        return localStorage.getItem('isAdmin') === 'true' ? (
+        return isAdmin ? (
           <Component title={title} {...props} />
         ) : (
-          <Redirect to='/login' />
+          <Redirect to='/' />
         );
       }}
     />
