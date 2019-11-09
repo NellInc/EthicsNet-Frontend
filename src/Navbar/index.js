@@ -15,33 +15,42 @@ function Navbar(props) {
   const classes = useStyles();
 
   const [isAdmin, setAdmin] = useState(false);
-  const [loading, setLoading] = useContext(Loading);
+  const setLoading = useContext(Loading)[1];
 
   useEffect(() => {
     async function getUserData() {
-      const { token } = localStorage;
+      try {
+        const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api2/user`, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const response = await fetch(`${apiURL}/api2/user`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      console.log('====================================');
-      console.log('navbar routes user data -> ', data.user);
-      console.log('====================================');
+        console.log('====================================');
+        console.log('navbar routes user data -> ', data.user);
+        console.log('====================================');
 
-      setAdmin(data.user.isAdmin);
+        setAdmin(data.user.isAdmin);
+      } catch (error) {
+        console.log('error on the navbar -> ', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (localStorage.isLogged) {
+      getUserData();
+    } else {
       setLoading(false);
     }
-    getUserData();
   }, [setLoading]);
 
   const handleLogout = () => {
@@ -65,7 +74,7 @@ function Navbar(props) {
           </Link>
 
           {/* There's no distraction to mask what is real */}
-          {isAdmin && (
+          {isAdmin && localStorage.isLogged === 'true' && (
             <Button color='inherit'>
               <Link className={classes.link} to='/admin'>
                 Admin
