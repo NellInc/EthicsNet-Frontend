@@ -13,8 +13,8 @@ function LoggedOut(props) {
     // localStorage.isLogged = null;
     localStorage.clear();
     setIsLogged(false);
-    props.history.push('/');
-    // window.location.reload();
+    // props.history.push('/');
+    window.location.reload();
   };
 
   function redirectHome() {

@@ -18,6 +18,9 @@ function Admin(props) {
     lasName: '',
   });
 
+  console.log(user);
+  
+
   useEffect(() => {
     async function getUserData() {
       const { token } = localStorage;

@@ -8,7 +8,7 @@ import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { Notification } from '../Store';
 import { useStyles } from './style';
-import RangeSlider from '../Slider' ;
+import RangeSlider from '../Slider';
 
 function NewAnotation(props) {
   const classes = useStyles();
@@ -18,14 +18,13 @@ function NewAnotation(props) {
 
   const notification = useContext(Notification);
 
-  const [contentAction, setContentAction] = useState(50)
-  const [toneForm, setToneForm] = useState(50)
+  const [contentAction, setContentAction] = useState(50);
+  const [toneForm, setToneForm] = useState(50);
 
   useEffect(() => {
     console.log('contentAction ->', contentAction);
     console.log('toneForm ->', toneForm);
-    
-  }, [contentAction, toneForm])
+  }, [contentAction, toneForm]);
 
   const handleChange = e => {
     setAnotation(e.target.value);
@@ -44,6 +43,9 @@ function NewAnotation(props) {
       content: anotation,
       authorId: userId,
     };
+
+    // sao pessoas reais, é assim que eu quero me entregar a uma dor quando eu to sentindo
+    
 
     try {
       const response = await fetch(`${apiURL}/api2/text`, {
@@ -80,12 +82,6 @@ function NewAnotation(props) {
     return <Loader />;
   }
 
-/*
-
-  im so high, my jumpsuit takes meso high
-
-*/
-
   return (
     <div className={classes.root}>
       <Typography variant='h6' gutterBottom>
@@ -108,14 +104,10 @@ function NewAnotation(props) {
         <RangeSlider
           range={contentAction}
           setValue={setContentAction}
-          name="Content/Action"
+          name='Content/Action'
         />
 
-        <RangeSlider
-          range={toneForm}
-          setValue={setToneForm}
-          name="Tone/Form"
-        />
+        <RangeSlider range={toneForm} setValue={setToneForm} name='Tone/Form' />
 
         <Button
           color='primary'

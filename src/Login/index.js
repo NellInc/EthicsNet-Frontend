@@ -52,8 +52,8 @@ function Login({ history }) {
         localStorage.setItem('isLogged', 'true');
         localStorage.setItem('lastclear', new Date().getTime());
         localStorage.setItem('token', token);
-        history.push('/');
-        // window.location.reload();
+        // history.push('/');
+        window.location.reload();
       } else {
         setLoading(false);
         notification('there was an error', 'we could not log you in', 'danger');
@@ -101,14 +101,36 @@ function Login({ history }) {
           />
         </div>
 
+        <p className={classes.account}>
+          don't you have an account?{' '}
+          <span
+            className={classes.link}
+            onClick={() => history.push('/register')}
+          >
+            register
+          </span>{' '}
+          instead
+        </p>
+
         <Button
-          className={classes.submit}
+          // className={classes.submit}
           type='submit'
           variant='contained'
           color='primary'
         >
           login
         </Button>
+
+        {/* <Button
+          className={classes.submit}
+          style={{ marginLeft: 10 }}
+          onClick={() => history.push('/register')}
+          type='button'
+          variant='contained'
+          color='primary'
+        >
+          Register
+        </Button> */}
       </form>
     </div>
   );

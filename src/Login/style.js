@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
   textField: {
@@ -16,4 +16,13 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  link: {
+    color: 'blue',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  account: {
+    fontSize: 15,
+  }
 }));
