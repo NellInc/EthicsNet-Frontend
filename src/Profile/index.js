@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { apiURL } from '../globals';
 import { useStyles } from './style';
-// import Info from './Info';
+import Info from './Info';
 
 function Profile() {
   const classes = useStyles();
@@ -277,7 +277,7 @@ function Profile() {
             />
           </div>
 
-          {/* <Info values={values} handleChange={handleChange}/> */}
+          <Info values={values} handleChange={handleChange}/>
 
           <div className={classes.buttonsWrapper}>
             <Button

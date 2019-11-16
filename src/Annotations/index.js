@@ -115,14 +115,14 @@ function Anotations(props) {
       <p className={classes.date}>{el.createdAt.substring(0, 10)} </p>
 
       <div>
-        <Button
+        {/* <Button
           color='primary'
           variant='outlined'
           style={{ marginRight: '10px' }}
           onClick={() => handleAnotationClick(el._id, 'edit')}
         >
           Edit
-        </Button>
+        </Button> */}
 
         <Button
           color='secondary'
