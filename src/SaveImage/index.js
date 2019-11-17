@@ -11,6 +11,7 @@ import { useStyles } from './style';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { Notification } from '../Store';
+import RangeSlider from '../Slider';
 
 function SaveImage(props) {
   const classes = useStyles();
@@ -18,6 +19,9 @@ function SaveImage(props) {
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
   const notification = useContext(Notification);
+
+  const [contentAction, setContentAction] = useState(50);
+  const [toneForm, setToneForm] = useState(50);
 
   const [values, setValues] = useState({
     title: '',
@@ -119,33 +123,13 @@ function SaveImage(props) {
           margin='normal'
         />
 
-        <FormControl className={classes.textField}>
-          <InputLabel htmlFor='category-simple'>Category</InputLabel>
-          <Select
-            value={values.category}
-            onChange={handleChange('category')}
-            inputProps={{
-              name: 'category',
-              id: 'category-simple',
-            }}
-          >
-            <MenuItem selected value='morally preferable'>
-              Morally preferable
-            </MenuItem>
-            <MenuItem value='morally unpreferable'>
-              Morally unpreferable
-            </MenuItem>
-            <MenuItem value='aesthetically preferable'>
-              Aesthetically preferable
-            </MenuItem>
-            <MenuItem value='aesthetically unpreferable'>
-              Aesthetically unpreferable
-            </MenuItem>
-            <MenuItem value='not unethical, but strange'>
-              Not unethical, but strange
-            </MenuItem>
-          </Select>
-        </FormControl>
+        <RangeSlider
+          range={contentAction}
+          setValue={setContentAction}
+          name='Content/Action'
+        />
+
+        <RangeSlider range={toneForm} setValue={setToneForm} name='Tone/Form' />
 
         <Button className={classes.submit} type='submit' variant='outlined'>
           Save
