@@ -31,9 +31,9 @@ function Video({ el, youtube_parser }) {
       ></iframe>
 
       <h3>{title}</h3>
-      <p>
+      {/* <p>
         <span className={classes.category}>{category}</span>
-      </p>
+      </p> */}
 
       <p>Person doing the action: </p>
       <img src={selectedPerson} alt='' srcSet='' />

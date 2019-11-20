@@ -13,12 +13,17 @@ export const useStyles = makeStyles(() => ({
   description: {},
   font: {
     fontSize: '10px',
+    marginBottom: 20,
   },
   img: {
     // width: '100%'
   },
   hr: {
     backgroundColor: '#ddd',
+  },
+  hr2: {
+    backgroundColor: '#ddd',
+    margin: '20px 0'
   },
   category: {
     backgroundColor: '#000',

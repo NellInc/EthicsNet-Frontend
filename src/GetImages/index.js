@@ -33,10 +33,11 @@ function GetImages() {
       setImages(data.images);
       setCount(data.count);
       setLoading(false);
+      console.log(data.images);
     }
 
     getImageData();
-  }, [page, loading]);
+  }, [page]);
 
   async function deleteImage(id) {
     setLoading(true);

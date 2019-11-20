@@ -11,6 +11,7 @@ import { VideoInfoContext } from '../Store';
 import { useStyles } from './style';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
+import RangeSlider from '../Slider';
 
 function SaveVideo(props) {
   const classes = useStyles();
@@ -19,10 +20,13 @@ function SaveVideo(props) {
   const [values, setValues] = React.useState({
     title: '',
     description: '',
-    start: '00:05',
-    end: '01:00',
+    start: '00:00',
+    end: '00:30',
     category: 'morally preferable',
   });
+
+  const [contentAction, setContentAction] = useState(50);
+  const [toneForm, setToneForm] = useState(50);
 
   const [videoInfo, setVideoInfo] = useContext(VideoInfoContext);
 
@@ -94,6 +98,8 @@ function SaveVideo(props) {
       title,
       description,
       videoUrl,
+      contentAction,
+      toneForm,
       videoStart: start,
       videoEnd: end,
       authorId: userId,
@@ -177,7 +183,6 @@ function SaveVideo(props) {
           required
         />
 
-        
         {/* <MomentInput
           // max={moment().add(5,'days')}
           // min={moment()}
@@ -224,7 +229,15 @@ function SaveVideo(props) {
           required
         />
 
-        <FormControl className={classes.textField}>
+        <RangeSlider
+          range={contentAction}
+          setValue={setContentAction}
+          name='Content/Action'
+        />
+
+        <RangeSlider range={toneForm} setValue={setToneForm} name='Tone/Form' />
+
+        {/* <FormControl className={classes.textField}>
           <InputLabel htmlFor='category-simple'>Category</InputLabel>
           <Select
             required
@@ -251,7 +264,7 @@ function SaveVideo(props) {
               Not unethical, but strange
             </MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
 
         <Button
           type='submit'

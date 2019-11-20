@@ -49,6 +49,8 @@ function SaveImage(props) {
       title,
       description,
       category,
+      contentAction,
+      toneForm,
       image,
       imageFont,
       authorId: userId,
