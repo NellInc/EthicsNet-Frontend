@@ -57,6 +57,8 @@ export const useStyles = makeStyles(theme => ({
   marksWrapper: {
     display: 'flex',
     justifyContent: 'center',
+    width: 790,
+    margin: 'auto'
   },
   marks: {
     display: 'flex',

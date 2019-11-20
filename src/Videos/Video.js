@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useStyles } from './style';
 
+import Category from '../Components/Category';
+
 function Video({ el, youtube_parser }) {
   const classes = useStyles();
   const {
@@ -13,6 +15,8 @@ function Video({ el, youtube_parser }) {
     videoEnd,
     description,
     selectedPerson,
+    contentAction,
+    toneForm,
   } = el;
 
   return (
@@ -34,6 +38,13 @@ function Video({ el, youtube_parser }) {
       {/* <p>
         <span className={classes.category}>{category}</span>
       </p> */}
+
+      <Category
+        title='Content/Action'
+        categoryRangeContentAction={contentAction}
+      />
+
+      <Category title='Tone/Form' categoryRangeContentAction={toneForm} />
 
       <p>Person doing the action: </p>
       <img src={selectedPerson} alt='' srcSet='' />
