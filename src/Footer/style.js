@@ -8,9 +8,10 @@ export const useStyles = makeStyles(theme => ({
     bottom: '1px',
     color: '#fff',
     background: theme.palette.primary.main,
-    fontSize: 13
+    fontSize: 14,
+    padding: '10px 0',
   },
   p: {
-    margin: '2px'
-  }
+    margin: '12px 0',
+  },
 }));

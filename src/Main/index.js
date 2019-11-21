@@ -47,7 +47,7 @@ function Main(props) {
 
   useEffect(() => {
     console.log('\n\n****************');
-    console.log('ALPHA: 0.0.35');
+    console.log('ALPHA: 0.0.36');
     console.log('****************\n\n\n');
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
