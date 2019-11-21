@@ -21,7 +21,7 @@ function Video({ el, youtube_parser, deleteVideo }) {
   } = el;
 
   return (
-    <div key={_id}>
+    <div key={_id} className={classes.video}>
       <iframe
         title={_id}
         src={

@@ -9,7 +9,7 @@ export const useStyles = makeStyles(theme => ({
   },
   hr: {
     backgroundColor: '#ddd',
-    margin: '50px 0',
+    margin: '20px 0',
   },
   category: {
     backgroundColor: '#000',
@@ -21,5 +21,11 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  video: {
+    marginBottom: 40,
+    border: '1px solid #ddd',
+    padding: 25,
+    borderRadius: 5,
   },
 }));
