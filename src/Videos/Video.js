@@ -1,10 +1,11 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 import { useStyles } from './style';
-
 import Category from '../Components/Category';
+import DeleteVideo from './DeleteVideo';
 
-function Video({ el, youtube_parser }) {
+function Video({ el, youtube_parser, deleteVideo }) {
   const classes = useStyles();
   const {
     _id,
@@ -35,19 +36,6 @@ function Video({ el, youtube_parser }) {
       ></iframe>
 
       <h3>{title}</h3>
-      {/* <p>
-        <span className={classes.category}>{category}</span>
-      </p> */}
-
-      <Category
-        title='Content/Action'
-        categoryRangeContentAction={contentAction}
-      />
-
-      <Category title='Tone/Form' categoryRangeContentAction={toneForm} />
-
-      <p>Person doing the action: </p>
-      <img src={selectedPerson} alt='' srcSet='' />
 
       <p>
         Url:{' '}
@@ -62,6 +50,31 @@ function Video({ el, youtube_parser }) {
       </p>
 
       <hr className={classes.hr} />
+
+      <p>Person doing the action: </p>
+      <img src={selectedPerson} alt='' srcSet='' />
+
+      <hr className={classes.hr} />
+
+      <Category
+        title='Content/Action'
+        categoryRangeContentAction={contentAction}
+      />
+
+      <Category title='Tone/Form' categoryRangeContentAction={toneForm} />
+
+      <hr className={classes.hr} />
+
+      {/* <Button variant='outlined' color='secondary'>
+        Delete
+      </Button> */}
+
+      <DeleteVideo
+        title={title}
+        id={_id}
+        // video={video}
+        deleteVideo={deleteVideo}
+      />
     </div>
   );
 }
