@@ -17,7 +17,7 @@ import Home from '../Home';
 import LoggedOut from '../LoggedOut';
 import NewAnnotation from '../NewAnnotation';
 import Screenshot from '../Screenshot';
-import Screenshot2 from '../Screenshot/Screenshot2';
+import Screenshot2 from '../Screenshot/Screenshot2'; 
 import SaveImage from '../SaveImage';
 import GetImages from '../GetImages';
 import GetAllImages from '../GetAllImages';

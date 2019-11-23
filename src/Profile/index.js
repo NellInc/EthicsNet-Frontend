@@ -101,8 +101,6 @@ function Profile() {
           earnings,
           ethnicity,
         });
-
-
       } else if (response.status === 404) {
         // props.history.push('/logged-out')
         // alert('your user doesnt exist')
@@ -203,6 +201,35 @@ function Profile() {
     }
   }
 
+  async function requestMyData() {
+    console.log('i want my data!');
+
+    try {
+      const token = localStorage.getItem('token');
+
+      console.log('====================================');
+      console.log('api url -> ', apiURL);
+      console.log('====================================');
+
+      const response = await fetch(`${apiURL}/api2/user/data`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      console.log('request my data -> ', data);
+    } catch (error) {
+      console.log('error');
+    }
+  }
+
   if (loading) {
     return (
       <div className={classes.loaderWrapper}>
@@ -277,16 +304,26 @@ function Profile() {
             />
           </div>
 
-          <Info values={values} handleChange={handleChange}/>
+          <Info values={values} handleChange={handleChange} />
 
           <div className={classes.buttonsWrapper}>
             <Button
               color='primary'
               variant='outlined'
-              style={{ marginRight: '10px' }}
               type='submit'
+              style={{ marginRight: '10px' }}
             >
               Save
+            </Button>
+
+            <Button
+              onClick={requestMyData}
+              color='secondary'
+              type='button'
+              variant='outlined'
+              style={{ marginRight: '10px' }}
+            >
+              Request my data
             </Button>
 
             <Button
