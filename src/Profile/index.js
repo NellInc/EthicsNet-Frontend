@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { apiURL } from '../globals';
 import { useStyles } from './style';
@@ -12,6 +17,7 @@ function Profile() {
 
   const [loading, setLoading] = useState(true);
   const setUserData = useState({})[1];
+  const [open, setOpen] = React.useState(false);
 
   const [values, setValues] = useState({
     name: '',
@@ -30,6 +36,14 @@ function Profile() {
     education: '',
     social: '',
   });
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -179,26 +193,28 @@ function Profile() {
     // deletes an user account
     // change from confirm to a better looking UI
 
-    if (window.confirm('are you sure you want to delete your account?')) {
-      const { token, userId } = localStorage;
+    // if (window.confirm('are you sure you want to delete your account?')) {
+    const { token, userId } = localStorage;
 
-      const response = await fetch(`${apiURL}/api2/user/${userId}`, {
-        method: 'DELETE',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const response = await fetch(`${apiURL}/api2/user/${userId}`, {
+      method: 'DELETE',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      console.log(response);
+    console.log(response);
 
-      console.log(data);
-    }
+    console.log(data);
+
+    window.location.reload();
+    // }
   }
 
   async function requestMyData() {
@@ -326,14 +342,46 @@ function Profile() {
               Request my data
             </Button>
 
-            <Button
+            {/* <Button
               onClick={handleDeleteAccount}
               color='secondary'
               type='button'
               variant='outlined'
             >
               Delete account
+            </Button> */}
+
+            <Button
+              color='secondary'
+              type='button'
+              variant='outlined'
+              onClick={handleClickOpen}
+            >
+              Delete My Account
             </Button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby='alert-dialog-title'
+              aria-describedby='alert-dialog-description'
+            >
+              <DialogTitle id='alert-dialog-title'>
+                Deleting your account cannot be undone
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id='alert-dialog-description'>
+                  Are you sure you want to permanently delete your account?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleDeleteAccount} color='primary'>
+                  Delete Account
+                </Button>
+                <Button onClick={handleClose} color='primary' autoFocus>
+                  Cancel
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
         </form>
       </main>
