@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ReCAPTCHA from 'react-google-recaptcha';
 import '../App.css';
 
 import TermsAndConditions from '../TermsAndConditions';
@@ -15,6 +16,9 @@ function App() {
   const notification = useContext(Notification);
   const [loading, setLoading] = useState(false);
   const [showTerms, setShowTerms] = useState(0);
+  const [passCaptcha, setPassCaptcha] = useState(false);
+
+  const recaptchaRef = React.createRef();
 
   const [values, setValues] = React.useState({
     firstName: '',
@@ -22,7 +26,7 @@ function App() {
     email: '',
     password: '',
     age: '',
-    gender: ''
+    gender: '',
   });
 
   const handleChange = name => event => {
@@ -73,16 +77,26 @@ function App() {
       }
     } catch (error) {
       console.error(error);
-      notification(
-        'there was an error',
-        'we could not register you',
-        'danger'
-      );
+      notification('there was an error', 'we could not register you', 'danger');
+    }
+  };
+
+  const onChange = value => {
+    console.log('Captcha value -> ', value);
+    if (value) {
+      console.log('token is valid!');
+      setPassCaptcha(true)
     }
   };
 
   function next() {
     setShowTerms(showTerms + 1);
+    const recaptchaValue = recaptchaRef.current.getValue();
+
+    console.log('Captcha value -> ', recaptchaValue);
+    console.log('Captcha value -> ', typeof recaptchaValue);
+    console.log(recaptchaValue ===  '');
+    
   }
 
   function previous() {
@@ -123,7 +137,6 @@ function App() {
             margin='normal'
           />
         </div>
-
         <div>
           <TextField
             required
@@ -146,8 +159,7 @@ function App() {
             margin='normal'
           />
         </div>
-
-        <div>
+        <div className={classes.gender}>
           <TextField
             // required
             className={classes.textField}
@@ -160,6 +172,12 @@ function App() {
           />
         </div>
 
+        <ReCAPTCHA
+          sitekey='6LcxVMUUAAAAANTT9RCdIyHNbYTTC6cDwNARknvT'
+          onChange={onChange}
+          ref={recaptchaRef}
+        />
+
         {!showTerms && (
           <Button
             className={classes.submit}
@@ -167,11 +185,11 @@ function App() {
             onClick={next}
             variant='contained'
             color='primary'
+            disabled={!passCaptcha}
           >
-            Next
+            Next ??
           </Button>
         )}
-
         {showTerms > 0 && (
           <div className={classes.headline}>
             To create an EthicsNet Account, you’ll need to agree to the{' '}
@@ -194,7 +212,6 @@ function App() {
             .
           </div>
         )}
-
         {showTerms === 1 && (
           <div>
             <TermsAndConditions />
@@ -209,7 +226,6 @@ function App() {
             </Button>
           </div>
         )}
-
         {showTerms === 2 && (
           <div>
             <PrivacyPolicy />

@@ -12,6 +12,9 @@ export const useStyles = makeStyles(theme => ({
   headline: {
     marginTop: 20,
     padding: 20,
-    border: '1px solid #ddd'
-  }
+    border: '1px solid #ddd',
+  },
+  gender: {
+    marginBottom: 10,
+  },
 }));
