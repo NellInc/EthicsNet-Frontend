@@ -31,6 +31,20 @@ function App() {
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
+
+    const recaptchaValue = recaptchaRef.current.getValue();
+    const { firstName, lastName, email, password } = values;
+
+    if (
+      recaptchaValue &&
+      firstName !== '' &&
+      lastName !== '' &&
+      email !== '' &&
+      password !== ''
+    ) {
+      console.log('token is valid!');
+      setPassCaptcha(true);
+    }
   };
 
   const handleSubmit = async e => {
@@ -82,10 +96,18 @@ function App() {
   };
 
   const onChange = value => {
+    const { firstName, lastName, email, password } = values;
+
     console.log('Captcha value -> ', value);
-    if (value) {
+    if (
+      value &&
+      firstName !== '' &&
+      lastName !== '' &&
+      email !== '' &&
+      password !== ''
+    ) {
       console.log('token is valid!');
-      setPassCaptcha(true)
+      setPassCaptcha(true);
     }
   };
 
@@ -95,8 +117,7 @@ function App() {
 
     console.log('Captcha value -> ', recaptchaValue);
     console.log('Captcha value -> ', typeof recaptchaValue);
-    console.log(recaptchaValue ===  '');
-    
+    console.log(recaptchaValue === '');
   }
 
   function previous() {
@@ -187,7 +208,7 @@ function App() {
             color='primary'
             disabled={!passCaptcha}
           >
-            Next ??
+            Next
           </Button>
         )}
         {showTerms > 0 && (
