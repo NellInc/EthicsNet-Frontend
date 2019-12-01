@@ -73,14 +73,12 @@ export default function EditImage({
         onClose={handleCloseCancel}
         aria-labelledby='alert-dialog-slide-title'
         aria-describedby='alert-dialog-slide-description'
-        // style={{ textAlign: 'center' }}
       >
         <DialogTitle id='alert-dialog-slide-title'>Edit Image</DialogTitle>
         <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
           <TextField
             id='image-title'
             label='Image title'
-            // className={classes.textField}
             value={values.title}
             onChange={handleChange('title')}
             margin='normal'
@@ -90,7 +88,6 @@ export default function EditImage({
           <TextField
             id='image-description'
             label='Image description'
-            // className={classes.textField}
             multiline
             rows='4'
             value={values.description}

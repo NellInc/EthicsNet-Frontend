@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
-// import html2canvas from 'html2canvas';
 
 import { IsLogged } from '../Store';
 import { useStyles } from './style';
@@ -10,10 +9,8 @@ function LoggedOut(props) {
   const setIsLogged = useContext(IsLogged)[1];
 
   function handleLogOut() {
-    // localStorage.isLogged = null;
     localStorage.clear();
     setIsLogged(false);
-    // props.history.push('/');
     window.location.reload();
   };
 

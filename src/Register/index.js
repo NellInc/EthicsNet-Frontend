@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -68,10 +68,6 @@ function Register() {
       });
 
       const json = await response.json();
-
-      console.log('====================================');
-      console.log('json response -> ', json);
-      console.log('====================================');
 
       if (response.status === 400) {
         notification(json.error, 'registration failed', 'danger');
@@ -150,9 +146,6 @@ function Register() {
           notification(json.error, 'please login instead', 'danger');
         }
 
-        console.log('====================================');
-        console.log('data -> ', json);
-        console.log('====================================');
       } catch (error) {
         console.log('error');
       } finally {

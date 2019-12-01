@@ -31,7 +31,6 @@ function Anotations(props) {
     document.title = 'EthicsNet - Annotations'
     async function getUserData() {
       const token = localStorage.getItem('token');
-
       const response = await fetch(`${apiURL}/api2/text/page/${page}`, {
         method: 'GET',
         mode: 'cors',
@@ -44,16 +43,11 @@ function Anotations(props) {
       });
 
       const data = await response.json();
-
-      console.log('annoatations -> ', data);
-
       setAnotations(data.anotations);
       setCount(data.count);
       setLoading(false);
     }
-
     getUserData();
-
     // if you place 'loading' here it will run twice (make 2 api calls)
   }, [page]);
 
@@ -115,15 +109,6 @@ function Anotations(props) {
       <p className={classes.date}>{el.createdAt.substring(0, 10)} </p>
 
       <div>
-        {/* <Button
-          color='primary'
-          variant='outlined'
-          style={{ marginRight: '10px' }}
-          onClick={() => handleAnotationClick(el._id, 'edit')}
-        >
-          Edit
-        </Button> */}
-
         <Button
           color='secondary'
           variant='outlined'

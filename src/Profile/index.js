@@ -303,7 +303,7 @@ function Profile() {
               value={values.age}
               onChange={handleChange('age')}
               margin='normal'
-              required
+              // required
             />
           </div>
 

@@ -30,15 +30,9 @@ function Videos(props) {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const data = await response.json();
-
       setVideos(data.videos);
       setCount(data.count);
-
-      console.log('====================================');
-      console.log(data.videos);
-      console.log('====================================');
       setLoading(false);
     }
 
@@ -92,7 +86,12 @@ function Videos(props) {
   }
 
   const videoElements = videos.map(el => (
-    <Video key={el._id} youtube_parser={youtube_parser} el={el} deleteVideo={deleteVideo} />
+    <Video
+      key={el._id}
+      youtube_parser={youtube_parser}
+      el={el}
+      deleteVideo={deleteVideo}
+    />
   ));
 
   if (loading) {

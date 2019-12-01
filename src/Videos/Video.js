@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 
 import { useStyles } from './style';
 import Category from '../Components/Category';
@@ -11,7 +10,7 @@ function Video({ el, youtube_parser, deleteVideo }) {
     _id,
     title,
     videoUrl,
-    category,
+    // category,
     videoStart,
     videoEnd,
     description,

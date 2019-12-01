@@ -5,7 +5,7 @@ import { useStyles } from './style';
 function Annotation(props) {
   const classes = useStyles();
 
-  return <div>annotation</div>;
+  return <div className={classes.root}>annotation</div>;
 }
 
 export default Annotation;

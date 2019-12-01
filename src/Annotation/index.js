@@ -27,8 +27,6 @@ function Anotation(props) {
     async function fetchData() {
       const { id } = props.match.params;
       const { token } = localStorage;
-
-      // const response = await fetch(`${apiURL}/api/user/anotation/${id}`, {
       const response = await fetch(`${apiURL}/api2/text/${id}`, {
         method: 'GET',
         mode: 'cors',
@@ -90,6 +88,7 @@ function Anotation(props) {
         category: selectedCategory[category],
       }),
     });
+    
     const data = await response.json();
 
     if (response.status === 200) {

@@ -10,10 +10,6 @@ export const PublicRoute = ({
   restricted,
   ...rest
 }) => {
-  console.log('**********');
-  console.log(title);
-  console.log(document.title);
-  console.log('**********');
   if (title) {
     document.title = title;
   }
@@ -40,10 +36,6 @@ export const PublicRouteRedirectHowtoUse = ({
   restricted,
   ...rest
 }) => {
-  console.log('**********');
-  console.log(title);
-  console.log(document.title);
-  console.log('**********');
   if (title) {
     document.title = title;
   }
@@ -65,10 +57,6 @@ export const PublicRouteRedirectHowtoUse = ({
 };
 
 export const PrivateRoute = ({ title, component: Component, ...rest }) => {
-  console.log('**********');
-  console.log(title);
-  console.log(document.title);
-  console.log('**********');
   if (title) {
     document.title = title;
   }
@@ -112,10 +100,6 @@ export const AdminRoutes = ({ title, component: Component, ...rest }) => {
     });
 
     const data = await response.json();
-
-    console.log('====================================');
-    console.log('admin routes user data -> ', data.user);
-    console.log('====================================');
 
     setIsAdmin(data.user.isAdmin);
     setLoading(false);

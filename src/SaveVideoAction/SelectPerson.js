@@ -23,36 +23,6 @@ class Screenshot extends PureComponent {
   };
 
   componentDidMount() {
-    // const fetchData = async () => {
-    //   try {
-    //     const { token } = localStorage;
-
-    //     const response = await fetch(`${apiURL}/api/user`, {
-    //       method: 'GET',
-    //       mode: 'cors',
-    //       cache: 'no-cache',
-    //       credentials: 'same-origin',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-
-    //     const data = await response.json();
-    //     if (response.status === 200) {
-    //       this.setState({
-    //         src: data.user.cachedImg,
-    //         imageFont: data.user.imageFont,
-    //         loading: false,
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.error('there was an error -> ', error);
-    //   }
-    // };
-
-    // fetchData();
-
     this.setState({ src: localStorage.selectPersonImage, loading: false });
   }
 
@@ -142,24 +112,9 @@ class Screenshot extends PureComponent {
     setTimeout(() => {
       this.props.history.push('/user/videos');
     }, 1000);
-
-    // console.log(apiURL + '/api2/video/update/' + localStorage.selectVideoId);
   };
 
   saveCroppedScreenshot = () => {
-    // localStorage.img = this.state.croppedImageUrl;
-    // localStorage.imageFont = this.state.imageFont;
-    // this.props.history.push('./save');
-
-    // make a post request to add the image to the video
-
-    // const { _id, userId } = localStorage;
-
-    console.log('====================================');
-    console.log('save select person!');
-    console.log(this.state.croppedImageUrl);
-    console.log('====================================');
-
     this.updateVideoPerson();
   };
 

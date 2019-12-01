@@ -53,16 +53,6 @@ function Navbar(props) {
     }
   }, [setLoading]);
 
-  const handleAdmin = () => {
-    console.log('com o ohotimaro, não há uma segunda chance');
-  };
-
-  handleAdmin();
-
-  // muito bom ohotimaro, vc é surpreendente
-  // sakura, vc ta bem? me responda
-  // muito mais supreendente
-
   const handleLogout = () => {
     props.history.push('/logged-out');
   };

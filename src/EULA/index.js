@@ -3,8 +3,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-// import { Container } from './styles';
-
 export default function EULA(props) {
   return (
     <div style={{ height: '100vh', paddingBottom: 50 }}>

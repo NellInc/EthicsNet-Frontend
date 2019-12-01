@@ -13,7 +13,6 @@ function GetAllImages() {
   useEffect(() => {
     async function getImageData() {
       const token = localStorage.getItem('token');
-
       const response = await fetch(`${apiURL}/api/user/images/all`, {
         method: 'GET',
         headers: {
@@ -21,12 +20,10 @@ function GetAllImages() {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const data = await response.json();
       setImages(data.images);
       setLoading(false);
     }
-
     getImageData();
   }, []);
 

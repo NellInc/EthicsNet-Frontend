@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStyles } from './style';
 import DeleteImage from './DeleteImage';
-import EditImage from './EditImage';
+// import EditImage from './EditImage';
 import Category from '../Components/Category';
 
 function Image({ el, deleteImage, editImage }) {
@@ -13,7 +13,7 @@ function Image({ el, deleteImage, editImage }) {
     title,
     image,
     imageFont,
-    category,
+    // category,
     description,
     contentAction,
     toneForm,
@@ -32,10 +32,6 @@ function Image({ el, deleteImage, editImage }) {
       </p>
 
       <p className={classes.description}>{description}</p>
-
-      {/* <p>
-        <span className={classes.category}>{category}</span>
-      </p> */}
 
       <hr className={classes.hr2} />
 

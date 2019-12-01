@@ -41,67 +41,14 @@ function SaveVideoAction(props) {
     setTimeVideo(
       `${videoUrl}?start=${secondStart}&end=${secondEnd}&autoplay=1`
     );
-
-    console.log('====================================');
-    console.log(
-      secondStart,
-      secondEnd,
-      videoUrl + `?start=${secondStart}&end=${secondEnd}&autoplay=1`
-    );
-    console.log('====================================');
   }, [videoInfo]);
 
   function handleSelectPersonClick() {
     setLoading(true)
     setTimeout(() => {
-      console.log('====================================');
-      console.log('handle person click!');
-      console.log('====================================');
       props.history.push('/select-person-action')
     }, 3000);
   }
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   const { title, description, category, start, end } = values;
-  //   const { token, userId } = localStorage;
-
-  //   const data = {
-  //     category,
-  //     title,
-  //     description,
-  //     videoUrl,
-  //     videoStart: start,
-  //     videoEnd: end,
-  //     authorId: userId,
-  //   };
-
-  //   try {
-  //     const response = await fetch(`${apiURL}/api/video`, {
-  //       method: 'POST',
-  //       mode: 'cors',
-  //       cache: 'no-cache',
-  //       credentials: 'same-origin',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       redirect: 'follow',
-  //       referrer: 'no-referrer',
-  //       body: JSON.stringify(data),
-  //     });
-
-  //     const json = await response.json();
-
-  //     // TODO: Add notification with the response
-  //     console.log(json);
-
-  //     props.history.push('/user/videos');
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   if (loading) {
     return <Loader />;

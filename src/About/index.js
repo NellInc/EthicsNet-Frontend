@@ -2,8 +2,6 @@ import React from 'react';
 
 import { useStyles } from './style';
 
-// a aposentadoria é comparada com uma piada
-
 function About() {
   const classes = useStyles();
   return (

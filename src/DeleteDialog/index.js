@@ -36,13 +36,6 @@ export default function AlertDialogSlide(props) {
         },
       });
 
-      console.log('====================================');
-      // TODO: Add a notification about the response
-      console.log('deleting annotation ... ');
-
-      console.log(response);
-      console.log('====================================');
-
       // TODO: show a message here if it was deleted successfully
       const data = await response.json();
       console.log(data);

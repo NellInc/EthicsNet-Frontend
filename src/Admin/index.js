@@ -5,21 +5,11 @@ import { useStyles } from './style';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
 
-// ta sobrando amor
 function Admin(props) {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
-
   const [values, setValues] = useState({});
-
-  const [user, setUser] = useState({
-    firstName: '',
-    lasName: '',
-  });
-
-  console.log(user);
-  
 
   useEffect(() => {
     async function getUserData() {
@@ -37,11 +27,8 @@ function Admin(props) {
       });
 
       const data = await response.json();
-
-      console.log('admin response -> ', data.user);
-
       setLoading(false);
-      setUser(data.user);
+
       if (!data.user.isAdmin) {
         props.history.push('/');
       }
@@ -50,9 +37,6 @@ function Admin(props) {
   }, [setLoading, props.history]);
 
   useEffect(() => {
-    console.log('====================================');
-    console.log('welcome to the world!');
-    console.log('====================================');
     async function getStats() {
       const { token } = localStorage;
 
@@ -68,10 +52,7 @@ function Admin(props) {
       });
 
       const data = await response.json();
-
       setValues(data);
-
-      console.log('admin response -> ', data);
     }
     getStats();
   }, [props.history]);
