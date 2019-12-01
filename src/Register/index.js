@@ -44,6 +44,8 @@ function App() {
     ) {
       console.log('token is valid!');
       setPassCaptcha(true);
+    } else {
+      setPassCaptcha(false);
     }
   };
 
@@ -112,12 +114,13 @@ function App() {
   };
 
   function next() {
-    setShowTerms(showTerms + 1);
-    const recaptchaValue = recaptchaRef.current.getValue();
-
-    console.log('Captcha value -> ', recaptchaValue);
-    console.log('Captcha value -> ', typeof recaptchaValue);
-    console.log(recaptchaValue === '');
+    if (passCaptcha) {
+      setShowTerms(showTerms + 1);
+      const recaptchaValue = recaptchaRef.current.getValue();
+      console.log('Captcha value -> ', recaptchaValue); 
+    } else {
+      alert('nah ;)')
+    }
   }
 
   function previous() {
