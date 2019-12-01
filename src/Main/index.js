@@ -17,7 +17,7 @@ import Home from '../Home';
 import LoggedOut from '../LoggedOut';
 import NewAnnotation from '../NewAnnotation';
 import Screenshot from '../Screenshot';
-import Screenshot2 from '../Screenshot/Screenshot2'; 
+import Screenshot2 from '../Screenshot/Screenshot2';
 import SaveImage from '../SaveImage';
 import GetImages from '../GetImages';
 import GetAllImages from '../GetAllImages';
@@ -46,9 +46,9 @@ function Main(props) {
   const [loading] = useContext(Loading);
 
   useEffect(() => {
-    console.log('\n\n****************');
-    console.log('ALPHA: 0.0.36');
-    console.log('****************\n\n\n');
+    console.log(
+      '\n\n********************************\n\nETHICSNET ALPHA VERSION: 0.0.37\n\n********************************\n\n'
+    );
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
     // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 * 30 = 30 days

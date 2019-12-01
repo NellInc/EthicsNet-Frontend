@@ -56,11 +56,6 @@ function Profile() {
   useEffect(() => {
     async function getUserData() {
       const token = localStorage.getItem('token');
-
-      console.log('====================================');
-      console.log('api url -> ', apiURL);
-      console.log('====================================');
-
       const response = await fetch(`${apiURL}/api2/user`, {
         method: 'GET',
         mode: 'cors',
@@ -73,8 +68,6 @@ function Profile() {
       });
 
       const data = await response.json();
-
-      console.log(data);
 
       if (response.status === 200) {
         setUserData(data.user);
@@ -116,9 +109,6 @@ function Profile() {
           ethnicity,
         });
       } else if (response.status === 404) {
-        // props.history.push('/logged-out')
-        // alert('your user doesnt exist')
-
         localStorage.isLogged = null;
         window.location.reload();
       }
