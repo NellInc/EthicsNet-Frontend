@@ -11,7 +11,7 @@ import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { useStyles } from './style';
 
-function App() {
+function Register() {
   const classes = useStyles();
   const notification = useContext(Notification);
   const [loading, setLoading] = useState(false);
@@ -114,13 +114,53 @@ function App() {
   };
 
   function next() {
-    if (passCaptcha) {
-      setShowTerms(showTerms + 1);
-      const recaptchaValue = recaptchaRef.current.getValue();
-      console.log('Captcha value -> ', recaptchaValue); 
-    } else {
-      alert('nah ;)')
+    // check if user already exists before moving foward
+
+    setLoading(true);
+
+    console.log('calling...');
+    async function checkUser() {
+      console.log('calling 2...');
+
+      try {
+        const response = await fetch(`${apiURL}/auth/email/${values.email}`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.token}`,
+          },
+          redirect: 'follow',
+          referrer: 'no-referrer',
+        });
+
+        const json = await response.json();
+
+        if (response.status === 200) {
+          if (passCaptcha) {
+            setShowTerms(showTerms + 1);
+            const recaptchaValue = recaptchaRef.current.getValue();
+            console.log('Captcha value -> ', recaptchaValue);
+          } else {
+            alert('nah ;)');
+          }
+        } else if (response.status === 400) {
+          notification(json.error, 'please login instead', 'danger');
+        }
+
+        console.log('====================================');
+        console.log('data -> ', json);
+        console.log('====================================');
+      } catch (error) {
+        console.log('error');
+      } finally {
+        setLoading(false);
+      }
     }
+
+    checkUser();
   }
 
   function previous() {
@@ -196,10 +236,12 @@ function App() {
           />
         </div>
 
+        {/* 37:30 - 38:30 */}
         <ReCAPTCHA
           sitekey='6LcxVMUUAAAAANTT9RCdIyHNbYTTC6cDwNARknvT'
           onChange={onChange}
           ref={recaptchaRef}
+          style={{ display: showTerms ? 'none' : 'block' }}
         />
 
         {!showTerms && (
@@ -280,4 +322,4 @@ function App() {
   );
 }
 
-export default App;
+export default Register;
