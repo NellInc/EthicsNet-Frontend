@@ -20,16 +20,12 @@ export default function DeleteImage({ title, id, image, deleteImage }) {
 
   const handleCloseDelete = async () => {
     setOpen(false);
-    deleteImage(id)
+    deleteImage(id);
   };
 
   const handleCloseCancel = () => {
     setOpen(false);
-  }
-
-  React.useEffect(() => {
-    console.log(title, id);
-  }, [title, id]);
+  };
 
   return (
     <div>
@@ -56,10 +52,18 @@ export default function DeleteImage({ title, id, image, deleteImage }) {
           <img src={image} alt={title} style={{ width: '90%' }} />
         </DialogContent>
         <DialogActions>
-          <Button variant='outlined' onClick={handleCloseCancel} color='default'>
+          <Button
+            variant='outlined'
+            onClick={handleCloseCancel}
+            color='default'
+          >
             Cancel
           </Button>
-          <Button variant='outlined' onClick={handleCloseDelete} color='secondary'>
+          <Button
+            variant='outlined'
+            onClick={handleCloseDelete}
+            color='secondary'
+          >
             Delete
           </Button>
         </DialogActions>

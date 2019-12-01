@@ -42,7 +42,6 @@ function Register() {
       email !== '' &&
       password !== ''
     ) {
-      console.log('token is valid!');
       setPassCaptcha(true);
     } else {
       setPassCaptcha(false);
@@ -95,8 +94,6 @@ function Register() {
 
   const onChange = value => {
     const { firstName, lastName, email, password } = values;
-
-    console.log('Captcha value -> ', value);
     if (
       value &&
       firstName !== '' &&
@@ -104,20 +101,13 @@ function Register() {
       email !== '' &&
       password !== ''
     ) {
-      console.log('token is valid!');
       setPassCaptcha(true);
     }
   };
 
   function next() {
-    // check if user already exists before moving foward
-
     setLoading(true);
-
-    console.log('calling...');
     async function checkUser() {
-      console.log('calling 2...');
-
       try {
         const response = await fetch(`${apiURL}/auth/email/${values.email}`, {
           method: 'GET',
@@ -137,15 +127,12 @@ function Register() {
         if (response.status === 200) {
           if (passCaptcha) {
             setShowTerms(showTerms + 1);
-            const recaptchaValue = recaptchaRef.current.getValue();
-            console.log('Captcha value -> ', recaptchaValue);
           } else {
             alert('nah ;)');
           }
         } else if (response.status === 400) {
           notification(json.error, 'please login instead', 'danger');
         }
-
       } catch (error) {
         console.log('error');
       } finally {

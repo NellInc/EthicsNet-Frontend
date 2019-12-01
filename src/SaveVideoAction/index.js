@@ -19,22 +19,9 @@ function SaveVideoAction(props) {
 
   useEffect(() => {
     setLoading(false);
-
-    console.log('videoinfo -> ', videoInfo);
-
-    console.log(videoInfo.start);
-    console.log(videoInfo.start[0]);
-    console.log(videoInfo.start[1]);
-    console.log(videoInfo.start[2]);
-    console.log(videoInfo.start[3]);
-    console.log(videoInfo.start[4]);
-
     const { end, start, videoUrl } = videoInfo;
-
     const minutesStart = start[0] * 10 + start[1] * 1;
-
     const secondStart = start[3] * 10 + start[4] * 1 + minutesStart * 60;
-
     const minutesEnd = end[0] * 10 + end[1] * 1;
     const secondEnd = end[3] * 10 + end[4] * 1 + minutesEnd * 60;
 
@@ -44,9 +31,9 @@ function SaveVideoAction(props) {
   }, [videoInfo]);
 
   function handleSelectPersonClick() {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
-      props.history.push('/select-person-action')
+      props.history.push('/select-person-action');
     }, 3000);
   }
 
@@ -84,7 +71,12 @@ function SaveVideoAction(props) {
         </div>
 
         {/* when the user clicks this button I want to send a message to the chrome extension */}
-        <Button onClick={handleSelectPersonClick} data-extension-person color='primary' variant='outlined'>
+        <Button
+          onClick={handleSelectPersonClick}
+          data-extension-person
+          color='primary'
+          variant='outlined'
+        >
           Select person
         </Button>
       </div>

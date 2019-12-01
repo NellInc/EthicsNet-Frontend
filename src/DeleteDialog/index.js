@@ -36,10 +36,6 @@ export default function AlertDialogSlide(props) {
         },
       });
 
-      // TODO: show a message here if it was deleted successfully
-      const data = await response.json();
-      console.log(data);
-
       if (response.status === 200) {
         notification('Annotation deleted!');
         filterAnotations(id);

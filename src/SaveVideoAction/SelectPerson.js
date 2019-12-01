@@ -89,25 +89,18 @@ class Screenshot extends PureComponent {
   updateVideoPerson = async () => {
     const { token, selectVideoId } = localStorage;
 
-    const response = await fetch(
-      `${apiURL}/api2/video/update/${selectVideoId}`,
-      {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          selectedPerson: this.state.croppedImageUrl,
-        }),
-      }
-    );
-
-    const json = await response.json();
-
-    console.log(json.video.selectedPerson);
+    await fetch(`${apiURL}/api2/video/update/${selectVideoId}`, {
+      method: 'PUT',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        selectedPerson: this.state.croppedImageUrl,
+      }),
+    });
 
     setTimeout(() => {
       this.props.history.push('/user/videos');

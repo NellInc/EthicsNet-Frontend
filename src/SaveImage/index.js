@@ -71,17 +71,11 @@ function SaveImage(props) {
         body: JSON.stringify(data),
       });
 
-      const json = await response.json();
-
       if (response.status === 200) {
         notification('Image saved');
       } else {
         notification('there was a problem saving the image');
       }
-
-      // TODO: add a notification with the response
-      console.log(json);
-
       props.history.push('/user/images');
     } catch (error) {
       console.error(error);

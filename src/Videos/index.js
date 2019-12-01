@@ -54,9 +54,6 @@ function Videos(props) {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      const data = await response.json();
-      console.log(data);
       if (response.status === 200) {
         notification('Video annotation deleted!');
         setVideos(videos.filter(el => el._id !== id));

@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function Screenshot2() {
   const [name, setName] = useState('lopes');
-
-  useEffect(() => {
-    console.log('====================================');
-    console.log('screenshot component');
-    console.log('====================================');
-  }, []);
 
   return (
     <div>

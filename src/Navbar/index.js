@@ -34,11 +34,6 @@ function Navbar(props) {
         });
 
         const data = await response.json();
-
-        console.log('====================================');
-        console.log('navbar routes user data -> ', data.user);
-        console.log('====================================');
-
         setAdmin(data.user.isAdmin);
       } catch (error) {
         console.log('error on the navbar -> ', error);

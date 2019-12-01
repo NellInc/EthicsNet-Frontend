@@ -65,7 +65,6 @@ const useStyles = makeStyles(theme => ({
 export default function CustomizedSlider({ range, setValue, name }) {
   const classes = useStyles();
   const handleChange = (e, newValue) => {
-    console.log('handle change -> ', newValue);
     setValue(newValue);
   };
 

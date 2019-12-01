@@ -51,10 +51,6 @@ export default function EditImage({
     setOpen(false);
   };
 
-  React.useEffect(() => {
-    console.log(title, id);
-  }, [title, id]);
-
   return (
     <div>
       <Button

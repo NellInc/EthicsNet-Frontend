@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -21,11 +21,6 @@ function NewAnotation(props) {
   const [contentAction, setContentAction] = useState(50);
   const [toneForm, setToneForm] = useState(50);
 
-  useEffect(() => {
-    console.log('contentAction ->', contentAction);
-    console.log('toneForm ->', toneForm);
-  }, [contentAction, toneForm]);
-
   const handleChange = e => {
     setAnotation(e.target.value);
   };
@@ -45,7 +40,6 @@ function NewAnotation(props) {
     };
 
     // sao pessoas reais, é assim que eu quero me entregar a uma dor quando eu to sentindo
-    
 
     try {
       const response = await fetch(`${apiURL}/api2/text`, {
@@ -63,11 +57,6 @@ function NewAnotation(props) {
       });
 
       if (response.status === 200) {
-        const json = await response.json();
-
-        // TODO: add a notification from notification
-        console.log(json);
-
         notification('annotation created!');
         props.history.push('/profile/annotations');
       } else {

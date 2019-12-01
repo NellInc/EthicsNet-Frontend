@@ -33,7 +33,6 @@ function GetImages() {
       setImages(data.images);
       setCount(data.count);
       setLoading(false);
-      console.log(data.images);
     }
 
     getImageData();
@@ -55,8 +54,6 @@ function GetImages() {
         },
       });
 
-      const data = await response.json();
-      console.log(data);
       if (response.status === 200) {
         notification('Image annotation deleted!');
         setImages(images.filter(el => el._id !== id));
@@ -97,8 +94,6 @@ function GetImages() {
         body: JSON.stringify(newData),
       });
 
-      const data = await response.json();
-      console.log(data);
       if (response.status === 200) {
         notification('Image annotation updated!');
         // setImages(images.filter(el => el._id !== id));
