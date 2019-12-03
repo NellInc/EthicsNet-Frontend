@@ -208,15 +208,8 @@ function Profile() {
   }
 
   async function requestMyData() {
-    console.log('i want my data!');
-
     try {
       const token = localStorage.getItem('token');
-
-      console.log('====================================');
-      console.log('api url -> ', apiURL);
-      console.log('====================================');
-
       const response = await fetch(`${apiURL}/api2/user/data`, {
         method: 'GET',
         mode: 'cors',
@@ -227,9 +220,8 @@ function Profile() {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const data = await response.json();
-
+      // download user data
       console.log('request my data -> ', data);
     } catch (error) {
       console.log('error');
