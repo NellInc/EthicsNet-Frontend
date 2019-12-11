@@ -3,10 +3,8 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './style';
 
-function Pagination(props) {
+function Pagination({ handleNextPage, handlePreviousPage, page }) {
   const classes = useStyles();
-
-  const { handleNextPage, handlePreviousPage, page } = props;
   return (
     <div className={classes.pagination}>
       <Button
