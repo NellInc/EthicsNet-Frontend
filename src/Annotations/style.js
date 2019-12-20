@@ -5,7 +5,7 @@ export const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3, 2),
     margin: '20px 20px',
     '&:hover': {
-      boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.4)',
+      boxShadow: '0px 0px 2px 2px rgba(0,0,0,0.4)',
       cursor: 'pointer',
     },
   },

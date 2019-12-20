@@ -17,7 +17,7 @@ function Annotation({
   const classes = useStyles();
 
   return (
-    <Card className={classes.paper} key={el._id}>
+    <Card className={classes.paper} >
       <DeleteDialog
         content={el.content}
         open={open}

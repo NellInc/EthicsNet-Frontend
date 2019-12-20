@@ -67,6 +67,7 @@ function Anotations(props) {
       el={el}
       handleAnotationClick={handleAnotationClick}
       open={open}
+      key={el._id}
     />
   ));
 
