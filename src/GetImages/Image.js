@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStyles } from './style';
 import DeleteImage from './DeleteImage';
-// import EditImage from './EditImage';
+import EditImage from './EditImage';
 import Category from '../Components/Category';
 
 function Image({ el, deleteImage, editImage }) {
@@ -13,7 +13,6 @@ function Image({ el, deleteImage, editImage }) {
     title,
     image,
     imageFont,
-    // category,
     description,
     contentAction,
     toneForm,
@@ -51,14 +50,15 @@ function Image({ el, deleteImage, editImage }) {
           image={image}
           deleteImage={deleteImage}
         />
-        {/* <EditImage
+        <EditImage
           title={title}
           id={_id}
           image={image}
           editImage={editImage}
-          category={category}
+          contentAction={contentAction}
+          toneForm={toneForm}
           description={description}
-        /> */}
+        />
       </div>
     </div>
   );

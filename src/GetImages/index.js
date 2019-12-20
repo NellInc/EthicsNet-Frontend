@@ -30,13 +30,16 @@ function GetImages() {
         },
       });
       const data = await response.json();
+      console.log('====================================');
+      console.log(data);
+      console.log('====================================');
       setImages(data.images);
       setCount(data.count);
       setLoading(false);
     }
 
     getImageData();
-  }, [page]);
+  }, [page, loading]);
 
   async function deleteImage(id) {
     setLoading(true);
@@ -96,6 +99,7 @@ function GetImages() {
 
       if (response.status === 200) {
         notification('Image annotation updated!');
+        
         // setImages(images.filter(el => el._id !== id));
       } else {
         notification(

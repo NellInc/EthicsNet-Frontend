@@ -6,12 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField';
-// import Select from '@material-ui/core/Select';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
 
-// import { useStyles } from './style';
 import RangeSlider from '../Slider';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -19,7 +14,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EditAnnotation({ editAnnotation, el }) {
-  // const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const {
     content,
@@ -28,11 +22,13 @@ export default function EditAnnotation({ editAnnotation, el }) {
     categoryRangeToneForm,
   } = el;
 
-  const [contentAction, setContentAction] = useState(categoryRangeContentAction);
+  const [contentAction, setContentAction] = useState(
+    categoryRangeContentAction
+  );
   const [toneForm, setToneForm] = useState(categoryRangeToneForm);
 
   const [values, setValues] = useState({
-    content
+    content,
   });
 
   const handleChange = name => event => {
@@ -49,8 +45,8 @@ export default function EditAnnotation({ editAnnotation, el }) {
     const data = {
       content: values.content,
       categoryRangeContentAction: contentAction,
-      categoryRangeToneForm: toneForm
-    }
+      categoryRangeToneForm: toneForm,
+    };
 
     editAnnotation(_id, data);
   };
@@ -91,26 +87,12 @@ export default function EditAnnotation({ editAnnotation, el }) {
             margin='normal'
             required
           />
-          {/* TODO: Add categories here */}
           <div>
-            {/* <Category
-              title='Content/Action'
-              categoryRangeContentAction={el.categoryRangeContentAction}
-            />
-
-            <Category
-              title='Tone/Form'
-              categoryRangeContentAction={el.categoryRangeToneForm}
-            /> */}
-
-            {/* <hr className={classes.hr} /> */}
-
             <RangeSlider
               range={categoryRangeContentAction}
               setValue={setContentAction}
               name='Content/Action'
             />
-
             <RangeSlider
               range={categoryRangeToneForm}
               setValue={setToneForm}

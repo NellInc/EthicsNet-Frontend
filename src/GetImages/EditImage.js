@@ -13,6 +13,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 import { useStyles } from './style';
 
+import RangeSlider from '../Slider';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
@@ -24,15 +26,24 @@ export default function EditImage({
   editImage,
   description,
   category,
+  contentAction,
+  toneForm,
 }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const [contentAction1, setContentAction] = useState(contentAction);
+  const [toneForm1, setToneForm] = useState(toneForm);
 
   const [values, setValues] = useState({
     title,
     category,
     description,
   });
+
+  React.useEffect(() => {
+    console.log(contentAction1, toneForm1)
+  })
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -44,7 +55,14 @@ export default function EditImage({
 
   const handleCloseDelete = async () => {
     setOpen(false);
-    editImage(id, values);
+
+    const data = {
+      ...values,
+      contentAction: contentAction1,
+      toneForm: toneForm1
+    }
+
+    editImage(id, data);
   };
 
   const handleCloseCancel = () => {
@@ -63,9 +81,10 @@ export default function EditImage({
       </Button>
 
       <Dialog
+        maxWidth='md'
         open={open}
         TransitionComponent={Transition}
-        keepMounted
+        // keepMounted
         onClose={handleCloseCancel}
         aria-labelledby='alert-dialog-slide-title'
         aria-describedby='alert-dialog-slide-description'
@@ -92,7 +111,20 @@ export default function EditImage({
             required
           />
 
-          <FormControl className={classes.formControl}>
+          <div>
+            <RangeSlider
+              range={contentAction1}
+              setValue={setContentAction}
+              name='Content/Action'
+            />
+            <RangeSlider
+              range={toneForm1}
+              setValue={setToneForm}
+              name='Tone/Form'
+            />
+          </div>
+
+          {/* <FormControl className={classes.formControl}>
             <InputLabel htmlFor='category-simple'>Category</InputLabel>
             <Select
               required
@@ -119,7 +151,7 @@ export default function EditImage({
                 Not unethical, but strange
               </MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
 
           <img src={image} alt={title} className={classes.editImage} />
         </DialogContent>
