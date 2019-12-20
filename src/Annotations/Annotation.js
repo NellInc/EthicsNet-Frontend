@@ -1,11 +1,11 @@
 import React from 'react';
-import Category from '../Components/Category';
-import DeleteDialog from '../DeleteDialog';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 
 import { useStyles } from './style';
 import EditAnnotation from './EditAnnotation';
+import Category from '../Components/Category';
+import DeleteDialog from '../DeleteDialog';
 
 function Annotation({
   handleClose,
@@ -77,8 +77,7 @@ function Annotation({
 
         <EditAnnotation
           editAnnotation={editAnnotation}
-          content={el.content}
-          id={el._id}
+          el={el}
           style={{ marginLeft: 10 }}
         />
       </div>
