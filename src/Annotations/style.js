@@ -72,5 +72,11 @@ export const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     justifyContent: 'center',
     flexDirection: 'column-reverse'
+  },
+  buttons: {
+    display: 'flex'
+  },
+  editImage: {
+    minWidth: 600
   }
 }));

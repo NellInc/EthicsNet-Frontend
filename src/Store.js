@@ -8,8 +8,8 @@ import 'react-notifications-component/dist/theme.css';
 
 const theme = createMuiTheme({
   palette: {
-    secondary: { main: 'rgb(49, 54, 57)' },
-    primary: { main: '#11cb5f' },
+    primary: { main: 'rgb(49, 54, 57)' },
+    secondary: { main: '#11cb5f' },
   },
 });
 

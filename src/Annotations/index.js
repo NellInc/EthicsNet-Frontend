@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 import Pagination from '../Components/Pagination';
 import { apiURL } from '../globals';
+import { Notification } from '../Store';
 import { useStyles } from './style';
 import Annotation from './Annotation';
 
@@ -14,6 +14,8 @@ function Anotations(props) {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState('');
+
+  const notification = useContext(Notification);
 
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
@@ -48,7 +50,7 @@ function Anotations(props) {
     }
     getUserData();
     // if you place 'loading' here it will run twice (make 2 api calls)
-  }, [page]);
+  }, [page, loading]);
 
   const handleAnotationClick = (id, type) => {
     if (type === 'edit') {
@@ -59,6 +61,48 @@ function Anotations(props) {
     }
   };
 
+  async function editAnnotation(id, values) {
+    console.log('====================================');
+    console.log('edit annotation', id, values);
+    console.log('====================================');
+    setLoading(true);
+
+    try {
+      const { token } = localStorage;
+
+      const response = await fetch(`${apiURL}/api2/text/${id}`, {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.status === 200) {
+        notification('Text annotation updated!');
+      } else {
+        notification(
+          'There was a problem editing the text annotation',
+          '',
+          'danger'
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      notification(
+        'There was a problem editing the text annotation',
+        '',
+        'danger'
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const anotationsComponent = anotations.map(el => (
     <Annotation
       handleClose={handleClose}
@@ -68,6 +112,7 @@ function Anotations(props) {
       handleAnotationClick={handleAnotationClick}
       open={open}
       key={el._id}
+      editAnnotation={editAnnotation}
     />
   ));
 

@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 
 import { useStyles } from './style';
+import EditAnnotation from './EditAnnotation';
 
 function Annotation({
   handleClose,
@@ -12,12 +13,13 @@ function Annotation({
   idToDelete,
   el,
   handleAnotationClick,
-  open
+  open,
+  editAnnotation,
 }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.paper} >
+    <Card className={classes.paper}>
       <DeleteDialog
         content={el.content}
         open={open}
@@ -64,7 +66,7 @@ function Annotation({
 
       <p className={classes.date}>{el.createdAt.substring(0, 10)} </p>
 
-      <div>
+      <div className={classes.buttons}>
         <Button
           color='secondary'
           variant='outlined'
@@ -72,6 +74,13 @@ function Annotation({
         >
           Delete
         </Button>
+
+        <EditAnnotation
+          editAnnotation={editAnnotation}
+          content={el.content}
+          id={el._id}
+          style={{ marginLeft: 10 }}
+        />
       </div>
     </Card>
   );
