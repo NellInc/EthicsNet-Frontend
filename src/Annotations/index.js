@@ -62,9 +62,6 @@ function Anotations(props) {
   };
 
   async function editAnnotation(id, values) {
-    console.log('====================================');
-    console.log('edit annotation', id, values);
-    console.log('====================================');
     setLoading(true);
 
     try {
