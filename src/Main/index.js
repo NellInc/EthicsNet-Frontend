@@ -47,7 +47,7 @@ function Main(props) {
 
   useEffect(() => {
     console.log(
-      '\n\n********************************\n\nETHICSNET ALPHA VERSION: 0.0.37\n\n********************************\n\n'
+      '\n\n********************************\n\nETHICSNET ALPHA VERSION: 0.0.38\n\n********************************\n\n'
     );
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();
