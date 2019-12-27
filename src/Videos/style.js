@@ -28,4 +28,7 @@ export const useStyles = makeStyles(theme => ({
     padding: 25,
     borderRadius: 5,
   },
+  buttons: {
+    display: 'flex'
+  }
 }));

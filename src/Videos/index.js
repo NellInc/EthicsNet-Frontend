@@ -37,7 +37,7 @@ function Videos(props) {
     }
 
     getVideoData();
-  }, [page]);
+  }, [page, loading]);
 
   async function deleteVideo(id) {
     setLoading(true);
@@ -76,6 +76,45 @@ function Videos(props) {
     }
   }
 
+  async function editVideo(id, newData) {
+    setLoading(true);
+    try {
+      const { token } = localStorage;
+
+      const response = await fetch(`${apiURL}/api2/video/edit/${id}`, {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` 
+        },
+        body: JSON.stringify(newData)
+      })
+
+      if (response.status === 200) {
+        notification('Video annotation updated');
+      } else {
+        notification(
+          'There was a problem editing the video annotation',
+          '',
+          'danger'
+        )
+      }
+
+    } catch (error) {
+      console.log('error editing video -> ', error)
+      notification(
+        'There was a problem editing the video annotation',
+        '',
+        'danger'
+      )
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function youtube_parser(url) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
@@ -88,6 +127,7 @@ function Videos(props) {
       youtube_parser={youtube_parser}
       el={el}
       deleteVideo={deleteVideo}
+      editVideo={editVideo}
     />
   ));
 

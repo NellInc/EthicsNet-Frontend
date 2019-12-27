@@ -1,10 +1,14 @@
 import React from 'react';
+// nunca perca dinheiro
+// todo sucesso da noite pro dia, tbm some do dia pra noite
+// somos livres na escolha mas escravos na consequencia
 
 import { useStyles } from './style';
 import Category from '../Components/Category';
 import DeleteVideo from './DeleteVideo';
+import EditVideo from './EditVideo';
 
-function Video({ el, youtube_parser, deleteVideo }) {
+function Video({ el, youtube_parser, deleteVideo, editVideo }) {
   const classes = useStyles();
   const {
     _id,
@@ -68,12 +72,23 @@ function Video({ el, youtube_parser, deleteVideo }) {
         Delete
       </Button> */}
 
-      <DeleteVideo
-        title={title}
-        id={_id}
-        // video={video}
-        deleteVideo={deleteVideo}
-      />
+      <div className={classes.buttons}>
+        <DeleteVideo
+          title={title}
+          id={_id}
+          // video={video}
+          deleteVideo={deleteVideo}
+        />
+
+        <EditVideo
+          title={title}
+          id={_id}
+          contentAction={contentAction}
+          toneForm={toneForm}
+          editVideo={editVideo}
+          description={description}
+        />
+      </div>
     </div>
   );
 }
