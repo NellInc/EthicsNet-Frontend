@@ -37,10 +37,6 @@ export default function EditImage({
     description,
   });
 
-  React.useEffect(() => {
-    console.log(contentAction1, toneForm1)
-  })
-
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };

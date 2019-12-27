@@ -30,9 +30,6 @@ function GetImages() {
         },
       });
       const data = await response.json();
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
       setImages(data.images);
       setCount(data.count);
       setLoading(false);
