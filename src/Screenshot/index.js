@@ -183,9 +183,9 @@ class Screenshot extends PureComponent {
           />
         )}
 
-        {croppedImageUrl && (
+        {/* {croppedImageUrl && (
           <img alt='Crop' style={{ width: 'auto' }} src={croppedImageUrl} />
-        )}
+        )} */}
       </div>
     );
   }
