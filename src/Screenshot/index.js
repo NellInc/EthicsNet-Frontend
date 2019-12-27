@@ -153,7 +153,7 @@ class Screenshot extends PureComponent {
   );
 
   render() {
-    const { crop, croppedImageUrl, src } = this.state;
+    const { crop, src } = this.state;
 
     if (this.state.loading) {
       return <Loader />;
@@ -192,3 +192,5 @@ class Screenshot extends PureComponent {
 }
 
 export default Screenshot;
+
+// 19537 - 4500 - 2000 = 13037
