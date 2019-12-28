@@ -62,6 +62,15 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
+        <Link className={classes.link} to='/save-upload-image'>
+          Upload image annotation
+        </Link>
+      </Button>
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
         <Link className={classes.link} to='/profile'>
           Profile
         </Link>

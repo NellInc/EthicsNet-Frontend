@@ -17,6 +17,7 @@ export const useStyles = makeStyles(() => ({
   },
   img: {
     // width: '100%'
+    width: '100%'
   },
   hr: {
     backgroundColor: '#ddd',

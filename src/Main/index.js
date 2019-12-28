@@ -31,6 +31,8 @@ import TermsAndConditions from '../TermsAndConditions';
 import EULA from '../EULA';
 import About from '../About';
 import Admin from '../Admin';
+import UploadImage from '../SaveImage/UploadImage';
+import SaveImageUpload from '../SaveImage/SaveImageUpload';
 
 import {
   PrivateRoute,
@@ -110,6 +112,9 @@ function Main(props) {
             />
 
             <PrivateRoute exact path='/profile' component={Profile} />
+
+            <PrivateRoute exact path='/upload' component={UploadImage} />
+            <PrivateRoute exact path='/save-upload-image' component={SaveImageUpload} />
 
             {/* Type of user */}
             <AdminRoutes
