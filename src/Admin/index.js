@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import Table from './Table';
 
 import { useStyles } from './style';
 import { apiURL } from '../globals';
@@ -64,13 +65,18 @@ function Admin(props) {
   return (
     <div className={classes.admin}>
       <h1>General info</h1>
-
+{/* 
       <h2>Users created: {values.numUsers}</h2>
       <h2>Tetxs annotated: {values.numTexts}</h2>
       <h2>Images annotated: {values.numImages}</h2>
-      <h2>Videos annotated: {values.numVideos}</h2>
+      <h2>Videos annotated: {values.numVideos}</h2> */}
 
-      <Button variant='outlined'>This is a button</Button>
+      <Table
+        numUsers={values.numUsers}
+        numTexts={values.numTexts}
+        numImages={values.numImages}
+        numVideos={values.numVideos}
+      />
     </div>
   );
 }
