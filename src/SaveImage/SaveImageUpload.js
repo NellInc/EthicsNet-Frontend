@@ -18,7 +18,6 @@ function SaveImageUpload(props) {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
-  const [image, setImage] = useState('');
   const notification = useContext(Notification);
 
   const [contentAction, setContentAction] = useState(50);
@@ -41,7 +40,6 @@ function SaveImageUpload(props) {
   }
 
   useEffect(() => {
-    setImage(localStorage.img);
     setLoading(false);
   }, []);
 

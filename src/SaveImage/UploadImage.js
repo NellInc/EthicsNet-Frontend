@@ -47,11 +47,6 @@ export default class UploadImage extends React.Component {
   // Callback~
   getFiles(files) {
     this.setState({ files: files });
-    
-    console.log('====================================');
-    console.log('uploades');
-    console.log('====================================');
-
     this.props.getImage(files.base64);
   }
 
