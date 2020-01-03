@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { Notification } from '../Store';
-import { apiURL } from '../globals';
+import API, { apiURL } from '../globals';
 import { Loader } from '../components';
 import { useStyles } from './style';
 
@@ -13,9 +13,18 @@ function Login({ history }) {
   const notification = useContext(Notification);
   const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
-    email: '',
-    password: '',
+    email: 'emersondeivson13@gmail.com',
+    password: '123',
   });
+
+  React.useEffect(() => {
+    async function healthcheck() {
+      const response = await API.get('/healthcheck');
+      console.log(response);
+      console.log(response.data.msg);
+    }
+    healthcheck();
+  }, []);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -23,30 +32,17 @@ function Login({ history }) {
 
   const handleSubmit = async e => {
     setLoading(true);
-    const data = values;
+    const { email, password } = values;
     e.preventDefault();
     try {
-      const response = await fetch(`${apiURL}/auth/authenticate`, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        redirect: 'follow',
-        referrer: 'no-referrer',
-        body: JSON.stringify(data),
+      const { data, status } = await API.post('/auth/authenticate', {
+        email,
+        password,
       });
 
-      const json = await response.json();
-
-      if (response.status === 400) {
-        notification(json.error, 'login failed', 'danger');
-        setLoading(false);
-      } else if (response.status === 200) {
+      if (status === 200) {
         notification('welcome back!');
-        const { token, user } = json;
+        const { token, user } = data;
         localStorage.setItem('userId', user._id);
         localStorage.setItem('userName', user.firstName);
         localStorage.setItem('isLogged', 'true');
@@ -59,7 +55,8 @@ function Login({ history }) {
         notification('there was an error', 'we could not log you in', 'danger');
       }
     } catch (error) {
-      console.error(error);
+      notification('there was an error', 'login failed', 'danger');
+      console.log('error -> ', error);
       setLoading(false);
     }
   };
@@ -112,11 +109,7 @@ function Login({ history }) {
           instead
         </p>
 
-        <Button
-          type='submit'
-          variant='contained'
-          color='primary'
-        >
+        <Button type='submit' variant='contained' color='primary'>
           login
         </Button>
 
