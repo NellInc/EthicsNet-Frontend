@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Pagination from '../Components/Pagination';
-import { apiURL } from '../globals';
+import API from '../globals';
 import { Notification } from '../Store';
 import { useStyles } from './style';
 import Annotation from './Annotation';
@@ -31,26 +31,19 @@ function Anotations(props) {
   useEffect(() => {
     document.title = 'EthicsNet - Annotations';
     async function getUserData() {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${apiURL}/api2/text/page/${page}`, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-      setAnotations(data.anotations);
-      setCount(data.count);
-      setLoading(false);
+      try {
+        const { data } = await API.get(`/api2/text/page/${page}`);
+        setAnotations(data.anotations);
+        setCount(data.count);
+        setLoading(false);
+      } catch (error) {
+        console.log('error -> ', error);
+        notification('There was a problem processing your request', '', 'danger');
+      }
     }
     getUserData();
     // if you place 'loading' here it will run twice (make 2 api calls)
-  }, [page, loading]);
+  }, [page, loading, notification]);
 
   const handleAnotationClick = (id, type) => {
     if (type === 'edit') {
@@ -63,23 +56,14 @@ function Anotations(props) {
 
   async function editAnnotation(id, values) {
     setLoading(true);
-
     try {
-      const { token } = localStorage;
+      const { content } = values;
 
-      const response = await fetch(`${apiURL}/api2/text/${id}`, {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(values),
+      const {status} = await API(`/api2/text/${id}`, {
+        content
       });
 
-      if (response.status === 200) {
+      if (status === 200) {
         notification('Text annotation updated!');
       } else {
         notification(

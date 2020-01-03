@@ -43,13 +43,17 @@ import {
 import { Loading } from '../Store';
 import { useStyles } from './style';
 
+// quem trabalha demais não tem tempo pra ganhar dinheiro
+// feche um ciclo, olhe o que aconteceu e veja como vc pode melhorar isso
+// o tempo para a analise é fundamental
+
 function Main(props) {
   const classes = useStyles();
   const [loading] = useContext(Loading);
 
   useEffect(() => {
     console.log(
-      '\n\n********************************\n\nETHICSNET ALPHA VERSION: 0.0.41\n\n********************************\n\n'
+      '\n\n********************************\n\nETHICSNET ALPHA VERSION: 0.0.42\n\n********************************\n\n'
     );
     var lastclear = localStorage.getItem('lastclear'),
       time_now = new Date().getTime();

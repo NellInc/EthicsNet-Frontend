@@ -33,8 +33,8 @@ export default function SimpleTable({ numUsers, numTexts, numImages, numVideos})
           <TableRow>
             <TableCell>Time</TableCell>
             <TableCell align="right">users</TableCell>
+            <TableCell align="right">texts</TableCell>
             <TableCell align="right">images</TableCell>
-            <TableCell align="right">videos</TableCell>
             <TableCell align="right">videos</TableCell>
           </TableRow>
         </TableHead>

@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { Notification } from '../Store';
-import API, { apiURL } from '../globals';
+import API from '../globals';
 import { Loader } from '../components';
 import { useStyles } from './style';
 
