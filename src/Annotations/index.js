@@ -38,7 +38,11 @@ function Anotations(props) {
         setLoading(false);
       } catch (error) {
         console.log('error -> ', error);
-        notification('There was a problem processing your request', '', 'danger');
+        notification(
+          'There was a problem processing your request',
+          '',
+          'danger'
+        );
       }
     }
     getUserData();
@@ -57,10 +61,16 @@ function Anotations(props) {
   async function editAnnotation(id, values) {
     setLoading(true);
     try {
-      const { content } = values;
+      const {
+        content,
+        categoryRangeContentAction,
+        categoryRangeToneForm,
+      } = values;
 
-      const {status} = await API(`/api2/text/${id}`, {
-        content
+      const { status } = await API.put(`/api2/text/${id}`, {
+        content,
+        categoryRangeContentAction,
+        categoryRangeToneForm,
       });
 
       if (status === 200) {
