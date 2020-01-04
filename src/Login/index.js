@@ -13,8 +13,8 @@ function Login({ history }) {
   const notification = useContext(Notification);
   const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
-    email: 'emersondeivson13@gmail.com',
-    password: '123',
+    email: '',
+    password: '',
   });
 
   React.useEffect(() => {
@@ -31,33 +31,26 @@ function Login({ history }) {
   };
 
   const handleSubmit = async e => {
-    setLoading(true);
     const { email, password } = values;
     e.preventDefault();
     try {
-      const { data, status } = await API.post('/auth/authenticate', {
+      const { data, message } = await API.post('/auth/authenticate', {
         email,
         password,
       });
-
-      if (status === 200) {
-        notification('welcome back!');
-        const { token, user } = data;
-        localStorage.setItem('userId', user._id);
-        localStorage.setItem('userName', user.firstName);
-        localStorage.setItem('isLogged', 'true');
-        localStorage.setItem('lastclear', new Date().getTime());
-        localStorage.setItem('token', token);
-        // history.push('/');
-        window.location.reload();
-      } else {
-        setLoading(false);
-        notification('there was an error', 'we could not log you in', 'danger');
+      if (message) {
+        notification(message);
       }
+      const { token, user } = data;
+      localStorage.setItem('userId', user._id);
+      localStorage.setItem('userName', user.firstName);
+      localStorage.setItem('isLogged', 'true');
+      localStorage.setItem('lastclear', new Date().getTime());
+      localStorage.setItem('token', token);
+      // history.push('/');
+      window.location.reload();
     } catch (error) {
-      notification('there was an error', 'login failed', 'danger');
-      console.log('error -> ', error);
-      setLoading(false);
+      notification(error.message, 'Login failed', 'danger');
     }
   };
 
@@ -112,17 +105,6 @@ function Login({ history }) {
         <Button type='submit' variant='contained' color='primary'>
           login
         </Button>
-
-        {/* <Button
-          className={classes.submit}
-          style={{ marginLeft: 10 }}
-          onClick={() => history.push('/register')}
-          type='button'
-          variant='contained'
-          color='primary'
-        >
-          Register
-        </Button> */}
       </form>
     </div>
   );

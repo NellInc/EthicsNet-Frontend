@@ -22,12 +22,12 @@ function Register() {
   const recaptchaRef = React.createRef();
 
   const [values, setValues] = React.useState({
-    firstName: 'lopes',
-    lastName: 'eemrosn',
-    email: 'lupuselit@gmail.com',
-    password: '123',
-    age: '21',
-    gender: 'male',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    age: '',
+    gender: '',
   });
 
   const handleChange = name => event => {
