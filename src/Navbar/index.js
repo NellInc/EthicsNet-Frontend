@@ -108,6 +108,12 @@ function Navbar(props) {
               </Button>
             </>
           )}
+
+          <Button color='inherit'>
+            <Link className={classes.link} to='/about'>
+              About
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
