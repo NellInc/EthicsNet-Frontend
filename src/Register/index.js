@@ -10,6 +10,7 @@ import { Notification } from '../Store';
 import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { useStyles } from './style';
+import API from '../globals';
 
 function Register() {
   const classes = useStyles();
@@ -21,12 +22,12 @@ function Register() {
   const recaptchaRef = React.createRef();
 
   const [values, setValues] = React.useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    age: '',
-    gender: '',
+    firstName: 'lopes',
+    lastName: 'eemrosn',
+    email: 'lupuselit@gmail.com',
+    password: '123',
+    age: '21',
+    gender: 'male',
   });
 
   const handleChange = name => event => {
@@ -51,44 +52,22 @@ function Register() {
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
-    const data = values;
     try {
-      const response = await fetch(`${apiURL}/auth/register`, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        redirect: 'follow',
-        referrer: 'no-referrer',
-        body: JSON.stringify(data),
-      });
-
-      const json = await response.json();
-
-      if (response.status === 400) {
-        notification(json.error, 'registration failed', 'danger');
-      } else if (response.status === 200) {
-        notification('welcome to ethics net!');
-        const { token, user } = json;
+      const { message, data } = await API.post('/auth/register', values);
+      // here will always be 200
+      if (message) {
+        notification(message);
+      }
+        const { token, user } = data;
         localStorage.setItem('userId', user._id);
         localStorage.setItem('userName', user.firstName);
         localStorage.setItem('isLogged', 'true');
         localStorage.setItem('lastclear', new Date().getTime());
         localStorage.setItem('token', token);
         window.location.reload();
-      } else {
-        notification(
-          'there was an error',
-          'we could not register you',
-          'danger'
-        );
-      }
     } catch (error) {
       console.error(error);
-      notification('there was an error', 'we could not register you', 'danger');
+      notification(error.message, 'Error', 'danger');
     }
   };
 
@@ -106,35 +85,13 @@ function Register() {
   };
 
   function next() {
-    setLoading(true);
     async function checkUser() {
       try {
-        const response = await fetch(`${apiURL}/auth/email/${values.email}`, {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.token}`,
-          },
-          redirect: 'follow',
-          referrer: 'no-referrer',
-        });
-
-        const json = await response.json();
-
-        if (response.status === 200) {
-          if (passCaptcha) {
-            setShowTerms(showTerms + 1);
-          } else {
-            alert('nah ;)');
-          }
-        } else if (response.status === 400) {
-          notification(json.error, 'please login instead', 'danger');
-        }
+        await API.get('/auth/email/' + values.email);
+        if (passCaptcha) setShowTerms(showTerms + 1)
+        else alert('nah')
       } catch (error) {
-        console.log('error');
+        notification(error.message, 'Error', 'danger');
       } finally {
         setLoading(false);
       }

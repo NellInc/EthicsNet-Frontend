@@ -25,6 +25,8 @@ base.interceptors.request.use(
       Authorization: `Bearer ${localStorage.token}`,
     };
 
+    console.log('the request was intercepted')
+
     return config;
   },
   error => Promise.reject(error)
@@ -33,14 +35,21 @@ base.interceptors.request.use(
 // Handling errors
 base.interceptors.response.use(
   response => {
-    if (response.status === 400) {
-      // your failure logic here
-      console.log('ops login failed');
+    console.log('the response was intercepted', response)
+    // response.message = 'There was an error processing your request ...'
+    if (response.status === 200) {
+      response.message = response.data.message
     }
-
     return response;
   },
-  error => Promise.reject(error)
+  error => {
+    if (error.response.data.error) {
+      error.message = error.response.data.error;
+    } else {
+      error.message = 'There was an error processing your request'
+    }
+    return Promise.reject(error)
+  }
 );
 
 export default base;

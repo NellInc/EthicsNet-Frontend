@@ -22,5 +22,5 @@ it("renders with or without a name", () => {
   act(() => {
     render(<Register />, container);
   });
-  expect(container.title).toBe("EthicsNet - Annotate the web");
+  expect(document.title).toBe("EthicsNet - Annotate the web");
 });
