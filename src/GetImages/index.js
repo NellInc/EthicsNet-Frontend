@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { apiURL } from '../globals';
 import { Notification } from '../Store';
 import { Loader } from '../components';
+import API from '../globals';
 
 import Image from './Image';
 import Pagination from '../Components/Pagination';
@@ -20,57 +21,25 @@ function GetImages() {
   const [count, setCount] = useState(0);
   useEffect(() => {
     async function getImageData() {
-      const token = localStorage.getItem('token');
-
-      const response = await fetch(`${apiURL}/api2/image/page/${page}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setImages(data.images);
-      setCount(data.count);
-      setLoading(false);
+      try {
+        const { data } = await API.get('/api2/image/page/' + page);
+        setImages(data.images);
+        setCount(data.count);
+        setLoading(false);
+      } catch (error) {
+        notification(error.message, 'Error', 'danger');
+      }
     }
 
     getImageData();
-  }, [page, loading]);
+  }, [page, loading, notification]);
 
   async function deleteImage(id) {
     setLoading(true);
     try {
-      const { token } = localStorage;
-
-      const response = await fetch(`${apiURL}/api2/image/${id}`, {
-        method: 'DELETE',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.status === 200) {
-        notification('Image annotation deleted!');
-        setImages(images.filter(el => el._id !== id));
-      } else {
-        notification(
-          'There was a problem deleting the image annotation',
-          '',
-          'danger'
-        );
-      }
+      await API.delete('/api2/image/' + id);
     } catch (error) {
-      console.error(error);
-      notification(
-        'There was a problem deleting the image annotation',
-        '',
-        'danger'
-      );
+      notification(error.message, 'Error', 'danger');
     } finally {
       setLoading(false);
     }
@@ -78,53 +47,21 @@ function GetImages() {
 
   // Edit image
   async function editImage(id, newData) {
-    setLoading(true);
     try {
-      const { token } = localStorage;
-
-      const response = await fetch(`${apiURL}/api2/image/${id}`, {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newData),
-      });
-
-      if (response.status === 200) {
-        notification('Image annotation updated!');
-
-        // setImages(images.filter(el => el._id !== id));
-      } else {
-        notification(
-          'There was a problem editing the image annotation',
-          '',
-          'danger'
-        );
-      }
+      await API.put('/api2/image/' + id, newData);
+      const { data } = await API.get('/api2/image/page/' + page);
+      setImages(data.images);
+      setCount(data.count);
+      setLoading(true);
     } catch (error) {
       console.error(error);
-      notification(
-        'There was a problem editing the image annotation',
-        '',
-        'danger'
-      );
+      notification(error.message, 'Error', 'danger');
     } finally {
       setLoading(false);
     }
   }
 
-  const imagesEl = images.map(el => (
-    <Image
-      key={el._id}
-      el={el}
-      deleteImage={deleteImage}
-      editImage={editImage}
-    />
-  ));
+  // const imagesEl =
 
   if (loading) {
     return <Loader />;
@@ -141,7 +78,14 @@ function GetImages() {
   return (
     <div>
       <h3 className={classes.title}>All images</h3>
-      {imagesEl}
+      {images.map(el => (
+        <Image
+          key={el._id}
+          el={el}
+          deleteImage={deleteImage}
+          editImage={editImage}
+        />
+      ))}
       <Pagination
         setPage={setPage}
         setLoading={setLoading}

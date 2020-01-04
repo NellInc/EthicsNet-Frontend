@@ -16,7 +16,7 @@ const base = axios.create({
   timeout: 10000,
 });
 
-// setting defaults
+// Setting defaults
 base.interceptors.request.use(
   config => {
     config.headers = {
@@ -24,9 +24,6 @@ base.interceptors.request.use(
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.token}`,
     };
-
-    console.log('the request was intercepted')
-
     return config;
   },
   error => Promise.reject(error)
@@ -35,20 +32,21 @@ base.interceptors.request.use(
 // Handling errors
 base.interceptors.response.use(
   response => {
-    console.log('the response was intercepted', response)
     // response.message = 'There was an error processing your request ...'
     if (response.status === 200) {
-      response.message = response.data.message
+      response.message = response.data.message;
     }
     return response;
   },
   error => {
-    if (error.response.data.error) {
+    if (!error.response) {
+      error.message = 'There was an error connecting to the server';
+    } else if (error.response.data.error) {
       error.message = error.response.data.error;
     } else {
-      error.message = 'There was an error processing your request'
+      error.message = 'There was an error processing your request';
     }
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
 );
 
