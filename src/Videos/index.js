@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet';
 
 import Pagination from '../Components/Pagination';
 import { useStyles } from './style';
-import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { Notification } from '../Store';
+import API from '../globals';
 
 import Video from './Video';
 
@@ -22,94 +22,40 @@ function Videos(props) {
 
   useEffect(() => {
     async function getVideoData() {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${apiURL}/api/user/videos/${page}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setVideos(data.videos);
-      setCount(data.count);
-      setLoading(false);
+      try {
+        const { data } = await API.get('/api2/video/' + page);
+        setVideos(data.videos);
+        setCount(data.count);
+        setLoading(false);
+      } catch (error) {
+        notification(error.message, 'Error', 'danger');
+      }
     }
 
     getVideoData();
-  }, [page, loading]);
+  }, [page, loading, notification]);
 
   async function deleteVideo(id) {
     setLoading(true);
     try {
-      const { token } = localStorage;
-
-      const response = await fetch(`${apiURL}/api2/video/${id}`, {
-        method: 'DELETE',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 200) {
-        notification('Video annotation deleted!');
-        setVideos(videos.filter(el => el._id !== id));
-      } else {
-        notification(
-          'There was a problem deleting the video annotation',
-          '',
-          'danger'
-        );
-      }
+      await API.delete('/api2/video/' + id);
     } catch (error) {
-      console.error(error);
-      notification(
-        'There was a problem deleting the video annotation',
-        '',
-        'danger'
-      );
+      notification(error.message, 'Error', 'danger');
     } finally {
       setLoading(false);
     }
   }
 
   async function editVideo(id, newData) {
-    setLoading(true);
+    // setLoading(true);
     try {
-      const { token } = localStorage;
-
-      const response = await fetch(`${apiURL}/api2/video/edit/${id}`, {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}` 
-        },
-        body: JSON.stringify(newData)
-      })
-
-      if (response.status === 200) {
-        notification('Video annotation updated');
-      } else {
-        notification(
-          'There was a problem editing the video annotation',
-          '',
-          'danger'
-        )
-      }
-
+      await API.put('/api2/video/edit/' + id, newData);
+      const { data } = await API.get('/api2/video/' + page);
+      setVideos(data.videos);
+      setCount(data.count);
+      setLoading(false);
     } catch (error) {
-      console.log('error editing video -> ', error)
-      notification(
-        'There was a problem editing the video annotation',
-        '',
-        'danger'
-      )
+      notification(error.message, 'Error', 'danger');
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-import { apiURL } from '../globals';
 import { Notification } from '../Store';
 import { Loader } from '../components';
 import API from '../globals';
@@ -60,9 +59,6 @@ function GetImages() {
       setLoading(false);
     }
   }
-
-  // const imagesEl =
-
   if (loading) {
     return <Loader />;
   }

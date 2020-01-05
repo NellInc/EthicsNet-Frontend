@@ -37,12 +37,7 @@ function Anotations(props) {
         setCount(data.count);
         setLoading(false);
       } catch (error) {
-        console.log('error -> ', error);
-        notification(
-          'There was a problem processing your request',
-          '',
-          'danger'
-        );
+        notification(error.message, 'Error', 'danger');
       }
     }
     getUserData();
@@ -61,51 +56,16 @@ function Anotations(props) {
   async function editAnnotation(id, values) {
     setLoading(true);
     try {
-      const {
-        content,
-        categoryRangeContentAction,
-        categoryRangeToneForm,
-      } = values;
-
-      const { status } = await API.put(`/api2/text/${id}`, {
-        content,
-        categoryRangeContentAction,
-        categoryRangeToneForm,
-      });
-
-      if (status === 200) {
-        notification('Text annotation updated!');
-      } else {
-        notification(
-          'There was a problem editing the text annotation',
-          '',
-          'danger'
-        );
-      }
+      await API.put(`/api2/text/${id}`, values);
+      const { data } = await API.get(`/api2/text/page/${page}`);
+      setAnotations(data.anotations);
+      setCount(data.count);
     } catch (error) {
-      console.error(error);
-      notification(
-        'There was a problem editing the text annotation',
-        '',
-        'danger'
-      );
+      notification(error.message, 'Error', 'danger');
     } finally {
       setLoading(false);
     }
   }
-
-  const anotationsComponent = anotations.map(el => (
-    <Annotation
-      handleClose={handleClose}
-      filterAnotations={filterAnotations}
-      idToDelete={idToDelete}
-      el={el}
-      handleAnotationClick={handleAnotationClick}
-      open={open}
-      key={el._id}
-      editAnnotation={editAnnotation}
-    />
-  ));
 
   if (loading) {
     return (
@@ -137,7 +97,20 @@ function Anotations(props) {
   return (
     <div>
       <h3 className={classes.title}>Annotations</h3>
-      <div>{anotationsComponent}</div>
+      <div>
+        {anotations.map(el => (
+          <Annotation
+            handleClose={handleClose}
+            filterAnotations={filterAnotations}
+            idToDelete={idToDelete}
+            el={el}
+            handleAnotationClick={handleAnotationClick}
+            open={open}
+            key={el._id}
+            editAnnotation={editAnnotation}
+          />
+        ))}
+      </div>
 
       <Pagination
         setPage={setPage}
