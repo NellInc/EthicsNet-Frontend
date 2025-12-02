@@ -3,54 +3,43 @@
   "version": "0.1.0",
   "homepage": "http://extension.lupuselit.me/",
   "private": true,
+  "type": "module",
   "dependencies": {
-    "@material-ui/core": "^4.8.1",
-    "@material-ui/icons": "^4.2.1",
-    "axios": "^0.19.0",
-    "gh-pages": "^2.1.1",
-    "html-screen-capture-js": "^1.0.21",
-    "html2canvas": "^1.0.0-rc.3",
-    "moment": "^2.24.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^7.3.5",
+    "@mui/material": "^7.3.5",
+    "axios": "^1.7.7",
+    "gh-pages": "^6.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-file-base64": "^1.0.3",
-    "react-google-recaptcha": "^2.0.1",
-    "react-helmet": "^5.2.1",
-    "react-image-crop": "^8.2.1",
-    "react-images-upload": "^1.2.7",
-    "react-input-mask": "^2.0.4",
-    "react-moment": "^0.9.6",
-    "react-moment-input": "^0.2.30",
-    "react-notifications-component": "^1.1.1",
-    "react-recaptcha-v3": "^1.1.0",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-google-recaptcha": "^3.1.0",
+    "react-helmet": "^6.1.0",
+    "react-image-crop": "^11.0.7",
+    "react-router-dom": "^7.9.6",
+    "sonner": "^2.0.7",
+    "tss-react": "^4.9.13"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
-    "deploy": "yarn run build &&  echo 'extension.lupuselit.me' > build/CNAME && gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && echo 'extension.lupuselit.me' > build/CNAME && gh-pages -d build"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.12.0"
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "jsdom": "^27.2.0",
+    "vite": "^7.2.6",
+    "vitest": "^4.0.14"
+  },
+  "overrides": {
+    "node-fetch": "^2.7.0",
+    "core-js": "^3.39.0"
   }
 }

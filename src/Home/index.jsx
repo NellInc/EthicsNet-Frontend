@@ -1,0 +1,92 @@
+import React, { useEffect } from 'react';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
+import { useStyles } from './style';
+
+function Home() {
+  const { classes } = useStyles();
+
+  useEffect(() => {
+    document.title = 'EthicsNet - Home ';
+  }, []);
+
+  return (
+    <div className={classes.root}>
+      <Typography className={classes.title} variant='h5' gutterBottom>
+        EthicsNet
+      </Typography>
+      <Typography variant='body1' gutterBottom>
+        Welcome to EthicsNet, now you can start to anotate things on the web.
+      </Typography>
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/profile/annotations'>
+          Texts
+        </Link>
+      </Button>
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/user/images'>
+          Images
+        </Link>
+      </Button>
+
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/user/videos'>
+          Videos
+        </Link>
+      </Button>
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/annotations/new'>
+          Insert new text annotation
+        </Link>
+      </Button>
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/save-upload-image'>
+          Upload image annotation
+        </Link>
+      </Button>
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/profile'>
+          Profile
+        </Link>
+      </Button>
+
+      <Button
+        color='primary'
+        variant='outlined'
+        style={{ marginRight: '10px' }}
+      >
+        <Link className={classes.link} to='/how-to-use'>
+          How to use it
+        </Link>
+      </Button>
+    </div>
+  );
+}
+
+export default Home;
