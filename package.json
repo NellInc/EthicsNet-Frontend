@@ -1,7 +1,7 @@
 {
   "name": "ethics-eth-anotate-frontent",
   "version": "0.1.0",
-  "homepage": "http://extension.lupuselit.me/",
+  "homepage": "https://nellinc.github.io/EthicsNet-Frontend/",
   "private": true,
   "type": "module",
   "dependencies": {
@@ -28,7 +28,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "predeploy": "npm run build",
-    "deploy": "npm run build && echo 'extension.lupuselit.me' > build/CNAME && gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
