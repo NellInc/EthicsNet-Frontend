@@ -2,25 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="manifest" href="/manifest.json" />
-    <title>EthicsNet - Annotate the web</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    />
+    <meta name="theme-color" content="#313639" />
+    <meta name="description" content="EthicsNet is a community platform for annotating text, images, and video with ethical and cultural context for machine ethics research." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://nellinc.github.io/EthicsNet-Frontend/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="EthicsNet" />
+    <meta property="og:title" content="EthicsNet | Community Machine Ethics Annotation" />
+    <meta property="og:description" content="Annotate text, images, and video with ethical and cultural context to support machine ethics research." />
+    <meta property="og:url" content="https://nellinc.github.io/EthicsNet-Frontend/" />
+    <meta property="og:image" content="https://nellinc.github.io/EthicsNet-Frontend/ethicsnet_logo_500.png" />
+    <meta property="og:image:alt" content="EthicsNet logo" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="EthicsNet | Community Machine Ethics Annotation" />
+    <meta name="twitter:description" content="Annotate text, images, and video with ethical and cultural context to support machine ethics research." />
+    <meta name="twitter:image" content="https://nellinc.github.io/EthicsNet-Frontend/ethicsnet_logo_500.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <title>EthicsNet | Community Machine Ethics Annotation</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "EthicsNet",
+        "url": "https://nellinc.github.io/EthicsNet-Frontend/",
+        "description": "A community platform for annotating text, images, and video with ethical and cultural context for machine ethics research.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "inLanguage": "en"
+      }
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-
+    <noscript>JavaScript is required to use the EthicsNet annotation platform.</noscript>
     <div id="root">
       <div class="loading">
         <style>
-          body {
-            margin: 0;
-          }
+          body { margin: 0; }
           .loading {
             background-color: rgba(196, 196, 196, 0.301);
             height: 100vh;
@@ -29,12 +50,9 @@
             justify-content: center;
             align-items: center;
           }
-
-          .loading img {
-            width: 250px;
-          }
+          .loading img { width: 250px; }
         </style>
-        <img src="/ethicsnet_logo_500-5k.png" alt="EthicsNet Logo" />
+        <img src="./ethicsnet_logo_500-5k.png" alt="EthicsNet logo" />
       </div>
     </div>
     <script type="module" src="/src/index.jsx"></script>
