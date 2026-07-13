@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import Pagination from '../Components/Pagination';
 import { useStyles } from './style';
