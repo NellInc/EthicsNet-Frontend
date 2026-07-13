@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nellinc.github.io/EthicsNet-Frontend/sitemap.xml
