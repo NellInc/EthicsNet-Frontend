@@ -21,9 +21,13 @@ function Login() {
 
   React.useEffect(() => {
     async function healthcheck() {
-      const response = await API.get('/healthcheck');
-      console.log(response);
-      console.log(response.data.msg);
+      try {
+        await API.get('/healthcheck');
+      } catch {
+        // The health check is advisory. Login remains usable when the API is
+        // temporarily unavailable, and the request must not create an
+        // unhandled rejection in the browser.
+      }
     }
     healthcheck();
   }, []);

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
 import Store from '../Store';
 import Navbar from './index';
@@ -84,34 +84,39 @@ describe('Navbar', () => {
       });
     });
 
-    it('shows Profile button', () => {
+    it('shows Profile button', async () => {
       renderNavbar();
 
       expect(screen.getByText('Profile')).toBeInTheDocument();
+      await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
     });
 
-    it('shows Logout button', () => {
+    it('shows Logout button', async () => {
       renderNavbar();
 
       expect(screen.getByText('Logout')).toBeInTheDocument();
+      await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
     });
 
-    it('shows Text annotations button', () => {
+    it('shows Text annotations button', async () => {
       renderNavbar();
 
       expect(screen.getByText('Text annotations')).toBeInTheDocument();
+      await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
     });
 
-    it('does not show Log in button', () => {
+    it('does not show Log in button', async () => {
       renderNavbar();
 
       expect(screen.queryByText('Log in')).not.toBeInTheDocument();
+      await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
     });
 
-    it('does not show Register button', () => {
+    it('does not show Register button', async () => {
       renderNavbar();
 
       expect(screen.queryByText('Register')).not.toBeInTheDocument();
+      await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
     });
   });
 

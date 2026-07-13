@@ -42,7 +42,7 @@ function Navbar() {
         setLoading(false);
       }
     }
-    if (localStorage.isLogged) {
+    if (localStorage.isLogged === 'true') {
       getUserData();
     } else {
       setLoading(false);
