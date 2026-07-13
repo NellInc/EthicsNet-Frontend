@@ -9,6 +9,19 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'mui-vendor': [
+            '@emotion/react',
+            '@emotion/styled',
+            '@mui/material',
+            '@mui/icons-material',
+          ],
+        },
+      },
+    },
   },
   base: './',
   test: {
