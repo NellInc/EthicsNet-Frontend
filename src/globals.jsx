@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export let apiURL;
-export const extensionProfile = 'http://extension.lupuselit.me/';
 
 if (import.meta.env.DEV) {
   // dev code

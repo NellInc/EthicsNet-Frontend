@@ -15,7 +15,8 @@ function HowToUse() {
   const webStoreLink =
     'https://chrome.google.com/webstore/detail/djamiamgnjcpjhkknjddilkaibbhmhgc/';
 
-  const extensionLink = 'http://extension.lupuselit.me/#/register';
+  const extensionLink =
+    'https://nellinc.github.io/EthicsNet-Frontend/#/register';
 
   function redirectHome() {
     navigate('/');
