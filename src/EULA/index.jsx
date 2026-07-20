@@ -1,11 +1,12 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 // https://www.termsfeed.com/eula/b6470a865ca4a16b4025b524c8a13cc9
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 export default function EULA() {
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   return (
     <div style={{ height: '100vh', paddingBottom: 50 }}>

@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useContext, useEffect, Fragment } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
@@ -50,7 +51,7 @@ import { useStyles } from './style';
 function Main() {
   const { classes } = useStyles();
   const [loading] = useContext(Loading);
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   useEffect(() => {
     console.log(

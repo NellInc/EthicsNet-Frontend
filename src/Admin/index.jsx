@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 // import Button from '@mui/material/Button';
 import Table from './Table';
 
@@ -9,7 +10,7 @@ import { Loader } from '../components';
 
 function Admin() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   const [loading, setLoading] = useState(true);
   const [values, setValues] = useState({});

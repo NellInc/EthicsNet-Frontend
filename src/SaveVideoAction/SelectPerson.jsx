@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { PureComponent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import ReactCrop from 'react-image-crop';
 import Button from '@mui/material/Button';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -168,7 +169,7 @@ class SelectPersonClass extends PureComponent {
 
 // Wrapper to provide navigate hook to class component
 function SelectPerson(props) {
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
   return <SelectPersonClass {...props} navigate={navigate} />;
 }
 

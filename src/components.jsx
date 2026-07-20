@@ -29,7 +29,7 @@ export function LinkBtn(props) {
       variant={props.variant}
       color={props.color}
     >
-      <Link className={classes.link} to={props.to}>
+      <Link viewTransition className={classes.link} to={props.to}>
         {props.name}
       </Link>
     </Button>

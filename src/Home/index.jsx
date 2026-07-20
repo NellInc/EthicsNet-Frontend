@@ -25,7 +25,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/profile/annotations'>
+        <Link viewTransition className={classes.link} to='/profile/annotations'>
           Texts
         </Link>
       </Button>
@@ -34,7 +34,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/user/images'>
+        <Link viewTransition className={classes.link} to='/user/images'>
           Images
         </Link>
       </Button>
@@ -44,7 +44,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/user/videos'>
+        <Link viewTransition className={classes.link} to='/user/videos'>
           Videos
         </Link>
       </Button>
@@ -53,7 +53,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/annotations/new'>
+        <Link viewTransition className={classes.link} to='/annotations/new'>
           Insert new text annotation
         </Link>
       </Button>
@@ -62,7 +62,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/save-upload-image'>
+        <Link viewTransition className={classes.link} to='/save-upload-image'>
           Upload image annotation
         </Link>
       </Button>
@@ -71,7 +71,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/profile'>
+        <Link viewTransition className={classes.link} to='/profile'>
           Profile
         </Link>
       </Button>
@@ -81,7 +81,7 @@ function Home() {
         variant='outlined'
         style={{ marginRight: '10px' }}
       >
-        <Link className={classes.link} to='/how-to-use'>
+        <Link viewTransition className={classes.link} to='/how-to-use'>
           How to use it
         </Link>
       </Button>

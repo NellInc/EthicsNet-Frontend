@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -12,7 +13,7 @@ import RangeSlider from '../Slider';
 
 function SaveVideo() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
   const [loading, setLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
   const [values, setValues] = React.useState({

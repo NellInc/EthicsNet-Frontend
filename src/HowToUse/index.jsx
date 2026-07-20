@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
@@ -10,7 +11,7 @@ import { textSteps, imageSteps, videoSteps } from './data';
 
 function HowToUse() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   const webStoreLink =
     'https://chrome.google.com/webstore/detail/djamiamgnjcpjhkknjddilkaibbhmhgc/';
@@ -40,7 +41,7 @@ function HowToUse() {
       <Typography className={classes.steps} variant='body1'>
         <span className={classes.numbers}>1 - </span>Download the chome
         extension from the{' '}
-        <Link
+        <Link viewTransition
           href={webStoreLink}
           target='_blank'
           rel='noreferrer'
@@ -53,7 +54,7 @@ function HowToUse() {
 
       <Typography className={classes.steps} variant='body1'>
         <span className={classes.numbers}>2 - </span>Create an account on{' '}
-        <Link
+        <Link viewTransition
           href={extensionLink}
           target='_blank'
           rel='noreferrer'

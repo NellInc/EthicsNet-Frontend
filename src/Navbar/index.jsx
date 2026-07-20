@@ -1,3 +1,4 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useEffect, useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -5,7 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Loading } from '../Store';
 import { apiURL } from '../globals';
@@ -13,7 +14,7 @@ import { useStyles } from './style';
 
 function Navbar() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   const [isAdmin, setAdmin] = useState(false);
   const setLoading = useContext(Loading)[1];
@@ -65,14 +66,14 @@ function Navbar() {
           >
             <MenuIcon />
           </IconButton>
-          <Link color='inherit' className={classes.title} to='/'>
+          <Link viewTransition color='inherit' className={classes.title} to='/'>
             Home
           </Link>
 
           {/* There's no distraction to mask what is real */}
           {isAdmin && localStorage.isLogged === 'true' && (
             <Button color='inherit'>
-              <Link className={classes.link} to='/admin'>
+              <Link viewTransition className={classes.link} to='/admin'>
                 Admin
               </Link>
             </Button>
@@ -81,12 +82,12 @@ function Navbar() {
           {localStorage.isLogged === 'true' ? (
             <>
               <Button color='inherit'>
-                <Link className={classes.link} to='/profile'>
+                <Link viewTransition className={classes.link} to='/profile'>
                   Profile
                 </Link>
               </Button>
               <Button color='inherit'>
-                <Link className={classes.link} to='/profile/annotations'>
+                <Link viewTransition className={classes.link} to='/profile/annotations'>
                   Text annotations
                 </Link>
               </Button>
@@ -97,13 +98,13 @@ function Navbar() {
           ) : (
             <>
               <Button color='inherit'>
-                <Link className={classes.link} to='/login'>
+                <Link viewTransition className={classes.link} to='/login'>
                   Log in
                 </Link>
               </Button>
 
               <Button color='inherit'>
-                <Link className={classes.link} to='/register'>
+                <Link viewTransition className={classes.link} to='/register'>
                   Register
                 </Link>
               </Button>
@@ -111,7 +112,7 @@ function Navbar() {
           )}
 
           <Button color='inherit'>
-            <Link className={classes.link} to='/about'>
+            <Link viewTransition className={classes.link} to='/about'>
               About
             </Link>
           </Button>

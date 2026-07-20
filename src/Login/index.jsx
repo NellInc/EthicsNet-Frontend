@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -10,7 +11,7 @@ import { useStyles } from './style';
 
 function Login() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   const notification = useContext(Notification);
   const [loading, setLoading] = useState(false);

@@ -1,8 +1,9 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 // This component is a placeholder for the chrome extension to
 // take a screenshot of the youtube video
 
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -14,7 +15,7 @@ import { Loader } from '../components';
 
 function SaveVideoAction() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
   const [loading, setLoading] = useState(true);
   const [videoInfo] = useContext(VideoInfoContext);
   const [timedVideo, setTimeVideo] = useState('');

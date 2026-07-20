@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -11,7 +12,7 @@ import Annotation from './Annotation';
 
 function Anotations() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
   const [anotations, setAnotations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);

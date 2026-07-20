@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -12,7 +13,7 @@ import RangeSlider from '../Slider';
 
 function NewAnotation() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
 
   const [loading, setLoading] = useState(false);
   const [anotation, setAnotation] = useState('');
@@ -108,7 +109,7 @@ function NewAnotation() {
           Save
         </Button>
         <Button color='secondary' type='button' variant='outlined'>
-          <Link className={classes.link} to='/'>
+          <Link viewTransition className={classes.link} to='/'>
             Cancel
           </Link>
         </Button>

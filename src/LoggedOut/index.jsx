@@ -1,5 +1,6 @@
+import { useSoftNavigate } from '../hooks/useSoftNavigate';
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 import { IsLogged } from '../Store';
@@ -7,7 +8,7 @@ import { useStyles } from './style';
 
 function LoggedOut() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const navigate = useSoftNavigate();
   const setIsLogged = useContext(IsLogged)[1];
 
   function handleLogOut() {
