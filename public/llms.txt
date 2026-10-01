@@ -1,0 +1,9 @@
+# EthicsNet
+
+> EthicsNet is a community platform for annotating text, images, and video with ethical and cultural context for machine ethics research.
+
+The annotation platform requires JavaScript.
+
+## Platform
+
+- [EthicsNet](https://nellinc.github.io/EthicsNet-Frontend/): Public entry point to the annotation platform and its navigation.
