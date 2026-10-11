@@ -5,7 +5,7 @@ import {  } from 'react-router-dom';
 import Table from './Table';
 
 import { useStyles } from './style';
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 
 function Admin() {
@@ -17,24 +17,30 @@ function Admin() {
 
   useEffect(() => {
     async function getUserData() {
-      const { token } = localStorage;
+      try {
+        const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api2/user`, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const response = await apiFetch(`/api2/user`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const data = await response.json();
-      setLoading(false);
+        const data = await response.json();
+        setLoading(false);
 
-      if (!data.user.isAdmin) {
-        navigate('/');
+        if (!data.user.isAdmin) {
+          navigate('/');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
     getUserData();
@@ -42,21 +48,25 @@ function Admin() {
 
   useEffect(() => {
     async function getStats() {
-      const { token } = localStorage;
+      try {
+        const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api2/admin/stats`, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const response = await apiFetch(`/api2/admin/stats`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const data = await response.json();
-      setValues(data);
+        const data = await response.json();
+        setValues(data);
+      } catch (error) {
+        console.error(error);
+      }
     }
     getStats();
   }, []);
@@ -68,7 +78,7 @@ function Admin() {
   return (
     <div className={classes.admin}>
       <h1>General info</h1>
-{/* 
+{/*
       <h2>Users created: {values.numUsers}</h2>
       <h2>Tetxs annotated: {values.numTexts}</h2>
       <h2>Images annotated: {values.numImages}</h2>

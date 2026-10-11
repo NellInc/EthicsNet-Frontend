@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 
 export const PublicRoute = ({
@@ -63,23 +63,30 @@ export const AdminRoutes = ({ title, children }) => {
   const [loading, setLoading] = React.useState(true);
 
   async function getUserData() {
-    const { token } = localStorage;
+    try {
+      const { token } = localStorage;
 
-    const response = await fetch(`${apiURL}/api2/user`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      const response = await apiFetch(`/api2/user`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    setIsAdmin(data.user.isAdmin);
-    setLoading(false);
+      setIsAdmin(data.user.isAdmin);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsAdmin(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
   React.useEffect(() => {

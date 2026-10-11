@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { useStyles } from './style';
 import Info from './Info';
 
@@ -16,6 +16,7 @@ function Profile() {
   const { classes } = useStyles();
 
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(0);
   const setUserData = useState({})[1];
   const [open, setOpen] = React.useState(false);
 
@@ -55,9 +56,157 @@ function Profile() {
 
   useEffect(() => {
     async function getUserData() {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${apiURL}/api2/user`, {
-        method: 'GET',
+      setLoading(true);
+      try {
+        const token = localStorage.getItem('token');
+        const response = await apiFetch(`/api2/user`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+          setUserData(data.user);
+
+          const {
+            firstName,
+            lastName,
+            email,
+            country,
+            state,
+            age,
+            political,
+            religious,
+            gender,
+            sexualOrientation,
+            language,
+            education,
+            social,
+            earnings,
+            ethnicity,
+          } = data.user;
+
+          setValues(current => ({
+            ...current,
+            name: firstName,
+            last: lastName,
+            email,
+            country,
+            state,
+            age,
+            political,
+            religious,
+            gender,
+            sexualOrientation,
+            language,
+            education,
+            social,
+            earnings,
+            ethnicity,
+          }));
+        } else if (response.status === 404) {
+          localStorage.isLogged = null;
+          window.location.reload();
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getUserData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh]);
+
+  const handleSubmit = async e => {
+    try {
+      e.preventDefault();
+
+      const {
+        name,
+        last,
+        email,
+        country,
+        state,
+        age,
+        political,
+        religious,
+        gender,
+        sexualOrientation,
+        language,
+        education,
+        social,
+        earnings,
+        ethnicity,
+      } = values;
+
+      const data = {
+        firstName: name,
+        lastName: last,
+        email,
+        country,
+        state,
+        age,
+        political,
+        religious,
+        gender,
+        sexualOrientation,
+        language,
+        education,
+        social,
+        earnings,
+        ethnicity,
+      };
+
+      const { token, userId } = localStorage;
+      const response = await apiFetch(`/api2/user/${userId}`, {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      console.log('====================================');
+      console.log(response);
+      console.log('====================================');
+
+      if (response.status === 200) {
+        setRefresh(value => value + 1);
+      } else {
+        throw new Error(response.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  async function handleDeleteAccount() {
+    try {
+      // deletes an user account
+      // change from confirm to a better looking UI
+
+      // if (window.confirm('are you sure you want to delete your account?')) {
+      const { token, userId } = localStorage;
+
+      const response = await apiFetch(`/api2/user/${userId}`, {
+        method: 'DELETE',
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
@@ -69,148 +218,21 @@ function Profile() {
 
       const data = await response.json();
 
-      if (response.status === 200) {
-        setUserData(data.user);
+      console.log(response);
 
-        const {
-          firstName,
-          lastName,
-          email,
-          country,
-          state,
-          age,
-          political,
-          religious,
-          gender,
-          sexualOrientation,
-          language,
-          education,
-          social,
-          earnings,
-          ethnicity,
-        } = data.user;
+      console.log(data);
 
-        setValues({
-          ...values,
-          name: firstName,
-          last: lastName,
-          email,
-          country,
-          state,
-          age,
-          political,
-          religious,
-          gender,
-          sexualOrientation,
-          language,
-          education,
-          social,
-          earnings,
-          ethnicity,
-        });
-      } else if (response.status === 404) {
-        localStorage.isLogged = null;
-        window.location.reload();
-      }
-      setLoading(false);
+      window.location.reload();
+      // }
+    } catch (error) {
+      console.error(error);
     }
-
-    getUserData();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    const {
-      name,
-      last,
-      email,
-      country,
-      state,
-      age,
-      political,
-      religious,
-      gender,
-      sexualOrientation,
-      language,
-      education,
-      social,
-      earnings,
-      ethnicity,
-    } = values;
-
-    const data = {
-      firstName: name,
-      lastName: last,
-      email,
-      country,
-      state,
-      age,
-      political,
-      religious,
-      gender,
-      sexualOrientation,
-      language,
-      education,
-      social,
-      earnings,
-      ethnicity,
-    };
-
-    const { token, userId } = localStorage;
-    const response = await fetch(`${apiURL}/api2/user/${userId}`, {
-      method: 'PUT',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
-
-    console.log('====================================');
-    console.log(response);
-    console.log('====================================');
-
-    setLoading(true);
-  };
-
-  async function handleDeleteAccount() {
-    // deletes an user account
-    // change from confirm to a better looking UI
-
-    // if (window.confirm('are you sure you want to delete your account?')) {
-    const { token, userId } = localStorage;
-
-    const response = await fetch(`${apiURL}/api2/user/${userId}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    console.log(response);
-
-    console.log(data);
-
-    window.location.reload();
-    // }
   }
 
   async function requestMyData() {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${apiURL}/api2/user/data`, {
+      const response = await apiFetch(`/api2/user/data`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',

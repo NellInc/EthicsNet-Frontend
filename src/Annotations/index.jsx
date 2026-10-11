@@ -41,6 +41,8 @@ function Anotations() {
         setLoading(false);
       } catch (error) {
         notification(error.message, 'Error', 'danger');
+      } finally {
+        setLoading(false);
       }
     }
     getUserData();

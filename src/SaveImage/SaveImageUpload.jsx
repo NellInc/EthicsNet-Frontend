@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 // import MenuItem from '@mui/material/MenuItem';
 
 import { useStyles } from './style';
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 import { Notification } from '../Store';
 import RangeSlider from '../Slider';
@@ -66,7 +66,7 @@ function SaveImageUpload() {
     };
 
     try {
-      const response = await fetch(`${apiURL}/api/image`, {
+      const response = await apiFetch(`/api/image`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -88,6 +88,8 @@ function SaveImageUpload() {
       navigate('/user/images');
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   }
 

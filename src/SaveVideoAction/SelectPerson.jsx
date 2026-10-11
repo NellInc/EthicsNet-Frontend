@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import 'react-image-crop/dist/ReactCrop.css';
 import '../App.css';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 
 // This is a class component because of the library
@@ -89,24 +89,28 @@ class SelectPersonClass extends PureComponent {
   }
 
   updateVideoPerson = async () => {
-    const { token, selectVideoId } = localStorage;
+    try {
+      const { token, selectVideoId } = localStorage;
 
-    await fetch(`${apiURL}/api2/video/update/${selectVideoId}`, {
-      method: 'PUT',
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        selectedPerson: this.state.croppedImageUrl,
-      }),
-    });
+      await apiFetch(`/api2/video/update/${selectVideoId}`, {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          selectedPerson: this.state.croppedImageUrl,
+        }),
+      });
 
-    setTimeout(() => {
-      this.props.navigate('/user/videos');
-    }, 1000);
+      setTimeout(() => {
+        this.props.navigate('/user/videos');
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   saveCroppedScreenshot = () => {

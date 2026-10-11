@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { useStyles } from './style';
 import { Loader } from '../components';
 
@@ -12,17 +12,23 @@ function GetAllImages() {
 
   useEffect(() => {
     async function getImageData() {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${apiURL}/api/user/images/all`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setImages(data.images);
-      setLoading(false);
+      try {
+        const token = localStorage.getItem('token');
+        const response = await apiFetch(`/api/user/images/all`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setImages(data.images);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     }
     getImageData();
   }, []);
