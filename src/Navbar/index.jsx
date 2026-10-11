@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../Store';
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { useStyles } from './style';
 
 function Navbar() {
@@ -24,7 +24,7 @@ function Navbar() {
       try {
         const { token } = localStorage;
 
-        const response = await fetch(`${apiURL}/api2/user`, {
+        const response = await apiFetch(`/api2/user`, {
           method: 'GET',
           mode: 'cors',
           cache: 'no-cache',

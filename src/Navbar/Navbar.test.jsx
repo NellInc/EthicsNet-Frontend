@@ -6,7 +6,7 @@ import Navbar from './index';
 
 // Mock the globals module
 vi.mock('../globals', () => ({
-  apiURL: 'http://localhost:3001',
+  apiFetch: (path, options) => fetch(`http://localhost:3001${path}`, options),
 }));
 
 // Mock fetch for the user API call

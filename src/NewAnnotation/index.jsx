@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 import { Notification } from '../Store';
 import { useStyles } from './style';
@@ -44,7 +44,7 @@ function NewAnotation() {
     // sao pessoas reais, é assim que eu quero me entregar a uma dor quando eu to sentindo
 
     try {
-      const response = await fetch(`${apiURL}/api2/text`, {
+      const response = await apiFetch(`/api2/text`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -66,6 +66,8 @@ function NewAnotation() {
       }
     } catch (error) {
       console.error('there was an error ->', error);
+    } finally {
+      setLoading(false);
     }
   };
 

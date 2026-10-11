@@ -29,3 +29,14 @@ none yet - still in development mode - all files are in the ./src folder
 1 - `docker build -t ethics-net-frontend .`
 
 2 - `docker run -p 80:80 ethics-net-frontend` 
+
+### Production API transport
+
+Set the non-secret `VITE_API_URL` at build time to the backend's verified HTTPS
+origin. The value must have no user information, path prefix, query or fragment.
+No production endpoint is assumed. Without valid configuration, the interface
+still renders, and API requests reject before network dispatch. Development
+retains `http://localhost`. Initial request paths stay within the configured origin. Backend redirect
+behavior requires operator review, as browser Axios follows redirects.
+Working if: invalid or missing production configuration produces no API network
+request, and a configured HTTPS origin receives the unchanged request payload.

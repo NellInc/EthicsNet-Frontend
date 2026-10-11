@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import 'react-image-crop/dist/ReactCrop.css';
 import '../App.css';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 
 // This is a class component because of the librally
@@ -29,7 +29,7 @@ class Screenshot extends PureComponent {
       try {
         const { token } = localStorage;
 
-        const response = await fetch(`${apiURL}/api/user`, {
+        const response = await apiFetch(`/api/user`, {
           method: 'GET',
           mode: 'cors',
           cache: 'no-cache',
@@ -50,6 +50,8 @@ class Screenshot extends PureComponent {
         }
       } catch (error) {
         console.error('there was an error -> ', error);
+      } finally {
+        this.setState({ loading: false });
       }
     };
 

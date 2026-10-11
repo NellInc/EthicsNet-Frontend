@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { VideoInfoContext } from '../Store';
 
 import { useStyles } from './style';
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Loader } from '../components';
 import RangeSlider from '../Slider';
 
@@ -37,7 +37,7 @@ function SaveVideo() {
     try {
       const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api2/user`, {
+      const response = await apiFetch(`/api2/user`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
@@ -65,6 +65,8 @@ function SaveVideo() {
       }
     } catch (error) {
       console.error('there was an error -> ', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,7 +102,7 @@ function SaveVideo() {
     };
 
     try {
-      const response = await fetch(`${apiURL}/api/video`, {
+      const response = await apiFetch(`/api/video`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -134,6 +136,8 @@ function SaveVideo() {
       navigate('/save-video-action');
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   }
 

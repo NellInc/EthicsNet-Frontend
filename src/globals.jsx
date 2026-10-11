@@ -1,23 +1,42 @@
 import axios from 'axios';
 
-export let apiURL;
+const connectionError = () => new Error('There was an error connecting to the server');
 
-if (import.meta.env.DEV) {
-  // dev code
-  apiURL = 'http://localhost';
-} else {
-  // production code
-  apiURL = 'http://167.71.163.123';
+function apiOrigin() {
+  if (import.meta.env.DEV) return 'http://localhost';
+  const configured = import.meta.env.VITE_API_URL;
+  try {
+    if (typeof configured !== 'string' ||
+        !/^https:\/\/[^/?#\\\s]+\/?$/.test(configured)) throw connectionError();
+    const url = new URL(configured);
+    if (url.protocol !== 'https:' || url.username || url.password ||
+        url.search || url.hash || url.pathname !== '/') throw connectionError();
+    return url.origin;
+  } catch {
+    throw connectionError();
+  }
 }
 
-const base = axios.create({
-  baseURL: apiURL,
-  timeout: 10000,
-});
+function apiTarget(path) {
+  const origin = apiOrigin();
+  if (typeof path !== 'string' || !path.startsWith('/') ||
+      path.startsWith('//') || path.includes('\\')) throw connectionError();
+  const url = new URL(path, origin);
+  if (url.origin !== origin) throw connectionError();
+  return url.href;
+}
+
+export async function apiFetch(path, options) {
+  return fetch(apiTarget(path), options);
+}
+
+const base = axios.create({ timeout: 10000 });
 
 // Setting defaults
 base.interceptors.request.use(
   config => {
+    config.url = apiTarget(config.url);
+    delete config.baseURL;
     config.headers = {
       ...config.headers,
       'Content-Type': 'application/json',

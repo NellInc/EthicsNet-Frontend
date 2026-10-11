@@ -7,7 +7,6 @@ import '../App.css';
 import TermsAndConditions from '../TermsAndConditions';
 import PrivacyPolicy from '../PrivacyPolicy';
 import { Notification } from '../Store';
-import { apiURL } from '../globals';
 import { Loader } from '../components';
 import { useStyles } from './style';
 import API from '../globals';
@@ -68,6 +67,8 @@ function Register() {
     } catch (error) {
       console.error(error);
       notification(error.message, 'Error', 'danger');
+    } finally {
+      setLoading(false);
     }
   };
 

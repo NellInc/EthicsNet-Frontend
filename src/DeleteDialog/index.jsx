@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
-import { apiURL } from '../globals';
+import { apiFetch } from '../globals';
 import { Notification } from '../Store';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -25,7 +25,7 @@ export default function AlertDialogSlide(props) {
     try {
       const { token } = localStorage;
 
-      const response = await fetch(`${apiURL}/api2/text/${id}`, {
+      const response = await apiFetch(`/api2/text/${id}`, {
         method: 'DELETE',
         mode: 'cors',
         cache: 'no-cache',
